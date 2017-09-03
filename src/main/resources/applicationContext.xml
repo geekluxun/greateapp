@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <!-- 基础配置资源加载 -->
+    <bean id="propertyConfigurer"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 启动注解 -->
+    <context:annotation-config />
+    <!-- 基础包路径 -->
+    <context:component-scan base-package="com.geekluxun.greateapp" />
+    
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+
+
+    <tx:advice id="transAdvice">
+        <tx:attributes>
+            <tx:method name="get*" propagation="SUPPORTS" />
+            <tx:method name="query*" propagation="SUPPORTS" />
+            <tx:method name="find*" propagation="SUPPORTS" />
+            <tx:method name="select*" propagation="SUPPORTS" />
+            <tx:method name="*" propagation="REQUIRES_NEW"
+                rollback-for="java.lang.Throwable" isolation="DEFAULT" />
+        </tx:attributes>
+    </tx:advice>
+
+
+    <!--<aop:config>-->
+        <!--&lt;!&ndash; <aop:advisor advice-ref="transAdvice"-->
+            <!--pointcut="execution(* com.namibank.df.mallOrder.service..*(..))" /> &ndash;&gt;-->
+        <!--<aop:pointcut expression="execution(* com.namibank.df.mallOrder.service..*(..))" id="serviceOperate"/>-->
+        <!--<aop:advisor advice-ref="transAdvice" pointcut-ref="serviceOperate"/>-->
+    <!--</aop:config>-->
+
+
+    <import resource="classpath:spring/spring-database.xml" />
+
+</beans>
