@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- <classPathEntry location="F:\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar"/> -->
+	
+    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="false"/>
+            <property name="suppressAllComments" value="true" />
+            <!-- 此处为 true 时，生成的 Mapper 接口将增加 @Mapper 注解，Spring ComponentScan 时可自动识别 -->
+            <property name="addMapperAnnotation" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://116.62.63.81:3306/mybatis"
+                        userId="root"
+                        password="geekluxun">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.geekluxun.greateapp.entity" targetProject="src/main/java">
+            <property name="trimStrings" value="true" />
+            <!--<property name="rootClass" value="tk.mybatis.simple.model.BaseEntity" />-->
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="sqlmapper"  targetProject="src/main/resources"/>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.geekluxun.greateapp.dao"  targetProject="src/main/java"/>
+
+        <table tableName="sys_%"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            
+            <!--<generatedKey column="id" sqlStatement="MySql"/>-->
+        </table>
+    </context>
+</generatorConfiguration>

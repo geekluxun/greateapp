@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 
 
-@SpringBootApplication
+@SpringBootApplication()
 @ImportResource(locations={"classpath:applicationContext.xml"})
 public class GreateappApplication {
 

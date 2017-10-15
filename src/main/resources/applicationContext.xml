@@ -19,7 +19,7 @@
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:application.properties</value>
+                <value>classpath*:application.properties</value>
             </list>
         </property>
     </bean>
@@ -54,5 +54,7 @@
 
 
     <import resource="classpath:spring/spring-database.xml" />
+    <import resource="classpath:spring/spring-quartz.xml" />
+    <import resource="classpath:spring/active-mq.xml"/>
 
 </beans>

@@ -22,6 +22,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		
+		<quartz.version>2.2.1</quartz.version>
+		<logback.version>1.2.3</logback.version>
+		<spring.version>4.3.10.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
@@ -68,6 +72,20 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -79,6 +97,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 
 
 		<dependency>
@@ -99,21 +118,128 @@
 			<version>1.2.37</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<!--<version>5.14.0</version>-->
+		</dependency>
+		
 	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<profiles.active>dev</profiles.active>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<profiles.active>test</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profiles.active>prod</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>cluster</id>
+			<properties>
+				<profiles.active>cluster</profiles.active>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
+		<filters>
+			<!--<filter>/etc/config/env.properties</filter>-->
+		</filters>
+		<resources>
+			<!--<resource>-->
+				<!--<directory>src/main/java</directory>-->
+				<!--<includes>-->
+					<!--<include>**/*.properties</include>-->
+					<!--<include>**/*.xml</include>-->
+				<!--</includes>-->
+				<!--&lt;!&ndash; 是否替换资源中的属性 &ndash;&gt;-->
+				<!--<filtering>false</filtering>-->
+			<!--</resource>-->
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<!--<excludes>-->
+					<!--<exclude>/test/*</exclude>-->
+					<!--<exclude>/prod/*</exclude>-->
+					<!--<exclude>/dev/*</exclude>-->
+					<!--<exclude>/cluster/*</exclude>-->
+				<!--</excludes>-->
+			</resource>
+			<resource>
+				<directory>src/main/resources/${profiles.active}</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
+			<!--<plugin>-->
+				<!--<groupId>org.mybatis.generator</groupId>-->
+				<!--<artifactId>mybatis-generator-maven-plugin</artifactId>-->
+				<!--<version>1.3.2</version>-->
+			<!--</plugin>-->
+			
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
-				<version>1.3.2</version>
+				<version>1.3.3</version>
+				
+				<configuration>
+					<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+					<overwrite>true</overwrite>
+					<verbose>true</verbose>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.32</version>
+					</dependency>
+					<!--<dependency>-->
+					<!--<groupId>tk.mybatis</groupId>-->
+					<!--<artifactId>simple</artifactId>-->
+					<!--<version>0.0.1-SNAPSHOT</version>-->
+					<!--</dependency>-->
+				</dependencies>
 			</plugin>
+			
+			
 		</plugins>
+		
+		
 
 	</build>
 
