@@ -19,4 +19,9 @@ public final class ConsumerListener implements MessageListener<String,String> {
         logger.info("收到了消息了！！！");
     }
 
+
+    public void processMessage(){
+        logger.info("我通过第2种方式收到了消息了！！！");
+    }
+
 }

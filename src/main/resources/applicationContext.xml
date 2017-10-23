@@ -56,6 +56,8 @@
     <import resource="classpath:spring/spring-database.xml" />
     <import resource="classpath:spring/spring-quartz.xml" />
     <import resource="classpath:spring/active-mq.xml"/>
+    <import resource="classpath:spring/spring-kafka-producer-02.xml"/>
+    <import resource="classpath*:spring/spring-kafka-consumer-02.xml"/>
     <import resource="classpath:spring/spring-kafka-producer.xml"/>
     <import resource="classpath*:spring/spring-kafka-consumer.xml"/>
 
