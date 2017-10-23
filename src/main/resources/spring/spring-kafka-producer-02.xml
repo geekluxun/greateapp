@@ -26,22 +26,28 @@
     </bean>
     
     
-    <int:channel id="channel">
+    <int:channel id="channel2">
         <int:queue/>
     </int:channel>
 
 
-    <int-kafka:outbound-channel-adapter kafka-producer-context-ref="producerContext" channel="channel">
+    <int-kafka:outbound-channel-adapter kafka-producer-context-ref="producerContext" channel="channel2">
         <int:poller fixed-delay="1000" time-unit="MILLISECONDS" task-executor="executor"/>
     </int-kafka:outbound-channel-adapter>
-
+    
     <task:executor id="executor" pool-size="100" keep-alive="1000" queue-capacity="50"/>
 
     <int-kafka:producer-context id="producerContext" producer-properties="producerProperties">
         <int-kafka:producer-configurations>
-            <int-kafka:producer-configuration topic="${kafka.topic.test.1}" broker-list="kafka.broker.url"/>
+            <int-kafka:producer-configuration topic="${kafka.topic.test.2}"
+                                              broker-list="${kafka.broker.url}"
+                                              key-serializer="stringSerializer"
+                                              value-class-type="java.lang.String"
+                                              value-serializer="stringSerializer"/>
         </int-kafka:producer-configurations>
     </int-kafka:producer-context>
 
+    
+    <bean id="stringSerializer" class="org.apache.kafka.common.serialization.StringSerializer"/>
 
 </beans>

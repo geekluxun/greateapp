@@ -27,16 +27,15 @@
     <int-kafka:consumer-context id="consumerContext" zookeeper-connect="zookeeperConnect">
         <int-kafka:consumer-configurations>
             <int-kafka:consumer-configuration group-id="group1">
-                <int-kafka:topic id="kafka.topic.test.1" streams="4"/>
+                <int-kafka:topic id="${kafka.topic.test.2}" streams="4"/>
             </int-kafka:consumer-configuration>
         </int-kafka:consumer-configurations>
     </int-kafka:consumer-context>
 
     <int-kafka:zookeeper-connect id="zookeeperConnect" zk-connect="${kafka.zk.connect}"/>
-
-    <!-- 消息接收的BEEN -->
+    
     <bean id="consumerListener" class="com.geekluxun.greateapp.kafka.consumer.ConsumerListener"/>
-    <!-- 指定接收的方法 -->
+   
     <int:outbound-channel-adapter  auto-startup="true" order="1"
                                    id="kafkaListenerAdapter" channel="channel"
                                    ref="consumerListener" method="processMessage"/>
