@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    
+    
+    <bean id="node" class="org.springframework.data.redis.connection.RedisNode"/>
+    
+    <bean id="sentinel" class="java.util.HashSet">
+        
+    </bean>
+    <bean id="redisSentinelConfiguration"  class="org.springframework.data.redis.connection.Red">
+        <property name="sentinels" ref="sentinel"></property>
+    </bean>
+    
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.config.maxTotal}" />
+        <property name="maxIdle" value="${redis.config.maxIdle}" />
+        <property name="minIdle" value="${redis.config.minIdle}" />
+        <property name="maxWaitMillis" value="${redis.config.maxWaitMillis}" />
+        <property name="testOnBorrow" value="true" />
+    </bean>
+    <!-- Jedis ConnectionFactory -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <constructor-arg index="0" ref="redisSentinelConfiguration"/>
+        <constructor-arg index="1" ref="jedisPoolConfig"/>
+    </bean>
+
+    
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    </bean>
+    
+</beans>
