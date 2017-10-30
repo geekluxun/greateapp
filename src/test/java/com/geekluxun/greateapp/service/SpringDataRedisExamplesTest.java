@@ -1,8 +1,10 @@
 package com.geekluxun.greateapp.service;
 
+import com.geekluxun.greateapp.redis.sdr.SpringDataRedisExamples;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -15,12 +17,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SpringDataRedisExamplesTest {
 
     @Autowired
-    RedisTemplate redisTemplate;
+    SpringDataRedisExamples redisExamples;
 
 
     @Test
     public void testString(){
-        redisTemplate.opsForValue().set("mykey1", "luxun");
+        redisExamples.testString();
     }
 
 }
