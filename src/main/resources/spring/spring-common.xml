@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:context="http://www.springframework.org/schema/context"
+          xmlns:aop="http://www.springframework.org/schema/aop"
+          xmlns:tx="http://www.springframework.org/schema/tx"
+          xmlns:mvc="http://www.springframework.org/schema/mvc"
+          xsi:schemaLocation="http://www.springframework.org/schema/beans
+       	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       	http://www.springframework.org/schema/aop
+       	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+      	http://www.springframework.org/schema/context
+       	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       	http://www.springframework.org/schema/tx
+       	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       	http://www.springframework.org/schema/mvc
+       	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+    
+    
+    <!-- id 的就是此bean的名字，引入此bean通过此名字，譬如@Resource注解 中的name 引用此 bean-->
+    <bean id = "springDemo2"  name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
+         <!--此处注入到bean 名字叫userService33-->
+        <property name="userService" ref="userService33"></property>
+    </bean>
+    
+    <bean id="springDemo1" class="com.geekluxun.greateapp.spring.SpringDemo">
+        <constructor-arg index="0"  value="32"/>
+        <constructor-arg index="1"  value="luxun"/>
+        <property name="userService" ref="userService33"/>
+    </bean>
+    
+    
+    <!-- 通过静态方法createInstance 构造 bean-->
+    <bean id="springDemo3" class="com.geekluxun.greateapp.spring.SpringDemo" factory-method="createInstance" >
+        <property name="userService" ref="userService33"/>
+    </bean>
+    
+    <!-- 指明了工厂bean 同时有一个非静态的factory method-->
+    <bean id="springDemo4" factory-bean="springDemo1" factory-method="createInstance2">
+        <property name="userService" ref="userService33"/>
+    </bean>
+    
+</beans>

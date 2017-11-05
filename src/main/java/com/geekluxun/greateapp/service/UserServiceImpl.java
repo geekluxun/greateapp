@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 /**
  * Created by luxun on 2017/9/3.
  */
-@Service
-public class UserServiceImpl implements UserService {
+//@Service  如果不指明bean的名字，默认的名字时uerServiceImpl,通过这个名字注入此bean到其他bean中
+//@Service("userService33")指明名字为userService33
+@Service("userService33")
+public class UserServiceImpl implements UserService{
     @Autowired
     TUserMapper userMapper;
 

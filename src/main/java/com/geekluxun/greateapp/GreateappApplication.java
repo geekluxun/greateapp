@@ -1,11 +1,13 @@
 package com.geekluxun.greateapp;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ImportResource;
 
 
-@SpringBootApplication()
+@SpringBootConfiguration
+@EnableAutoConfiguration
 @ImportResource(locations={"classpath:applicationContext.xml"})
 public class GreateappApplication {
 

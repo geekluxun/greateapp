@@ -14,8 +14,12 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-    <!-- 基础配置资源加载 -->
-    <bean id="propertyConfigurer"
+    <!-- 基础配置资源加载
+      以下两种方式是等价的！！！
+     -->
+    <!--<context:property-placeholder-->
+            <!--location="classpath*:sapplication.properties, classpath*:application.properties"/>-->
+    <bean id="propertyConfigure"
         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
@@ -23,11 +27,23 @@
             </list>
         </property>
     </bean>
+    
+    
 
-    <!-- 启动注解 -->
+     <!--启动注解-->
     <context:annotation-config />
-    <!-- 基础包路径 -->
-    <context:component-scan base-package="com.geekluxun.greateapp" />
+    
+    <!--指明spring bean 扫描包根路径-->
+    <!--
+       1、如果 use-default-filters=false 需要在include
+       exclude中显示的指明包含或排除的扫描范围，如果是默认true,只要指明自己"另外"想要include和exclude的范围即可
+       2、如果springbootApplication 默认是启用的@ComponetScan 注解，此配置将失效，不起作用！！！
+    -->
+    <context:component-scan base-package="com.geekluxun.greateapp" use-default-filters="true">
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+    </context:component-scan >
+    
     
     <tx:annotation-driven transaction-manager="transactionManager" />
 
@@ -61,5 +77,6 @@
     <import resource="classpath:spring/spring-kafka-producer.xml"/>
     <import resource="classpath*:spring/spring-kafka-consumer.xml"/>
     <import resource="classpath*:spring/spring-data-redis.xml"/>
+    <import resource="classpath*:spring/spring-common.xml"/>
 
 </beans>

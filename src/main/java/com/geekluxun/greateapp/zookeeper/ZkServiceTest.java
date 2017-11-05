@@ -4,13 +4,13 @@ import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by luxun on 2017/10/25.
  */
 
-@Component
+@Service
 public class ZkServiceTest
 {
     private static final Logger logger = LoggerFactory.getLogger(ZkServiceTest.class);

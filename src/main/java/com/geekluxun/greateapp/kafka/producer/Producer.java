@@ -8,14 +8,14 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.MessageChannel;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
 /**
  * Created by luxun on 2017/10/20.
  */
-@Component
+@Service
 public class Producer {
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(MainController.class);
 
