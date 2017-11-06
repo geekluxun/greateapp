@@ -1,12 +1,57 @@
 package com.geekluxun.greateapp.spring;
 
-import org.springframework.context.annotation.Configuration;
+import com.geekluxun.greateapp.service.UserService;
+import com.geekluxun.greateapp.service.UserServiceImpl;
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * Created by luxun on 2017/11/4.
  */
 @Configuration
+@ComponentScan(basePackages = "com.geekluxun")
+@Import({SpringDefaultConfig.class})  //导入另外一个java Config
+@ImportResource("classpath:/spring/spring-common.xml") // 导入XML方式配置的Bean
+@PropertySource("classpath:application.properties")
 public class SpringConfig {
 
+    /**
+     * 注意此方式通过注解@Servcie方式定义的
+     */
+    @Autowired
+    @Qualifier("userService33")
+    UserService userService;
 
+    /**
+     * 注意此bean是通过XML方式定义的
+     */
+    @Resource(name = "springDemo10")
+    SpringDemo springDemo10;
+
+    /**
+     * 实例化这个bean时又用到了另一个UserService，类似xml方式 属性方法！！！
+     * @return
+     */
+    @Bean(initMethod = "init",name = "springDemoConfig")
+    public SpringDemo springDemoConfig() {
+        SpringDemo springDemo = new SpringDemo();
+        springDemo.setUserService(userService);
+        springDemo.setAge(111);
+        return springDemo;
+    }
+
+    /**
+     * 接口方式
+     * @return
+     */
+    @Bean
+    @Description("描述性")
+    @Scope(value = "prototype")
+    public UserService userServiceConfig(){
+        return new UserServiceImpl();
+    }
 }

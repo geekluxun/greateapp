@@ -5,6 +5,7 @@
           xmlns:aop="http://www.springframework.org/schema/aop"
           xmlns:tx="http://www.springframework.org/schema/tx"
           xmlns:mvc="http://www.springframework.org/schema/mvc"
+          xmlns:p="http://www.springframework.org/schema/p"
           xsi:schemaLocation="http://www.springframework.org/schema/beans
        	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        	http://www.springframework.org/schema/aop
@@ -34,10 +35,93 @@
     <bean id="springDemo3" class="com.geekluxun.greateapp.spring.SpringDemo" factory-method="createInstance" >
         <property name="userService" ref="userService33"/>
     </bean>
-    
+
+    <!-- 通过静态方法createInstance2 构造 bean，注意工厂方法带参数！！-->
+    <bean id="springDemo5" class="com.geekluxun.greateapp.spring.SpringDemo" factory-method="createInstance3" >
+        <constructor-arg name="age" value="99"/>
+        <constructor-arg name="name" value="geeks"/>
+        <property name="userService" ref="userService33"/>
+    </bean>
+
     <!-- 指明了工厂bean 同时有一个非静态的factory method-->
     <bean id="springDemo4" factory-bean="springDemo1" factory-method="createInstance2">
         <property name="userService" ref="userService33"/>
     </bean>
-    
+
+    <!-- 使用p标签示例-->
+    <bean id="springDemo6" factory-bean="springDemo1" factory-method="createInstance2"
+        p:userService-ref="userService33"
+    />
+
+
+    <!-- 内部bean示例 ,内部bean可以不用指定id或name-->
+    <bean id="springDemo7" factory-bean="springDemo1" factory-method="createInstance2">
+        <property name="userService">
+            <bean class="com.geekluxun.greateapp.service.UserServiceImpl"/>
+        </property>
+    </bean>
+
+
+    <!-- props 、list、map、set 示例 -->
+    <bean id="springDemo8" class="com.geekluxun.greateapp.spring.SpringDemo" >
+        <property name="userService">
+            <bean class="com.geekluxun.greateapp.service.UserServiceImpl"/>
+        </property>
+
+        <property name="myProperties">
+            <props>
+                <prop key="p1">11</prop>
+                <prop key="p2">22</prop>
+            </props>
+        </property>
+
+        <property name="myList">
+            <list>
+                <value>123</value>
+            </list>
+        </property>
+
+        <property name="myMap">
+            <map>
+                <entry key="dd" value="dd"/>
+            </map>
+        </property>
+
+        <property name="mySet">
+            <set>
+                <value>555</value>
+            </set>
+        </property>
+    </bean>
+
+    <!--  父子 bean示例-->
+    <bean id="springDemo9" parent="springDemo8" class="com.geekluxun.greateapp.spring.SpringDemo" >
+        <property name="userService">
+            <bean class="com.geekluxun.greateapp.service.UserServiceImpl"/>
+        </property>
+        <!-- 属性合并示例 child 覆盖 parent 相应值 p1 -->
+        <property name="myProperties">
+            <props merge="true">
+                <prop key="p1">33</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <!--  depends-on示例 类似ref，两个bean存在依赖关系 在实例化和销毁顺序就明确了！-->
+    <bean id="springDemo10" factory-bean="springDemo1" factory-method="createInstance2" depends-on="springDemo9"
+          p:userService-ref="userService33"
+    />
+
+    <!-- 此bean实例化会推迟到使用时而不是上下文创建时-->
+    <bean id="springDemo11" class="com.geekluxun.greateapp.spring.SpringDemo" lazy-init="true">
+        <property name="userService" ref="userService33"/>
+    </bean>
+
+
+    <!-- autowire 示例-->
+    <bean id="springDemo12" class="com.geekluxun.greateapp.spring.SpringDemo" lazy-init="true" autowire="byType" >
+        <property name="userService" ref="userService33"/>
+    </bean>
+
 </beans>

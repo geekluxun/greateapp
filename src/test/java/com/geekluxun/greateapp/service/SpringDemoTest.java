@@ -1,11 +1,15 @@
 package com.geekluxun.greateapp.service;
 
+import com.geekluxun.greateapp.spring.SpringConfig;
 import com.geekluxun.greateapp.spring.SpringDemo;
+import org.apache.catalina.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -41,6 +45,45 @@ public class SpringDemoTest {
 
 
 
+    @Resource(name = "springDemo5")
+    SpringDemo springDemo5;
+
+
+    @Resource(name = "springDemo6")
+    SpringDemo springDemo6;
+
+
+
+    @Resource(name = "springDemo7")
+    SpringDemo springDemo7;
+
+
+    @Resource(name = "springDemo8")
+    SpringDemo springDemo8;
+
+    @Resource(name = "springDemo9")
+    SpringDemo springDemo9;
+
+    @Resource(name = "springDemo10")
+    SpringDemo springDemo10;
+
+
+    @Resource(name = "springDemo11")
+    SpringDemo springDemo11;
+
+
+
+    @Resource(name = "springDemoConfig")
+    SpringDemo springDemo13;
+
+
+
+    @Resource(name = "userServiceConfig")
+    UserService userService;
+
+
+    @Resource(name = "userServiceConfig")
+    UserService userService2;
 
 
 //    @Autowired
@@ -54,7 +97,10 @@ public class SpringDemoTest {
 
     @Test
     public void test(){
-        //mockMvc.perform(get("/list"))
+//        ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
+//        UserService userService2 = (UserService) ctx.getBean("userServiceConfig2");
+//        UserService userService = (UserService) ctx.getBean("userServiceConfig");
+//        System.out.println();
     }
 
 }
