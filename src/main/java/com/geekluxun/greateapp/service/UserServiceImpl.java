@@ -19,4 +19,13 @@ public class UserServiceImpl implements UserService{
     public void addUser(TUser user) {
         userMapper.insert(user);
     }
+
+    @Override
+    public Boolean isSucceed() {
+        return false;
+    }
+
+    public void exceptionTest() throws Exception{
+        throw new RuntimeException("在UserService.exceptionTest中抛出异常示例!!");
+    }
 }

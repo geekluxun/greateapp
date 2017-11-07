@@ -9,5 +9,8 @@ public interface UserService {
 
     void addUser(TUser user);
 
+    Boolean isSucceed();
+
+    void exceptionTest() throws Exception;
 }
 

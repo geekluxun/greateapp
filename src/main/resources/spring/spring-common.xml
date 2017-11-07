@@ -124,4 +124,19 @@
         <property name="userService" ref="userService33"/>
     </bean>
 
+    <!-- 这种方式配置的每次advice 都会执行两次，未找到问题！！暂时改成注解方式！！-->
+    <!--<bean id="aBean" class="com.geekluxun.greateapp.spring.aop.MyAspect"/>-->
+
+    <!--<aop:config>-->
+        <!--<aop:aspect id = "myAspect" ref="aBean">-->
+            <!--<aop:pointcut id="businessService" expression="execution(* com.geekluxun.greateapp.service.UserServiceImpl.addUser(..))"/>-->
+            <!--<aop:before method="doBefore" pointcut-ref="businessService"/>-->
+            <!--<aop:after method="doAfter" pointcut-ref="businessService"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+    <!--&lt;!&ndash; 使用cglib 代理&ndash;&gt;-->
+    <!--<aop:aspectj-autoproxy expose-proxy="true"/>-->
+
+
 </beans>
