@@ -1,4 +1,4 @@
-package com.geekluxun.greateapp.Execption;
+package com.geekluxun.greateapp.execption;
 
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.core.MethodParameter;

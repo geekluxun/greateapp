@@ -1,8 +1,10 @@
 package com.geekluxun.greateapp.entity;
 
+import com.geekluxun.greateapp.common.BaseEntity;
+
 import java.util.Date;
 
-public class SysRole {
+public class SysRole extends BaseEntity{
     private Long id;
 
     private String roleName;

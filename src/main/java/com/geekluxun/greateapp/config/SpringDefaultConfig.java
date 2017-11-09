@@ -1,9 +1,8 @@
-package com.geekluxun.greateapp.spring;
+package com.geekluxun.greateapp.config;
 
-import com.geekluxun.greateapp.service.UserService;
-import com.geekluxun.greateapp.service.UserServiceImpl;
+import com.geekluxun.greateapp.service.UserService.UserService;
+import com.geekluxun.greateapp.service.UserService.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.context.annotation.Scope;
 

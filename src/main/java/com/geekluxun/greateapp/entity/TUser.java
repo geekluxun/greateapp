@@ -1,6 +1,10 @@
 package com.geekluxun.greateapp.entity;
 
-public class TUser {
+import com.geekluxun.greateapp.common.BaseEntity;
+import com.geekluxun.greateapp.annotation.MyAnnotation;
+
+@MyAnnotation
+public class TUser extends BaseEntity{
     private Long id;
 
     private String name;
@@ -39,4 +43,5 @@ public class TUser {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

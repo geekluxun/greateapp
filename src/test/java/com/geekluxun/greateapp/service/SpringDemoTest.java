@@ -1,15 +1,12 @@
 package com.geekluxun.greateapp.service;
 
-import com.geekluxun.greateapp.spring.SpringConfig;
+import com.geekluxun.greateapp.service.UserService.UserService;
 import com.geekluxun.greateapp.spring.SpringDemo;
-import org.apache.catalina.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;

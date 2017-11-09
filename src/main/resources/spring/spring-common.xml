@@ -57,7 +57,7 @@
     <!-- 内部bean示例 ,内部bean可以不用指定id或name-->
     <bean id="springDemo7" factory-bean="springDemo1" factory-method="createInstance2">
         <property name="userService">
-            <bean class="com.geekluxun.greateapp.service.UserServiceImpl"/>
+            <bean class="com.geekluxun.greateapp.service.UserService.UserServiceImpl"/>
         </property>
     </bean>
 
@@ -65,7 +65,7 @@
     <!-- props 、list、map、set 示例 -->
     <bean id="springDemo8" class="com.geekluxun.greateapp.spring.SpringDemo" >
         <property name="userService">
-            <bean class="com.geekluxun.greateapp.service.UserServiceImpl"/>
+            <bean class="com.geekluxun.greateapp.service.UserService.UserServiceImpl"/>
         </property>
 
         <property name="myProperties">
@@ -97,7 +97,7 @@
     <!--  父子 bean示例-->
     <bean id="springDemo9" parent="springDemo8" class="com.geekluxun.greateapp.spring.SpringDemo" >
         <property name="userService">
-            <bean class="com.geekluxun.greateapp.service.UserServiceImpl"/>
+            <bean class="com.geekluxun.greateapp.service.UserService.UserServiceImpl"/>
         </property>
         <!-- 属性合并示例 child 覆盖 parent 相应值 p1 -->
         <property name="myProperties">

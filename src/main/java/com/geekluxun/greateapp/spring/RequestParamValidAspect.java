@@ -1,7 +1,7 @@
 package com.geekluxun.greateapp.spring;
 
-import com.geekluxun.greateapp.Execption.FieldError;
-import com.geekluxun.greateapp.Execption.ParamValidException;
+import com.geekluxun.greateapp.execption.FieldError;
+import com.geekluxun.greateapp.execption.ParamValidException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

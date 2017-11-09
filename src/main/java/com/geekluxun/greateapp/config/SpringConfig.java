@@ -1,8 +1,8 @@
-package com.geekluxun.greateapp.spring;
+package com.geekluxun.greateapp.config;
 
-import com.geekluxun.greateapp.service.UserService;
-import com.geekluxun.greateapp.service.UserServiceImpl;
-import org.apache.catalina.User;
+import com.geekluxun.greateapp.service.UserService.UserService;
+import com.geekluxun.greateapp.service.UserService.UserServiceImpl;
+import com.geekluxun.greateapp.spring.SpringDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.*;

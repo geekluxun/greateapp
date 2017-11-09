@@ -1,10 +1,8 @@
 package com.geekluxun.greateapp.spring;
 
-import com.geekluxun.greateapp.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.geekluxun.greateapp.service.UserService.UserService;
 import org.springframework.beans.factory.annotation.Required;
 
-import javax.swing.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;

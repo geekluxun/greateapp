@@ -2,6 +2,7 @@ package com.geekluxun.greateapp.service;
 
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.schedule.TestTask;
+import com.geekluxun.greateapp.service.UserService.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

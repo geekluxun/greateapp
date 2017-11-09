@@ -4,19 +4,15 @@ import com.geekluxun.greateapp.dto.CommonResponseDto;
 import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.kafka.producer.Producer;
-import com.geekluxun.greateapp.service.UserService;
-import com.geekluxun.greateapp.zookeeper.ZkService;
+import com.geekluxun.greateapp.service.UserService.UserService;
 import com.geekluxun.greateapp.zookeeper.ZkServiceTest;
-import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -47,13 +43,16 @@ public class MainController {
         dto.setPassword("123123");
 
         BeanUtils.copyProperties(dto, user);
-        userService.addUser(user);
-        userService.isSucceed();
-        try {
-            userService.exceptionTest();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //userService.addUser(user);
+        //userService.testString("hello", new HashMap());
+        userService.testAopArgsAnnotation(user, user);
+//        userService.isSucceed();
+//        try {
+//            userService.exceptionTest();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        //testAop("d");
         return  dto;
     }
 

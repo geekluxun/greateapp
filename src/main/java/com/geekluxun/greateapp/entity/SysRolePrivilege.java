@@ -1,6 +1,8 @@
 package com.geekluxun.greateapp.entity;
 
-public class SysRolePrivilege {
+import com.geekluxun.greateapp.common.BaseEntity;
+
+public class SysRolePrivilege extends BaseEntity{
     private Long roleId;
 
     private Long privilegeId;

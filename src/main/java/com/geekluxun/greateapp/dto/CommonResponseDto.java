@@ -1,11 +1,13 @@
 package com.geekluxun.greateapp.dto;
 
+import com.geekluxun.greateapp.common.BaseDto;
+
 import java.io.Serializable;
 
 /**
  * Created by luxun on 2017/10/20.
  */
-public class CommonResponseDto implements Serializable{
+public class CommonResponseDto extends BaseDto{
 
     public String code;
     public String msg;
