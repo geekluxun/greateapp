@@ -1,14 +1,14 @@
 package com.geekluxun.greateapp.dto;
 
+import com.geekluxun.greateapp.annotation.ParaValidator;
 import com.geekluxun.greateapp.common.BaseDto;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 /**
  * Created by luxun on 2017/9/2.
  */
+@ParaValidator
 public class UserDto extends BaseDto{
     @NotNull(message = "姓名不能为空")
     private String name;

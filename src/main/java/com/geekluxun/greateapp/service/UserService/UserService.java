@@ -1,8 +1,10 @@
 package com.geekluxun.greateapp.service.UserService;
 
-import com.geekluxun.greateapp.entity.SysUser;
+import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
@@ -21,5 +23,7 @@ public interface UserService {
     void testString(String argc, Map argc2);
 
     void testAopArgsAnnotation(TUser user, TUser user2);
+
+    void testValidate(@NotNull @Valid UserDto user);
 }
 

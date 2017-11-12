@@ -11,8 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
@@ -35,17 +37,28 @@ public class MainController {
     ZkServiceTest zkServiceTest;
 
 
-    @RequestMapping(value = "/main.json",method = RequestMethod.POST)
-    public Object mainPage(@RequestBody  UserDto para){
-        TUser user = new TUser();
-        UserDto dto = new UserDto();
-        dto.setName("luxun");
-        dto.setPassword("123123");
+    @RequestMapping(value = "/main.json", method = RequestMethod.POST)
+    public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result) {
+        CommonResponseDto dto = new CommonResponseDto();
+        if (result.getErrorCount() > 0) {
+            dto.setMsg("错误啦");
+            return dto;
+        }
 
-        BeanUtils.copyProperties(dto, user);
+        TUser user = new TUser();
+
+
+        BeanUtils.copyProperties(para, user);
         //userService.addUser(user);
         //userService.testString("hello", new HashMap());
-        userService.testAopArgsAnnotation(user, user);
+//        userService.testAopArgsAnnotation(user, user);
+        para.setName(null);
+        UserDto dto1 = null;
+        try {
+            userService.testValidate(dto1);
+        }catch (Exception e){
+            logger.error("异常",e);
+        }
 //        userService.isSucceed();
 //        try {
 //            userService.exceptionTest();
@@ -53,7 +66,7 @@ public class MainController {
 //            e.printStackTrace();
 //        }
         //testAop("d");
-        return  dto;
+        return dto;
     }
 
     @RequestMapping(value = "/kafka/{topic}.json")
