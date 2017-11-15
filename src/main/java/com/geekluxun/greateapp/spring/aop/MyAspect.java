@@ -102,12 +102,12 @@ public class MyAspect {
     }
 
     @Around("pointcut1()")
-    public void doAfterFinally(ProceedingJoinPoint point) throws Exception{
+    public void doAfterFinally(ProceedingJoinPoint point) throws Throwable{
         logger.error(" ========== 环绕通知 ========== ");
         try {
             point.proceed();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
+        } catch (Throwable throwable) { //此处必须重新抛出异常，否则异常会被吃掉！！！
+            throw throwable;
         }
     }
 

@@ -1,10 +1,12 @@
 package com.geekluxun.greateapp.service.UserService;
 
+import com.geekluxun.greateapp.annotation.ConsistentDateParameters;
 import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -24,6 +26,5 @@ public interface UserService {
 
     void testAopArgsAnnotation(TUser user, TUser user2);
 
-    void testValidate(@NotNull @Valid UserDto user);
 }
 

@@ -5,6 +5,7 @@ import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.UserService.UserService;
+import com.geekluxun.greateapp.validator.Car;
 import com.geekluxun.greateapp.zookeeper.ZkServiceTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -40,37 +43,22 @@ public class MainController {
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
     public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result) {
         CommonResponseDto dto = new CommonResponseDto();
+
         if (result.getErrorCount() > 0) {
-            dto.setMsg("错误啦");
+            dto.setMsg(result.getAllErrors().iterator().next().getDefaultMessage());
+            logger.error("=========== mainPage ==========" + result.getAllErrors().iterator().next().getDefaultMessage());
             return dto;
         }
 
         TUser user = new TUser();
-
-
         BeanUtils.copyProperties(para, user);
-        //userService.addUser(user);
-        //userService.testString("hello", new HashMap());
-//        userService.testAopArgsAnnotation(user, user);
-        para.setName(null);
-        UserDto dto1 = null;
-        try {
-            userService.testValidate(dto1);
-        }catch (Exception e){
-            logger.error("异常",e);
-        }
-//        userService.isSucceed();
-//        try {
-//            userService.exceptionTest();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        //testAop("d");
+
+        dto.setData(user);
         return dto;
     }
 
     @RequestMapping(value = "/kafka/{topic}.json")
-    public Object testKafka(@PathVariable("topic") String topic){
+    public Object testKafka(@PathVariable("topic") String topic) {
         CommonResponseDto dto = new CommonResponseDto();
         dto.setCode("123");
         dto.setMsg("kafka");
@@ -81,7 +69,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/zk.json", method = RequestMethod.POST)
-    public Object testZkLock(@RequestBody Map<String , Object> params ){
+    public Object testZkLock(@RequestBody Map<String, Object> params) {
         CommonResponseDto dto = new CommonResponseDto();
         dto.setCode("0000");
         dto.setMsg("成功");
@@ -96,9 +84,5 @@ public class MainController {
         }
         return dto;
     }
-
-
-
-
 
 }

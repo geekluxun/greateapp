@@ -1,5 +1,6 @@
 package com.geekluxun.greateapp.validator;
 
+import com.geekluxun.greateapp.annotation.ValidPassengerCount;
 import org.hibernate.validator.constraints.NotBlank;
 import org.junit.Assert;
 
@@ -10,13 +11,21 @@ import java.util.Set;
 /**
  * Created by luxun on 2017/11/11.
  */
+//定义类级的约束校验，使用场景：约束条件由多个属性共同组成 ，校验时需要调用validator.validate(car)方法
+@ValidPassengerCount(message = "乘车人数不对")
 public class Car {
 
     @NotBlank(message = "品牌不能为空")
     private String brand;
 
-    @NotNull
+    @NotNull(message = "引擎不能为空")
     private Gear gearList;
+
+
+    private  Integer passengers;
+
+    private Integer seatCount;
+
 
     public Car() {
     }
@@ -29,6 +38,23 @@ public class Car {
         this.brand = brand;
     }
 
+
+    public Integer getPassengers() {
+        return passengers;
+    }
+
+    public Integer getSeatCount() {
+        return seatCount;
+    }
+
+    public void setPassengers(Integer passengers) {
+        this.passengers = passengers;
+    }
+
+
+    public void setSeatCount(Integer seatCount) {
+        this.seatCount = seatCount;
+    }
 
     public Gear getGearList() {
         return gearList;

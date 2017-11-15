@@ -1,5 +1,6 @@
-package com.geekluxun.greateapp.spring;
+package com.geekluxun.greateapp.spring.aop;
 
+import com.geekluxun.greateapp.execption.ParaValidException;
 import com.geekluxun.greateapp.execption.ParamValidException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,10 +14,12 @@ import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.Path;
 import javax.validation.Validation;
 import javax.validation.ValidatorFactory;
 import javax.validation.executable.ExecutableValidator;
 import java.lang.reflect.Method;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -28,7 +31,8 @@ public class ParamValidAspect {
 
     Logger log = LoggerFactory.getLogger(getClass());
 
-    @Pointcut("execution(* com.geekluxun.greateapp.service..*.*(..)) && @args(com.geekluxun.greateapp.annotation.ParaValidator)")
+    //@Pointcut("execution(* com.geekluxun.greateapp.service..*.*(..)) && @args(com.geekluxun.greateapp.annotation.ParaValidator)")
+    @Pointcut("execution(* com.geekluxun.greateapp.service..*.*(..))")
     public void controllerBefore() {
     }
 
@@ -60,7 +64,18 @@ public class ParamValidAspect {
 //                return error;
 //            }).collect(Collectors.toList());
             String error = validResult.iterator().next().getMessage();
-            throw new Exception(error);  // 抛出异常，交给上层处理
+
+//            Iterator<Path.Node> propertyPath = validResult.iterator()
+//                    .next()
+//                    .getPropertyPath()
+//                    .iterator();
+//
+//            Path.MethodNode methodNode = propertyPath.next().as( Path.MethodNode.class );
+//
+//            Path.ParameterNode parameterNode = propertyPath.next().as( Path.ParameterNode.class );
+
+
+            throw new ParaValidException(error);  // 抛出异常，交给上层处理
 
         }
     }

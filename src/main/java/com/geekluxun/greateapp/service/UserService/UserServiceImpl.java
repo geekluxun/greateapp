@@ -1,5 +1,6 @@
 package com.geekluxun.greateapp.service.UserService;
 
+import com.geekluxun.greateapp.annotation.ConsistentDateParameters;
 import com.geekluxun.greateapp.annotation.ParaValidator;
 import com.geekluxun.greateapp.dao.TUserMapper;
 import com.geekluxun.greateapp.dto.UserDto;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -21,7 +23,7 @@ import java.util.Map;
 //@Service("userService33")指明名字为userService33
 @Service("userService33")
 @ParaValidator
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
@@ -45,11 +47,11 @@ public class UserServiceImpl implements UserService{
         return false;
     }
 
-    public void exceptionTest() throws Exception{
+    public void exceptionTest() throws Exception {
         throw new RuntimeException("在UserService.exceptionTest中抛出异常示例!!");
     }
 
-    public void testInnerMethodCall(){
+    public void testInnerMethodCall() {
         logger.info("================ 在内部调用方法示例 ================");
     }
 
@@ -63,8 +65,4 @@ public class UserServiceImpl implements UserService{
         logger.info("================ testAopArgsAnnotation ================:");
     }
 
-    @Override
-    public void testValidate(@NotNull @Valid UserDto dto) {
-        logger.info("================ testValidate ================:");
-    }
 }
