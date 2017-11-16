@@ -1,6 +1,7 @@
 package com.geekluxun.greateapp.dto;
 
 import com.geekluxun.greateapp.common.BaseDto;
+import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 
 import java.io.Serializable;
 
@@ -9,24 +10,27 @@ import java.io.Serializable;
  */
 public class CommonResponseDto extends BaseDto{
 
-    public String code;
-    public String msg;
+    public Boolean result;
+    public Integer errcode;
+    public String errmsg;
     public Object data;
 
-    public String getCode() {
-        return code;
+
+    public String getErrmsg() {
+        return errmsg;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setErrmsg(String errmsg) {
+        this.errmsg = errmsg;
     }
 
-    public String getMsg() {
-        return msg;
+    public Integer getErrcode() {
+        return errcode;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+
+    public void setErrcode(Integer errcode) {
+        this.errcode = errcode;
     }
 
     public Object getData() {
@@ -35,5 +39,14 @@ public class CommonResponseDto extends BaseDto{
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+
+    public Boolean getResult() {
+        return result;
+    }
+
+    public void setResult(Boolean result) {
+        this.result = result;
     }
 }

@@ -1,5 +1,7 @@
 package com.geekluxun.greateapp.controller;
 
+import com.geekluxun.greateapp.constant.Constants;
+import com.geekluxun.greateapp.constant.ResponseCode;
 import com.geekluxun.greateapp.dto.CommonResponseDto;
 import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
@@ -42,26 +44,40 @@ public class MainController {
 
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
     public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result) {
-        CommonResponseDto dto = new CommonResponseDto();
 
-        if (result.getErrorCount() > 0) {
-            dto.setMsg(result.getAllErrors().iterator().next().getDefaultMessage());
-            logger.error("=========== mainPage ==========" + result.getAllErrors().iterator().next().getDefaultMessage());
-            return dto;
+        CommonResponseDto  dto = new CommonResponseDto();
+        dto.setResult(true);
+
+        try {
+
+            if (result.getErrorCount() > 0) {
+                String msg = result.getAllErrors().iterator().next().getDefaultMessage();
+                dto.setErrmsg(msg);
+                dto.setErrcode(ResponseCode.RET_INVALID_PARA.getErrcode());
+                logger.error("=========== mainPage ==========" + msg);
+                return dto;
+            }
+
+            TUser user = new TUser();
+            BeanUtils.copyProperties(para, user);
+
+            dto.setData(user);
+        } catch (Exception e) {
+            logger.error("========= mainPage ========== ",e);
+            dto.setResult(false);
+            dto.setErrcode(ResponseCode.RET_SERVER_EXCEPTION.getErrcode());
+            dto.setErrmsg(ResponseCode.RET_SERVER_EXCEPTION.getErrmsg());
         }
 
-        TUser user = new TUser();
-        BeanUtils.copyProperties(para, user);
-
-        dto.setData(user);
         return dto;
     }
 
     @RequestMapping(value = "/kafka/{topic}.json")
     public Object testKafka(@PathVariable("topic") String topic) {
         CommonResponseDto dto = new CommonResponseDto();
-        dto.setCode("123");
-        dto.setMsg("kafka");
+        dto.setResult(true);
+        dto.setErrcode(123);
+        dto.setErrmsg("kafka");
         dto.setData("456");
         logger.info("============ send kafka msg start!!! ============");
         producer.send(topic);
@@ -71,18 +87,22 @@ public class MainController {
     @RequestMapping(value = "/zk.json", method = RequestMethod.POST)
     public Object testZkLock(@RequestBody Map<String, Object> params) {
         CommonResponseDto dto = new CommonResponseDto();
-        dto.setCode("0000");
-        dto.setMsg("成功");
+        dto.setResult(true);
+        dto.setErrcode(0000);
+        dto.setErrmsg("成功");
 
         logger.info("============ 开始测试分布锁 ===========");
         try {
             zkServiceTest.testLock((String) params.get("path"));
         } catch (Exception e) {
             logger.error(" ==========  调用失败2！ ========== ", e);
-            dto.setMsg("服务器返回异常！");
-            dto.setCode("1111");
         }
         return dto;
+    }
+
+    @RequestMapping(value = "test")
+    public void testGet(){
+        logger.info("=========  testGet ============");
     }
 
 }
