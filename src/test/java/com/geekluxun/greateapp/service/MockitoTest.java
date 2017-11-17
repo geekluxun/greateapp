@@ -41,15 +41,4 @@ public class MockitoTest extends BaseTest{
 
     }
 
-    @Test
-    public void count() throws Exception {
-        Duplicator counter = mock(Counter.class);
-        Answer<Integer> answer = new Answer<Integer>() {
-            public Integer answer(InvocationOnMock invocationOnMock) throws Throwable {
-                return ((String) invocationOnMock.getArguments()[0]).length();
-            }
-        };
-        when(counter.count(anyString())).thenAnswer(answer);
-    }
-
 }
