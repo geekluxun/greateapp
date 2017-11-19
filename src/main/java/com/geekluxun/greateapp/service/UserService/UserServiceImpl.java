@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -34,8 +35,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     //@MyAnnotation
+    @Transactional
     public void addUser(TUser user) {
         userMapper.insert(user);
+
+        int i = 0/0;
 
         //以下两种方式调用不一样，前一种不会被动态代理，后一种会被动态代理
         //testInnerMethodCall();

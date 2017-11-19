@@ -78,5 +78,6 @@
     <import resource="classpath*:spring/spring-kafka-consumer.xml"/>
     <import resource="classpath*:spring/spring-data-redis.xml"/>
     <import resource="classpath*:spring/spring-common.xml"/>
+    <import resource="classpath*:spring/spring-cache.xml"/>
 
 </beans>
