@@ -44,29 +44,24 @@
         <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
     </context:component-scan >
     
+    <!-- 使用aspectj 而不是默认的proxy，可以解决非public方法和内部调用事务注解无效问题-->
+    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
     
-    <tx:annotation-driven transaction-manager="transactionManager" />
-
-
-
     <tx:advice id="transAdvice">
         <tx:attributes>
             <tx:method name="get*" propagation="SUPPORTS" />
             <tx:method name="query*" propagation="SUPPORTS" />
             <tx:method name="find*" propagation="SUPPORTS" />
             <tx:method name="select*" propagation="SUPPORTS" />
-            <tx:method name="*" propagation="REQUIRES_NEW"
-                rollback-for="java.lang.Throwable" isolation="DEFAULT" />
+            <tx:method name="*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>
         </tx:attributes>
     </tx:advice>
 
 
-    <!--<aop:config>-->
-        <!--&lt;!&ndash; <aop:advisor advice-ref="transAdvice"-->
-            <!--pointcut="execution(* com.namibank.df.mallOrder.service..*(..))" /> &ndash;&gt;-->
-        <!--<aop:pointcut expression="execution(* com.namibank.df.mallOrder.service..*(..))" id="serviceOperate"/>-->
-        <!--<aop:advisor advice-ref="transAdvice" pointcut-ref="serviceOperate"/>-->
-    <!--</aop:config>-->
+    <aop:config>
+        <aop:pointcut expression="execution(* com.geekluxun.greateapp.service..*(..))" id="serviceOperate"/>
+        <aop:advisor advice-ref="transAdvice" pointcut-ref="serviceOperate"/>
+    </aop:config>
 
 
     <import resource="classpath:spring/spring-database.xml" />

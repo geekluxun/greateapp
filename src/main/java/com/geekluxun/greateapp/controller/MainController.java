@@ -1,13 +1,11 @@
 package com.geekluxun.greateapp.controller;
 
-import com.geekluxun.greateapp.constant.Constants;
 import com.geekluxun.greateapp.constant.ResponseCode;
 import com.geekluxun.greateapp.dto.CommonResponseDto;
 import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.UserService.UserService;
-import com.geekluxun.greateapp.validator.Car;
 import com.geekluxun.greateapp.zookeeper.ZkServiceTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Map;
 
 /**

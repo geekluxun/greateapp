@@ -7,7 +7,7 @@
             <charset class="java.nio.charset.Charset">UTF-8</charset>
         </encoder>
     </appender>
-    <property name="filePath" value="/data/logs" />
+    <property name="filePath" value="data/logs" />
     <property name="project.name" value="greateapp"/>
     
     <!-- daily rollover -->

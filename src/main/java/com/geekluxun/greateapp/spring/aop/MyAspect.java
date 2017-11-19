@@ -1,6 +1,5 @@
 package com.geekluxun.greateapp.spring.aop;
 
-import org.aspectj.apache.bcel.classfile.Method;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -10,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by luxun on 2017/11/7.
+ *
+ * 通知的顺序为after、 before 、around,否则会报错！！！
  */
 @Aspect
 @Component
@@ -53,8 +54,8 @@ public class MyAspect {
     /**
      * 通过bean的id或者name
      */
-    @Pointcut("bean(userService33)")
-    public void pointcut6(){}
+//    @Pointcut("bean(userService33)")
+//    public void pointcut6(){}
 
     /**
      * 实现某个接口
@@ -74,18 +75,6 @@ public class MyAspect {
     @Pointcut("execution(* com.geekluxun.greateapp.service..*.*(..)) && @args(com.geekluxun.greateapp.annotation.MyAnnotation, com.geekluxun.greateapp.annotation.MyAnnotation)")
     public void pointcut9(){}
 
-
-    @Before("pointcut9()")
-    public void doBefore(JoinPoint joinPoint){
-        logger.info(" ============ 服务调用前 =============");
-        logger.info("调用:" + joinPoint.getSignature().toShortString());
-        Object[] argcs = joinPoint.getArgs();
-        for (int i = 0; i < argcs.length; i++){
-            logger.info("调用方法参数:" + i + ": " + argcs[i].toString());
-        }
-
-    }
-
     @After("pointcut1()")
     public void doAfter(){
         logger.info(" ============ 服务调用后 =============");
@@ -101,11 +90,29 @@ public class MyAspect {
         logger.error(" ========== 调用发生异常： ========== ", ex);
     }
 
+    @Before("pointcut9()")
+    public void doBefore(JoinPoint joinPoint){
+        logger.info(" ============ 服务调用前 =============");
+        logger.info("调用:" + joinPoint.getSignature().toShortString());
+        Object[] argcs = joinPoint.getArgs();
+        for (int i = 0; i < argcs.length; i++){
+            logger.info("调用方法参数:" + i + ": " + argcs[i].toString());
+        }
+
+    }
+
+
+    /**
+     * 必须带返回值object
+     * @param point
+     * @return
+     * @throws Throwable
+     */
     @Around("pointcut1()")
-    public void doAfterFinally(ProceedingJoinPoint point) throws Throwable{
+    public Object doAfterFinally(ProceedingJoinPoint point) throws Throwable{
         logger.error(" ========== 环绕通知 ========== ");
         try {
-            point.proceed();
+            return point.proceed();
         } catch (Throwable throwable) { //此处必须重新抛出异常，否则异常会被吃掉！！！
             throw throwable;
         }
