@@ -1,0 +1,7 @@
+server:
+  port: 8031
+
+spring:
+  profiles: default
+my:
+  intvalue: 99

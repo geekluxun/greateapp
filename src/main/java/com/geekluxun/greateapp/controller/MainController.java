@@ -12,9 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpRequest;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Map;
 
@@ -37,9 +41,11 @@ public class MainController {
     @Autowired
     ZkServiceTest zkServiceTest;
 
+    @Value("${mytest.intvalue}")
+    Integer testInt;
 
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
-    public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result) {
+    public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result, HttpServletRequest request , HttpServletResponse response) {
 
         CommonResponseDto  dto = new CommonResponseDto();
         dto.setResult(true);

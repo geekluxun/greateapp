@@ -37,6 +37,6 @@
     <root>
         <level value="debug" />
         <appender-ref ref="STDOUT" />
-        <appender-ref ref="rollingFileAppender" />
+        <!--<appender-ref ref="rollingFileAppender" />-->
     </root>
 </configuration>
