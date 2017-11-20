@@ -80,6 +80,12 @@ public class MainController {
         return dto;
     }
 
+    /**
+     * CrossOrigin解决浏览器跨域问题
+     * @param params
+     * @return
+     */
+    @CrossOrigin(origins = "*",allowedHeaders = "*",maxAge = 7200, methods = {RequestMethod.POST,RequestMethod.GET,RequestMethod.OPTIONS})
     @RequestMapping(value = "/zk.json", method = RequestMethod.POST)
     public Object testZkLock(@RequestBody Map<String, Object> params) {
         CommonResponseDto dto = new CommonResponseDto();
