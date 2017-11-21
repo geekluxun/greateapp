@@ -3,7 +3,7 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: test
 
 foo:
     remote-address: 192.168.1.200

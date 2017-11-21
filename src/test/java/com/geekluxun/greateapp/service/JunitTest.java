@@ -43,7 +43,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 //@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @WebAppConfiguration(value = "classpath:applicationContext.xml")
 //@Transactional(transactionManager = "txMgr")
-@ActiveProfiles("prod") //不起作用！！！
+//注意spring的profiles和maven中的profiles是不同的概念，前者配置不同环境的bean, 后者在于打包时选择不同的配置文件
+@ActiveProfiles("prod") //起作用了！！！application.yml中spring.profiles.active区别
 //@TestPropertySource(value = "classpath:application.properties")
 //@ProfileValueSourceConfiguration(CustomProfileValueSource.class)
 public class JunitTest extends BaseTest {
@@ -53,6 +54,10 @@ public class JunitTest extends BaseTest {
 //    UserService userService;
     @Resource(name = "springDemo11")
     SpringDemo springDemo;
+
+
+    @Resource(name = "springDemo13")
+    SpringDemo springDemo13;
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -74,7 +79,7 @@ public class JunitTest extends BaseTest {
     //在测试类实例化前
     @Ignore
     @BeforeClass
-    public void beforeClass() {
+    public static void beforeClass() {
 
     }
 

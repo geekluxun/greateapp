@@ -51,6 +51,7 @@ public class SpringConfig {
     @Bean
     @Description("描述性")
     @Scope(value = "prototype")
+    @Profile(value = "prod")
     public UserService userServiceConfig(){
         return new UserServiceImpl();
     }

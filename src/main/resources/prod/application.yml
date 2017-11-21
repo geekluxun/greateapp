@@ -3,8 +3,7 @@ server:
 
 spring:
   profiles:
-    active: dev
-
+    active: prod
 foo:
     remote-address: 192.168.1.200
     security:
