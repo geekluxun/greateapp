@@ -1,6 +1,7 @@
 package com.geekluxun.greateapp.service.UserService;
 
 import com.geekluxun.greateapp.annotation.ParaValidator;
+import com.geekluxun.greateapp.config.FooProperties;
 import com.geekluxun.greateapp.dao.TUserMapper;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.execption.MyException;
@@ -27,6 +28,9 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
+    FooProperties fooProperties;
+
+    @Autowired
     TUserMapper userMapper;
 
     @Resource(name = "userService33")
@@ -44,7 +48,7 @@ public class UserServiceImpl implements UserService {
     public void addUser(TUser user) throws MyException {
         userMapper.insertSelective(user);
 
-
+        logger.info("==========属性值==========={}" ,fooProperties);
         user.setName("luxun555");
         //addUser2(user);
         testaddUser(user);

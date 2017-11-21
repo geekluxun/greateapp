@@ -17,15 +17,7 @@ import java.io.IOException;
  * Created by luxun on 2017/11/20.
  */
 @Configuration
-@EnableAutoConfiguration
-@ComponentScan
-@EnableConfigurationProperties
+@EnableConfigurationProperties(FooProperties.class)
 public class YmalConfig {
 
-    @Bean
-    public PropertySource<?> yamlPropertySourceLoader() throws IOException {
-        YamlPropertySourceLoader loader = new YamlPropertySourceLoader();
-        PropertySource<?> applicationYamlPropertySource = loader.load("application.yml", new ClassPathResource("application.yml"),"default");
-        return applicationYamlPropertySource;
-    }
 }

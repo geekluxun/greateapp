@@ -41,8 +41,6 @@ public class MainController {
     @Autowired
     ZkServiceTest zkServiceTest;
 
-    @Value("${mytest.intvalue}")
-    Integer testInt;
 
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
     public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result, HttpServletRequest request , HttpServletResponse response) {
@@ -62,7 +60,7 @@ public class MainController {
 
             TUser user = new TUser();
             BeanUtils.copyProperties(para, user);
-
+            userService.addUser(user);
             dto.setData(user);
         } catch (Exception e) {
             logger.error("========= mainPage ========== ",e);
