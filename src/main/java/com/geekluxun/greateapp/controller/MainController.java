@@ -7,6 +7,9 @@ import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.UserService.UserService;
 import com.geekluxun.greateapp.zookeeper.ZkServiceTest;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -42,6 +45,7 @@ public class MainController {
     ZkServiceTest zkServiceTest;
 
 
+    @ApiOperation(value = "主接口", notes = "无", produces = "application/json",consumes = "application/json")
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
     public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result, HttpServletRequest request , HttpServletResponse response) {
 
@@ -72,7 +76,8 @@ public class MainController {
         return dto;
     }
 
-    @RequestMapping(value = "/kafka/{topic}.json")
+    @ApiOperation(value = "Kafka测试接口", notes = "无", produces = "application/json",consumes = "application/json")
+    @RequestMapping(value = "/kafka/{topic}.json", method = RequestMethod.POST)
     public Object testKafka(@PathVariable("topic") String topic) {
         CommonResponseDto dto = new CommonResponseDto();
         dto.setResult(true);
@@ -89,6 +94,7 @@ public class MainController {
      * @param params
      * @return
      */
+    @ApiOperation(value = "zookeeper测试接口", notes = "无", produces = "application/json",consumes = "application/json")
     @CrossOrigin(origins = "*",allowedHeaders = "*",maxAge = 7200, methods = {RequestMethod.POST,RequestMethod.GET,RequestMethod.OPTIONS})
     @RequestMapping(value = "/zk.json", method = RequestMethod.POST)
     public Object testZkLock(@RequestBody Map<String, Object> params) {
@@ -106,7 +112,8 @@ public class MainController {
         return dto;
     }
 
-    @RequestMapping(value = "test")
+    //@ApiOperation(value = "test接口", notes = "无")
+    @RequestMapping(value = "/test" , method = RequestMethod.GET)
     public void testGet(){
         logger.info("=========  testGet ============");
     }
