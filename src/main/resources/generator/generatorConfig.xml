@@ -20,7 +20,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://116.62.63.81:3306/mybatis"
+                        connectionURL="jdbc:mysql://116.62.63.81:3306/test"
                         userId="root"
                         password="geekluxun">
         </jdbcConnection>
@@ -34,7 +34,7 @@
 
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.geekluxun.greateapp.dao"  targetProject="src/main/java"/>
 
-        <table tableName="sys_%"
+        <table tableName="t_user"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

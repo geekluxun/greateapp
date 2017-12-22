@@ -1,51 +1,100 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geekluxun.greateapp.dao.TUserMapper">
     <resultMap id="BaseResultMap" type="com.geekluxun.greateapp.entity.TUser">
-	<constructor>
-	    <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long"/>
-	    <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String"/>
-	    <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String"/>
-	</constructor>
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, name, password
-  	</sql>
+        id, name, password, create_time, modify_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByTime" parameterType="java.util.Date" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where create_time   <![CDATA[ < #{time} ]]>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM t_user
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.geekluxun.greateapp.entity.TUser">
+        INSERT INTO t_user (id, name, password,
+                            create_time, modify_time)
+        VALUES (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+    </insert>
     <insert id="insertSelective" parameterType="com.geekluxun.greateapp.entity.TUser">
-	insert into t_user
-	<trim prefix="(" suffix=")" suffixOverrides=",">
-	    <if test="id != null">
-		id,
-	    </if>
-	    <if test="name != null">
-		name,
-	    </if>
-	    <if test="password != null">
-		password,
-	    </if>
-	</trim>
-	<trim prefix="values (" suffix=")" suffixOverrides=",">
-	    <if test="id != null">
-		#{id,jdbcType=BIGINT},
-	    </if>
-	    <if test="name != null">
-		#{name,jdbcType=VARCHAR},
-	    </if>
-	    <if test="password != null">
-		#{password,jdbcType=VARCHAR},
-	    </if>
-	</trim>
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.geekluxun.greateapp.entity.TUser">
-	update t_user
-	<set>
-	    <if test="name != null">
-		name = #{name,jdbcType=VARCHAR},
-	    </if>
-	    <if test="password != null">
-		password = #{password,jdbcType=VARCHAR},
-	    </if>
-	</set>
-	where id = #{id,jdbcType=BIGINT}
+        update t_user
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.geekluxun.greateapp.entity.TUser">
+        UPDATE t_user
+        SET name        = #{name,jdbcType=VARCHAR},
+            password    = #{password,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+        WHERE id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

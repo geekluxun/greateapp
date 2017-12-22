@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -92,7 +94,13 @@ public class UserServiceImpl implements UserService {
         logger.info("================ testAopArgsAnnotation ================:");
     }
 
-     @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Override
+    public List<TUser> queryByTime(Date beforeTime) {
+        List<TUser> users = userMapper.selectByTime(beforeTime);
+        return users;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
      private void testaddUser(TUser user){
         userMapper.insertSelective(user);
     }

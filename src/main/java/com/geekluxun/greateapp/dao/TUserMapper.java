@@ -2,13 +2,13 @@ package com.geekluxun.greateapp.dao;
 
 import com.geekluxun.greateapp.entity.TUser;
 
-/**
- * Created by luxun on 2017/9/2.
- */
+import java.util.Date;
+import java.util.List;
 
 public interface TUserMapper {
-
     int deleteByPrimaryKey(Long id);
+
+    int insert(TUser record);
 
     int insertSelective(TUser record);
 
@@ -17,4 +17,6 @@ public interface TUserMapper {
     int updateByPrimaryKeySelective(TUser record);
 
     int updateByPrimaryKey(TUser record);
+
+    List<TUser> selectByTime(Date time);
 }

@@ -7,22 +7,20 @@ import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.UserService.UserService;
 import com.geekluxun.greateapp.zookeeper.ZkServiceTest;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpRequest;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -116,6 +114,18 @@ public class MainController {
     @RequestMapping(value = "/test" , method = RequestMethod.GET)
     public void testGet(){
         logger.info("=========  testGet ============");
+    }
+
+
+    @RequestMapping(value = "/test2" , method = RequestMethod.POST)
+    public Object testQuery(){
+        CommonResponseDto  dto = new CommonResponseDto();
+
+        Date before = new Date();
+        before.setTime(new Date().getTime() - (1000*60*60*24*3L));
+
+        userService.queryByTime(before);
+        return  dto;
     }
 
 }

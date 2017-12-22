@@ -3,6 +3,8 @@ package com.geekluxun.greateapp.service.UserService;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.execption.MyException;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,5 +26,6 @@ public interface UserService {
 
     void testAopArgsAnnotation(TUser user, TUser user2);
 
+    List<TUser> queryByTime(Date beforeTime);
 }
 
