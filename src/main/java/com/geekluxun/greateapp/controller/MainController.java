@@ -22,6 +22,12 @@ import javax.validation.Valid;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import static java.lang.Math.abs;
 
 /**
  * Created by luxun on 2017/9/2.
@@ -126,6 +132,59 @@ public class MainController {
 
         userService.queryByTime(before);
         return  dto;
+    }
+
+    TUser user;
+
+    @RequestMapping(value = "/test3" , method = RequestMethod.GET)
+    public Object test3(){
+        CommonResponseDto  responseDto = new CommonResponseDto();
+
+
+
+        ExecutorService exec = Executors.newFixedThreadPool(100);
+        BatchUpdateUser task = new BatchUpdateUser();
+        for (int i = 0; i < 1000; i++){
+            exec.execute(task);
+        }
+        //new Thread(new BatchUpdateUser()).start();
+        return responseDto;
+    }
+
+    private class BatchUpdateUser implements Runnable {
+
+        @Override
+        public void run() {
+            logger.info("threadId:{}", Thread.currentThread().getId());
+            Random random = new Random();
+            user = userService.queryById(89L);
+            user.setPassword(random.nextInt() + "");
+            try {
+                Thread.sleep(abs(new Random().nextInt(1000)));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+//            try {
+
+                int count = userService.updateUser(user);
+
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+
+            logger.info("======updateUser======{}",count );
+        }
+    }
+
+
+    @RequestMapping(value = "/test4" , method = RequestMethod.GET)
+    public Object test4(){
+        CommonResponseDto  responseDto = new CommonResponseDto();
+
+
+        userService.testJdbc();
+
+        return responseDto;
     }
 
 }

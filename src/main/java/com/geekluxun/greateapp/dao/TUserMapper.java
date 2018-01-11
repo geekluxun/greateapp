@@ -19,4 +19,8 @@ public interface TUserMapper {
     int updateByPrimaryKey(TUser record);
 
     List<TUser> selectByTime(Date time);
+
+    int updateRemind(TUser record);
+
+
 }

@@ -27,5 +27,11 @@ public interface UserService {
     void testAopArgsAnnotation(TUser user, TUser user2);
 
     List<TUser> queryByTime(Date beforeTime);
+
+    TUser queryById(long id);
+
+    int updateUser(TUser user);
+
+    void testJdbc();
 }
 

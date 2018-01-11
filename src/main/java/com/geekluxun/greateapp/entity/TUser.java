@@ -13,6 +13,10 @@ public class TUser {
 
     private Date modifyTime;
 
+    private int remained;
+
+    private int version;
+
     public Long getId() {
         return id;
     }
@@ -51,5 +55,22 @@ public class TUser {
 
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+
+    public int getRemained() {
+        return remained;
+    }
+
+    public void setRemained(int remained) {
+        this.remained = remained;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }
