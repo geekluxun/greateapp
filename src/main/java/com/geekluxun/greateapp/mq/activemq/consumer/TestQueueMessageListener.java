@@ -1,4 +1,4 @@
-package com.geekluxun.greateapp.mq.consumer;
+package com.geekluxun.greateapp.mq.activemq.consumer;
 
 import org.apache.activemq.command.ActiveMQQueue;
 import org.slf4j.Logger;

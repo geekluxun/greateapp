@@ -50,7 +50,7 @@
         <constructor-arg index="0" value="${active.mq.destination.queue.test}"/>
     </bean>
     
-    <bean id="testMessageListener" class="com.geekluxun.greateapp.mq.consumer.TestQueueMessageListener"></bean>
+    <bean id="testMessageListener" class="com.geekluxun.greateapp.mq.activemq.consumer.TestQueueMessageListener"></bean>
     
     
    

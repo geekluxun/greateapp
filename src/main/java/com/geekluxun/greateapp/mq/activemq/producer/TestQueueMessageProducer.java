@@ -1,4 +1,4 @@
-package com.geekluxun.greateapp.mq.producer;
+package com.geekluxun.greateapp.mq.activemq.producer;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.activemq.command.ActiveMQQueue;
