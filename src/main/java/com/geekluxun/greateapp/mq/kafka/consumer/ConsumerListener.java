@@ -1,4 +1,4 @@
-package com.geekluxun.greateapp.kafka.consumer;
+package com.geekluxun.greateapp.mq.kafka.consumer;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;

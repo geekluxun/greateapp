@@ -1,4 +1,4 @@
-package com.geekluxun.greateapp.kafka.producer;
+package com.geekluxun.greateapp.mq.kafka.producer;
 
 import com.geekluxun.greateapp.controller.MainController;
 import org.slf4j.Logger;

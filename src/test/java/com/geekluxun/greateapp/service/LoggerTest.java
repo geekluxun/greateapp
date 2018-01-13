@@ -1,16 +1,13 @@
 package com.geekluxun.greateapp.service;
 
-import ch.qos.logback.core.pattern.ConverterUtil;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.yaml.snakeyaml.introspector.PropertyUtils;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
