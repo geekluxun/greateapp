@@ -1,7 +1,9 @@
 package com.geekluxun.greateapp.controller;
 
 import com.geekluxun.greateapp.constant.ResponseCode;
+import com.geekluxun.greateapp.constant.SexEnum;
 import com.geekluxun.greateapp.dto.CommonResponseDto;
+import com.geekluxun.greateapp.dto.TestDto;
 import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.mq.kafka.producer.Producer;
@@ -19,7 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -179,8 +183,23 @@ public class MainController {
     public Object test4(){
         CommonResponseDto  responseDto = new CommonResponseDto();
 
-
         userService.testJdbc();
+
+        return responseDto;
+    }
+
+
+    @RequestMapping(value = "/test5" , method = RequestMethod.GET)
+    public Object test5(){
+        CommonResponseDto  responseDto = new CommonResponseDto();
+
+        TestDto dto = new TestDto();
+        dto.setAge(11);
+        dto.setAmount(new BigDecimal("100"));
+        dto.setBorn(new Date());
+        dto.setSex(SexEnum.WORMAN);
+
+        responseDto.setData(dto);
 
         return responseDto;
     }

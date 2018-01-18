@@ -34,7 +34,7 @@
 
     <int-kafka:zookeeper-connect id="zookeeperConnect" zk-connect="${kafka.zk.connect}"/>
     
-    <bean id="consumerListener" class="com.geekluxun.greateapp.kafka.consumer.ConsumerListener"/>
+    <bean id="consumerListener" class="com.geekluxun.greateapp.mq.kafka.consumer.ConsumerListener"/>
    
     <int:outbound-channel-adapter  auto-startup="true" order="1"
                                    id="kafkaListenerAdapter" channel="channel"

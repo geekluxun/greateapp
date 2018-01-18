@@ -34,7 +34,7 @@
     </bean>
 
     <!-- 实际执行消息消费的类 -->
-    <bean id="messageListernerConsumerService" class="com.geekluxun.greateapp.kafka.consumer.ConsumerListener"/>
+    <bean id="messageListernerConsumerService" class="com.geekluxun.greateapp.mq.kafka.consumer.ConsumerListener"/>
 
     <!-- 消费者容器配置信息 -->
     <bean id="containerProperties" class="org.springframework.kafka.listener.config.ContainerProperties">
