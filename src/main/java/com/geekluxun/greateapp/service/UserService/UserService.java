@@ -33,5 +33,7 @@ public interface UserService {
     int updateUser(TUser user);
 
     void testJdbc();
+
+    void testMybatisCache();
 }
 

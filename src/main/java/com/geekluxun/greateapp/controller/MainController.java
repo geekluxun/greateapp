@@ -8,7 +8,9 @@ import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.mq.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.UserService.UserService;
-import com.geekluxun.greateapp.zookeeper.ZkServiceTest;
+import com.geekluxun.greateapp.zookeeper.SharedCounterExample;
+import com.geekluxun.greateapp.zookeeper.barrier.DistributedBarrierDemo;
+import com.geekluxun.greateapp.zookeeper.lock.ZkLock;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -48,7 +49,13 @@ public class MainController {
     Producer producer;
 
     @Autowired
-    ZkServiceTest zkServiceTest;
+    ZkLock zkServiceTest;
+
+    @Autowired
+    DistributedBarrierDemo distributedBarrierDemo;
+
+    @Autowired
+    SharedCounterExample sharedCounterExample;
 
 
     @ApiOperation(value = "主接口", notes = "无", produces = "application/json",consumes = "application/json")
@@ -201,6 +208,35 @@ public class MainController {
 
         responseDto.setData(dto);
 
+        return responseDto;
+    }
+
+
+    @RequestMapping(value = "/test6" , method = RequestMethod.GET)
+    public Object test6(){
+        CommonResponseDto  responseDto = new CommonResponseDto();
+
+        userService.testMybatisCache();
+        return responseDto;
+    }
+
+
+    @RequestMapping(value = "/test7" , method = RequestMethod.GET)
+    public Object test7(){
+        CommonResponseDto  responseDto = new CommonResponseDto();
+        distributedBarrierDemo.test();
+        return responseDto;
+    }
+
+    @RequestMapping(value = "/test8" , method = RequestMethod.GET)
+    public Object test8(){
+        CommonResponseDto  responseDto = new CommonResponseDto();
+
+        try {
+            sharedCounterExample.testShareCounter();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return responseDto;
     }
 

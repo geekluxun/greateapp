@@ -136,6 +136,13 @@ public class UserServiceImpl implements UserService {
         jdbcDemo6();
     }
 
+    @Override
+    public void testMybatisCache() {
+        TUser user = userMapper.selectByPrimaryKey(89L);
+        user = userMapper.selectByPrimaryKey(89L);
+        user = userMapper.selectByPrimaryKey(89L);
+    }
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     private void testaddUser(TUser user){
         userMapper.insertSelective(user);

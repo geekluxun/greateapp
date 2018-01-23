@@ -6,6 +6,8 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -14,9 +16,9 @@ import javax.annotation.PostConstruct;
  * Created by luxun on 2017/10/25.
  */
 @Service
-public class ZkService {
+public class ZkClientService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ZkService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ZkClientService.class);
 
     private CuratorFramework client;
 

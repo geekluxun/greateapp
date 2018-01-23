@@ -11,6 +11,7 @@
         <result column="remained" jdbcType="INTEGER" property="remained"/>
 
     </resultMap>
+    <cache/>
     <sql id="Base_Column_List">
         id, name, password, create_time, modify_time, version, remained
     </sql>
