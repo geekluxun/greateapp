@@ -6,6 +6,7 @@ import com.geekluxun.greateapp.dto.CommonResponseDto;
 import com.geekluxun.greateapp.dto.TestDto;
 import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
+import com.geekluxun.greateapp.mq.activemq.producer.TopicProducer;
 import com.geekluxun.greateapp.mq.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.UserService.UserService;
 import com.geekluxun.greateapp.zookeeper.SharedCounterExample;
@@ -31,6 +32,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.multiplyExact;
 
 /**
  * Created by luxun on 2017/9/2.
@@ -57,6 +59,8 @@ public class MainController {
     @Autowired
     SharedCounterExample sharedCounterExample;
 
+    @Autowired
+    TopicProducer topicProducer;
 
     @ApiOperation(value = "主接口", notes = "无", produces = "application/json",consumes = "application/json")
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
@@ -234,6 +238,23 @@ public class MainController {
 
         try {
             sharedCounterExample.testShareCounter();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return responseDto;
+    }
+
+    @RequestMapping(value = "/test9" , method = RequestMethod.GET)
+    public Object test9(){
+        CommonResponseDto  responseDto = new CommonResponseDto();
+
+        try {
+            TestDto msg = new TestDto();
+            msg.setSex(SexEnum.WORMAN);
+            msg.setBorn(new Date());
+            msg.setAmount(new BigDecimal("11.33"));
+
+            topicProducer.sendMsg(msg);
         } catch (Exception e) {
             e.printStackTrace();
         }

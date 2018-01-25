@@ -42,12 +42,12 @@ public class InjectFileResourceDataExample {
             return new ClientBean();
         }
 
-        @Bean
-        @Qualifier("data1")
-        public String myResourceData(@Value("file:D:\\test.txt") Resource myResource) throws IOException {
-            File file = myResource.getFile();
-            return new String(Files.readAllBytes(file.toPath()));
-        }
+//        @Bean
+//        @Qualifier("data1")
+//        public String myResourceData(@Value("file:D:\\test.txt") Resource myResource) throws IOException {
+//            File file = myResource.getFile();
+//            return new String(Files.readAllBytes(file.toPath()));
+//        }
 
         @Bean
         @Primary

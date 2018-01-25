@@ -2,14 +2,12 @@ package com.geekluxun.greateapp.redis.redisson;
 
 import com.geekluxun.greateapp.entity.SysUser;
 import org.redisson.Redisson;
-import org.redisson.api.RAtomicLong;
-import org.redisson.api.RBucket;
-import org.redisson.api.RMap;
-import org.redisson.api.RedissonClient;
+import org.redisson.api.*;
 import org.redisson.config.Config;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by luxun on 2017/10/28.
@@ -117,6 +115,21 @@ public class RedisExamples {
         SysUser user2  = bucket.get();
 
         System.out.println(user2);
+    }
+
+
+    /**
+     * 分布式延时队列
+     */
+    public void testDelayQueue(){
+        RQueue<String> distinationQueue = redissonClient.getQueue("queue1");
+
+        RDelayedQueue<String> delayedQueue = redissonClient.getDelayedQueue(distinationQueue);
+        // 10秒钟以后将消息发送到指定列队
+        delayedQueue.offer("msg1", 10, TimeUnit.SECONDS);
+        // 一分钟以后将消息发送到指定列队
+        delayedQueue.offer("msg2", 1, TimeUnit.MINUTES);
+
     }
 
 }

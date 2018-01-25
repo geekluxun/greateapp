@@ -16,11 +16,10 @@ import javax.jms.*;
 import java.util.Random;
 
 /**
- * Created by luxun on 2017/10/15.
+ * 此生产者有一个队列用于接收消费者的反馈
  */
 @Component
-public class TestQueueMessageProducer implements MessageListener
-{
+public class TestQueueMessageProducer implements MessageListener {
     public final static Logger logger = LoggerFactory.getLogger(TestQueueMessageProducer.class);
 
 
@@ -35,20 +34,20 @@ public class TestQueueMessageProducer implements MessageListener
     ActiveMQQueue replyDestination;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         Session session;
         MessageConsumer consumer;
         try {
             session = jmsTemplate.getConnectionFactory().createConnection().createSession(false, Session.AUTO_ACKNOWLEDGE);
             consumer = session.createConsumer(replyDestination);
             consumer.setMessageListener(this);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public void sendMsg(Object msg){
+    public void sendMsg(Object msg) {
 
         final String json = JSON.toJSONString(msg);
 
@@ -57,17 +56,23 @@ public class TestQueueMessageProducer implements MessageListener
             public Message createMessage(Session session) throws JMSException {
                 Message msg = session.createTextMessage(json);
                 logger.info("sendMsg Id:" + msg.getJMSMessageID());
-                msg.setJMSCorrelationID(Math.abs(new Random().nextLong()) + "");
+                msg.setJMSCorrelationID(new Random().nextInt(Integer.MAX_VALUE) + "");
+                /** 设置响应队列 接收消费者的反馈消息*/
                 msg.setJMSReplyTo(replyDestination);
                 return msg;
             }
         });
     }
 
+    /**
+     * 接收消费者的反馈消息
+     *
+     * @param message
+     */
     @Override
     public void onMessage(Message message) {
 
-        if (message instanceof TextMessage){
+        if (message instanceof TextMessage) {
             TextMessage textMessage = (TextMessage) message;
             String msg = null;
             String msgId = null;
