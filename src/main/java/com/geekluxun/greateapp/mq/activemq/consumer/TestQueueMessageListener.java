@@ -1,5 +1,7 @@
 package com.geekluxun.greateapp.mq.activemq.consumer;
 
+import com.geekluxun.greateapp.entity.TUser;
+import com.geekluxun.greateapp.service.UserService.UserService;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 
 import javax.jms.*;
+import java.util.Date;
 
 /**
  * Created by luxun on 2017/10/15.
@@ -19,6 +22,11 @@ public class TestQueueMessageListener implements SessionAwareMessageListener {
     @Autowired
     @Qualifier("testQueueDestinationReply")
     ActiveMQQueue replyDestination;
+
+
+    @Autowired
+    @Qualifier(value = "userService33")
+    UserService userService;
 
 
     /**
@@ -55,6 +63,12 @@ public class TestQueueMessageListener implements SessionAwareMessageListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            TUser user = new TUser();
+            user.setName("geekluxun");
+            user.setCreateTime(new Date());
+
+            userService.addUser2(user);
 
         }
     }

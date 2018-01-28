@@ -33,6 +33,14 @@ public class TestQueueMessageProducer implements MessageListener {
     @Qualifier("testQueueDestinationReply")
     ActiveMQQueue replyDestination;
 
+
+    public static void main(String[] argc){
+        //TestQueueMessageProducer producer = new TestQueueMessageProducer();
+        //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"spring/active-mq.xml","applicationContext.xml"});
+        //producer.jmsTemplate  = context.getBean(JmsTemplate.class);
+        //producer.replyDestination = (ActiveMQQueue)context.getBean("testQueueDestinationReply");
+    }
+
     @PostConstruct
     public void init() {
         Session session;
