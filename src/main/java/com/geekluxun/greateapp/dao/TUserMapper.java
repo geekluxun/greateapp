@@ -20,6 +20,9 @@ public interface TUserMapper {
 
     List<TUser> selectByTime(Date time);
 
+
+    List<TUser> selectAll();
+
     int updateRemind(TUser record);
 
 

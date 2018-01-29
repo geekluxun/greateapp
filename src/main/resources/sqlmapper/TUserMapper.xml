@@ -28,6 +28,14 @@
         from t_user
         where create_time   <![CDATA[ < #{time} ]]>
     </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        ORDER BY create_time DESC
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         DELETE FROM t_user
         WHERE id = #{id,jdbcType=BIGINT}

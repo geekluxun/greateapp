@@ -6,9 +6,12 @@ import com.geekluxun.greateapp.dto.CommonResponseDto;
 import com.geekluxun.greateapp.dto.TestDto;
 import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
+import com.geekluxun.greateapp.example.excel.ExportExcelService;
 import com.geekluxun.greateapp.mq.activemq.producer.TopicProducer;
 import com.geekluxun.greateapp.mq.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.UserService.UserService;
+import com.geekluxun.greateapp.spring.mail.SendMailService;
+import com.geekluxun.greateapp.spring.schedule.ScheduleServcie;
 import com.geekluxun.greateapp.zookeeper.SharedCounterExample;
 import com.geekluxun.greateapp.zookeeper.barrier.DistributedBarrierDemo;
 import com.geekluxun.greateapp.zookeeper.lock.ZkLock;
@@ -25,11 +28,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.multiplyExact;
@@ -61,6 +64,19 @@ public class MainController {
 
     @Autowired
     TopicProducer topicProducer;
+
+
+    @Autowired
+    SendMailService sendMailService;
+
+    @Autowired
+    ScheduleServcie scheduleServcie;
+
+
+    @Autowired
+    ExportExcelService exportExcelService;
+
+
 
     @ApiOperation(value = "主接口", notes = "无", produces = "application/json",consumes = "application/json")
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
@@ -258,6 +274,52 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return responseDto;
+    }
+
+
+    @RequestMapping(value = "/test10" , method = RequestMethod.GET)
+    public Object test10() {
+        CommonResponseDto responseDto = new CommonResponseDto();
+
+        String[] receivers = {"geekluxun@163.com"};
+        sendMailService.send("通知", "hello world", Arrays.asList(receivers), null,null);
+
+        return responseDto;
+    }
+
+
+    @RequestMapping(value = "/test11" , method = RequestMethod.GET)
+    public Object test11() {
+        CommonResponseDto responseDto = new CommonResponseDto();
+
+        Future<String> task4 = scheduleServcie.doSomething4("dd");
+        Future<String> task5 = scheduleServcie.doSomething5("dd");
+
+        try {
+            String result4 = task4.get();
+            String result5 = task5.get();
+            logger.info("两个任务结果：" + result4  + " " + result5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return responseDto;
+    }
+
+
+
+    @RequestMapping(value = "/test12" , method = RequestMethod.GET)
+    public Object test12() {
+        CommonResponseDto responseDto = new CommonResponseDto();
+
+        String[] headers = {"id", "name", "password", "createTime", "modifyTime", "remained", "version"};
+
+        List<TUser> users = userService.queryAll();
+        exportExcelService.exportExcel(headers, users,"user",  null);
+
         return responseDto;
     }
 

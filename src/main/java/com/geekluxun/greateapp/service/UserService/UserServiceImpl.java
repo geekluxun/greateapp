@@ -118,6 +118,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<TUser> queryAll() {
+        return userMapper.selectAll();
+    }
+
+    @Override
     @Transactional
     public int updateUser(TUser user) {
         return userMapper.updateRemind(user);

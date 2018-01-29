@@ -18,6 +18,7 @@
 		http://www.springframework.org/schema/cache
 		http://www.springframework.org/schema/cache/spring-cache.xsd">
 
+    <!-- spring提供的cacheManager只是一个抽象，需要具体的缓存实现，这里使用的是redis缓存-->
     <cache:annotation-driven cache-manager="cacheManager" error-handler="customCacheErrorHandler"/>
 
     <bean id="customCacheErrorHandler" class="com.geekluxun.greateapp.cache.CustomCacheErrorHandler" />

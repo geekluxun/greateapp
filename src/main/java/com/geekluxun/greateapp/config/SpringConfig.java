@@ -6,6 +6,8 @@ import com.geekluxun.greateapp.spring.SpringDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.*;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.annotation.Resource;
 
@@ -17,6 +19,8 @@ import javax.annotation.Resource;
 @Import({SpringDefaultConfig.class})  //导入另外一个java Config
 @ImportResource("classpath:/spring/spring-common.xml") // 导入XML方式配置的Bean
 @PropertySource("classpath:application.properties")
+@EnableScheduling //使能spring @Schedule注解
+@EnableAsync  //使能spring @Async注解
 public class SpringConfig {
 
     /**

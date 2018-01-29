@@ -30,6 +30,8 @@ public interface UserService {
 
     TUser queryById(long id);
 
+    List<TUser> queryAll();
+
     int updateUser(TUser user);
 
     void testJdbc();
