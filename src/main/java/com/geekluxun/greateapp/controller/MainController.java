@@ -10,6 +10,9 @@ import com.geekluxun.greateapp.example.excel.ExportExcelService;
 import com.geekluxun.greateapp.mq.activemq.producer.TopicProducer;
 import com.geekluxun.greateapp.mq.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.UserService.UserService;
+import com.geekluxun.greateapp.spring.jpa.demo.JpaDemoService;
+import com.geekluxun.greateapp.spring.jpa.domain.User;
+import com.geekluxun.greateapp.spring.jpa.domain.UserRepository;
 import com.geekluxun.greateapp.spring.mail.SendMailService;
 import com.geekluxun.greateapp.spring.schedule.ScheduleServcie;
 import com.geekluxun.greateapp.zookeeper.SharedCounterExample;
@@ -75,6 +78,10 @@ public class MainController {
 
     @Autowired
     ExportExcelService exportExcelService;
+
+
+    @Autowired
+    JpaDemoService jpaDemoService;
 
 
 
@@ -319,6 +326,16 @@ public class MainController {
 
         List<TUser> users = userService.queryAll();
         exportExcelService.exportExcel(headers, users,"user",  null);
+
+        return responseDto;
+    }
+
+
+    @RequestMapping(value = "/test13", method = RequestMethod.GET)
+    public Object test13() {
+        CommonResponseDto responseDto = new CommonResponseDto();
+
+        jpaDemoService.test();
 
         return responseDto;
     }
