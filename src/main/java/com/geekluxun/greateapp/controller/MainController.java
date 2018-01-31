@@ -7,6 +7,7 @@ import com.geekluxun.greateapp.dto.TestDto;
 import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.example.excel.ExportExcelService;
+import com.geekluxun.greateapp.example.jdbc.JdbcExample;
 import com.geekluxun.greateapp.mq.activemq.producer.TopicProducer;
 import com.geekluxun.greateapp.mq.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.UserService.UserService;
@@ -30,6 +31,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -82,6 +86,9 @@ public class MainController {
 
     @Autowired
     JpaDemoService jpaDemoService;
+
+    @Autowired
+    JdbcExample jdbcExample;
 
 
 
@@ -336,6 +343,16 @@ public class MainController {
         CommonResponseDto responseDto = new CommonResponseDto();
 
         jpaDemoService.test();
+
+        return responseDto;
+    }
+
+
+    @RequestMapping(value = "/test14", method = RequestMethod.GET)
+    public Object test14() {
+        CommonResponseDto responseDto = new CommonResponseDto();
+
+        jdbcExample.testTransaction();
 
         return responseDto;
     }

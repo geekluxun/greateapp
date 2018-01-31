@@ -1,4 +1,4 @@
-package com.geekluxun.greateapp.example.jdbc;
+package com.geekluxun.greateapp.spring.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
