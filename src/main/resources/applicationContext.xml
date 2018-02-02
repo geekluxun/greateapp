@@ -90,5 +90,7 @@
     <import resource="classpath*:spring/spring-data-redis.xml"/>
     <import resource="classpath*:spring/spring-common.xml"/>
     <import resource="classpath*:spring/spring-cache.xml"/>
+    <import resource="classpath*:spring/spring-batch.xml"/>
+    <import resource="classpath*:spring/spring-httpclient.xml"/>
 
 </beans>

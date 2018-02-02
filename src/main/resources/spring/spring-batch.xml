@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:batch="http://www.springframework.org/schema/batch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       	http://www.springframework.org/schema/aop
+       	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+      	http://www.springframework.org/schema/context
+       	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       	http://www.springframework.org/schema/tx
+       	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       	http://www.springframework.org/schema/mvc
+       	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+	    http://www.springframework.org/schema/batch
+	    http://www.springframework.org/schema/batch/spring-batch-3.0.xsd">
+
+    <batch:job id="messageJob" restartable="true">
+        <batch:step id="messageStep">
+            <tasklet>
+                <chunk reader="messageReader" processor="messageProcessor" writer="messageWriter"
+                       commit-interval="5" retry-limit="2">
+                    <retryable-exception-classes>
+                        <include class="java.lang.RuntimeException"/>
+                    </retryable-exception-classes>
+                </chunk>
+            </tasklet>
+        </batch:step>
+    </batch:job>
+
+
+    <bean id="jobRepository"
+          class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
+
+    <bean id="messageReader"
+          class="org.springframework.batch.item.file.FlatFileItemReader">
+        <property name="lineMapper" ref="lineMapper"/>
+        <property name="strict" value="false"/>
+        <property name="resource" value="classpath:localdata/users.properties"/>
+    </bean>
+
+    <bean id="lineMapper"
+          class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+        <property name="lineTokenizer">
+            <bean
+                    class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer"></bean>
+        </property>
+        <property name="fieldSetMapper">
+            <bean class="com.geekluxun.greateapp.spring.batch.UserMapper"></bean>
+        </property>
+    </bean>
+
+    <bean id="messageProcessor"
+          class="com.geekluxun.greateapp.spring.batch.MessagesItemProcessor"></bean>
+
+    <bean id="messageWriter"
+          class="com.geekluxun.greateapp.spring.batch.MessagesItemWriter"></bean>
+
+</beans>

@@ -6,16 +6,19 @@ import com.geekluxun.greateapp.dto.CommonResponseDto;
 import com.geekluxun.greateapp.dto.TestDto;
 import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
+import com.geekluxun.greateapp.example.HttpClientExample;
 import com.geekluxun.greateapp.example.excel.ExportExcelService;
 import com.geekluxun.greateapp.example.jdbc.JdbcExample;
 import com.geekluxun.greateapp.mq.activemq.producer.TopicProducer;
 import com.geekluxun.greateapp.mq.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.UserService.UserService;
+import com.geekluxun.greateapp.spring.batch.BatchExmaple;
 import com.geekluxun.greateapp.spring.jpa.demo.JpaDemoService;
 import com.geekluxun.greateapp.spring.jpa.domain.User;
 import com.geekluxun.greateapp.spring.jpa.domain.UserRepository;
 import com.geekluxun.greateapp.spring.mail.SendMailService;
 import com.geekluxun.greateapp.spring.schedule.ScheduleServcie;
+import com.geekluxun.greateapp.util.httpclient.HttpClientService;
 import com.geekluxun.greateapp.zookeeper.SharedCounterExample;
 import com.geekluxun.greateapp.zookeeper.barrier.DistributedBarrierDemo;
 import com.geekluxun.greateapp.zookeeper.lock.ZkLock;
@@ -90,11 +93,16 @@ public class MainController {
     @Autowired
     JdbcExample jdbcExample;
 
+    @Autowired
+    BatchExmaple batchExmaple;
+
+    @Autowired
+    HttpClientExample httpClientExample;
 
 
     @ApiOperation(value = "主接口", notes = "无", produces = "application/json",consumes = "application/json")
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
-    public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result, HttpServletRequest request , HttpServletResponse response) {
+    public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result, @RequestHeader("myheader") String myheader, HttpServletRequest request, HttpServletResponse response) {
 
         CommonResponseDto  dto = new CommonResponseDto();
         dto.setResult(true);
@@ -353,6 +361,41 @@ public class MainController {
         CommonResponseDto responseDto = new CommonResponseDto();
 
         jdbcExample.testTransaction();
+
+        return responseDto;
+    }
+
+
+    @RequestMapping(value = "/test15", method = RequestMethod.GET)
+    public Object test15() {
+        CommonResponseDto responseDto = new CommonResponseDto();
+
+        batchExmaple.taskExecute();
+
+        return responseDto;
+    }
+
+
+    @RequestMapping(value = "/test16", method = RequestMethod.GET)
+    public Object test16() {
+        CommonResponseDto responseDto = new CommonResponseDto();
+
+        try {
+            httpClientExample.testPost();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return responseDto;
+    }
+
+
+    @RequestMapping(value = "/test17", method = RequestMethod.POST)
+    @ResponseBody
+    public Object test17() {
+        CommonResponseDto responseDto = new CommonResponseDto();
+
+        responseDto.setErrmsg("hello world!!!");
 
         return responseDto;
     }

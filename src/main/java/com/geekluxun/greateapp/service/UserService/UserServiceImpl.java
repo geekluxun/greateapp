@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
@@ -207,6 +208,9 @@ public class UserServiceImpl implements UserService {
         List<TUser> userList = new ArrayList<>();
         String sql = "SELECT create_time createTime ,modify_time modifyTime FROM test.t_user";
 
+        /**
+         * 这是一个很好的抽象，我们可以遍历这个list，已json形式输出给客户端
+         */
         List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
 
         try {
@@ -241,5 +245,6 @@ public class UserServiceImpl implements UserService {
             return user;
         }
     }
+
 
 }

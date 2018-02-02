@@ -28,7 +28,6 @@
 		<quartz.version>2.2.1</quartz.version>
 		<logback.version>1.2.3</logback.version>
 		<spring.version>4.3.10.RELEASE</spring.version>
-		<jackson.version>1.9.13</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -48,11 +47,24 @@
 			<!--<groupId>org.springframework.boot</groupId>-->
 			<!--<artifactId>spring-boot-starter-data-redis</artifactId>-->
 		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-freemarker</artifactId>-->
-		<!--</dependency>-->
-		<dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+        <!--监控-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!--批处理-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-batch</artifactId>
+        </dependency>
+
+        <dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
@@ -300,16 +312,11 @@
 			<version>1.4.5</version>
 		</dependency>
 
-		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.3.1</version>
+            <version>4.5.3</version>
 		</dependency>
 
 		<dependency>
@@ -328,19 +335,6 @@
 			<artifactId>jsr305</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-
-
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.apache.poi</groupId>
@@ -416,6 +410,11 @@
 				<directory>src/main/resources/${profiles.active}</directory>
 				<filtering>true</filtering>
 			</resource>
+
+            <resource>
+                <directory>src/main/webapp</directory>
+                <filtering>true</filtering>
+            </resource>
 		</resources>
 		<plugins>
 			<plugin>
