@@ -384,6 +384,190 @@ SHOW CREATE TABLE test.t3;
 
 CREATE DATABASE test;
 
+##打开或关闭通用日志查询 方便定位问题
+SHOW VARIABLES LIKE '%general_log%';
+SHOW VARIABLES LIKE '%log_output%';
+
+#打开
+SET GLOBAL GENERAL_LOG = 'on';
+SET GLOBAL LOG_OUTPUT = 'table';
+#关闭
+SET GLOBAL GENERAL_LOG = 'off';
+SET GLOBAL LOG_OUTPUT = 'file';
+#查询
+SELECT *
+FROM mysql.general_log
+ORDER BY event_time DESC;
+
+DESC mysql.general_log;
+
+
+EXPLAIN EXTENDED SELECT *
+                 FROM mysql.general_log
+                 ORDER BY event_time DESC;
+SHOW WARNINGS;
+
+#《mysql排错指南》
+
+CREATE DATABASE mysql_book_paicuo_guide;
+
+
+DROP TABLE IF EXISTS item;
+
+CREATE TABLE item (
+    id      INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    example TEXT
+);
+
+
+CREATE TABLE item_links (
+    iid    INT NULL,
+    linkid INT NULL,
+    KEY key_iid(iid)
+);
+
+INSERT INTO test.item (test.item.example) VALUES ('luxun');
+
+INSERT INTO test.item_links VALUES (3, 111);
+
+SELECT count(*)
+FROM test.item;
+
+#此处有一个错误，item_links表没有id字段，这里会使用 依赖子查询
+SELECT count(*)
+FROM item
+WHERE id IN (SELECT id
+             FROM item_links);
+EXPLAIN EXTENDED SELECT count(*)
+                 FROM item
+                 WHERE id IN (SELECT id
+                              FROM item_links);
+SHOW WARNINGS;
+
+CREATE TEMPORARY TABLE t1 (
+    f1 INT
+);
+CREATE TEMPORARY TABLE t2 (
+    f2 INT
+);
+
+INSERT INTO t1 VALUES (1);
+
+SELECT *
+FROM t1;
+
+
+DELETE FROM t1, t2
+USING t1, t2;
+
+EXPLAIN EXTENDED SELECT *
+                 FROM t1, t2;
+
+
+SHOW GLOBAL STATUS LIKE 'uptime';
+
+#用户权限相关
+
+SELECT
+    user(),
+    current_user();
+#授权
+GRANT ALL ON *.* TO root@'%';
+#撤销权限
+REVOKE ALL ON *.* FROM root@'%';
+
+FLUSH PRIVILEGES;
+
+SELECT *
+FROM mysql.user;
+
+
+GRANT ALL ON *.* TO luxun@'%';
+
+SELECT
+    user,
+    host
+FROM mysql.user
+WHERE user = 'luxun'
+ORDER BY Host DESC;
+
+#显示用户有的权限
+SHOW GRANTS FOR 'luxun'@'%';
+
+#锁表示例
+USE test;
+
+DROP TABLE IF EXISTS test.t;
+
+CREATE TABLE t (
+    id    INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    value VARCHAR(100)                   NULL
+);
+
+INSERT INTO test.t (value) VALUES ('luxun');
+
+LOCK TABLES test.t READ;
+
+SELECT *
+FROM test.t;
+UNLOCK TABLES;
+
+UPDATE test.t
+SET value = sleep(100)
+WHERE id = 4;
+
+SHOW PROCESSLIST;
+
+
+SHOW CREATE TABLE t;
+
+
+SELECT *
+FROM information_schema.PROCESSLIST;
+
+#INNODB 状态监控器 排错时候很常用的工具！！！
+SHOW ENGINE innodb STATUS;
+
+# INNODB 事务 锁 三剑客 排错工具！！！
+SELECT *
+FROM information_schema.INNODB_LOCKS;
+
+SELECT *
+FROM information_schema.INNODB_LOCK_WAITS;
+
+SELECT *
+FROM information_schema.INNODB_TRX;
+
+#注意INNODB是行级锁，两个事务只有对同一行数据并发访问时，才会产生锁订单
+
+
+SHOW ENGINES;
+
+
+SHOW VARIABLES LIKE '%sql_mode%';
+
+
+SELECT @@sql_mode;
+
+#查看字符集相关变量
+SHOW VARIABLES LIKE '%char%';
+#查看排序相关变量
+SHOW VARIABLES LIKE '%coll%';
+
+SHOW SLAVE STATUS;
+
+#创建一个和原来表一样的表
+CREATE TABLE test.t_bak LIKE test.t;
+
+SHOW CREATE TABLE test.t_bak;
+#新创建的表插入原来表的数据
+INSERT INTO test.t_bak (SELECT *
+                        FROM test.t);
+SELECT *
+FROM test.t_bak;
+
+
+
 ######################### test库 end!!! #####################
 
 
