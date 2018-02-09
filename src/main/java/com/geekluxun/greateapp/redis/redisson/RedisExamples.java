@@ -26,7 +26,9 @@ public class RedisExamples {
 
         examples.testObject();
 
-        examples.destroy();
+        examples.testSemaphore();
+
+        examples.testDelayQueue();
     }
 
 
@@ -130,6 +132,26 @@ public class RedisExamples {
         // 一分钟以后将消息发送到指定列队
         delayedQueue.offer("msg2", 1, TimeUnit.MINUTES);
 
+    }
+
+
+    /**
+     * 分布式信号量
+     */
+    public void testSemaphore() {
+        int count;
+        RSemaphore rSemaphore = redissonClient.getSemaphore("semaphore1");
+        rSemaphore.trySetPermits(5);
+        count = rSemaphore.availablePermits();
+        try {
+            rSemaphore.acquire();
+            count = rSemaphore.availablePermits();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        rSemaphore.release();
     }
 
 }
