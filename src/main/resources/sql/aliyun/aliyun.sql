@@ -538,7 +538,7 @@ FROM information_schema.INNODB_LOCK_WAITS;
 SELECT *
 FROM information_schema.INNODB_TRX;
 
-#注意INNODB是行级锁，两个事务只有对同一行数据并发访问时，才会产生锁订单
+#注意INNODB是行级锁，两个事务只有对同一行数据并发访问时，才会产生锁等待
 
 
 SHOW ENGINES;
@@ -561,12 +561,28 @@ CREATE TABLE test.t_bak LIKE test.t;
 
 SHOW CREATE TABLE test.t_bak;
 #新创建的表插入原来表的数据
-INSERT INTO test.t_bak (SELECT *
-                        FROM test.t);
+INSERT INTO test.t_bak (test.t_bak.value) (SELECT `value`
+                                           FROM test.t);
+
+#自增加的列用NULL表示
+INSERT INTO t_bak VALUES (NULL, 'luxun456');
+
 SELECT *
 FROM test.t_bak;
 
+#表上的索引 其中
+SHOW INDEX FROM t_bak;
 
+#可以重新统计Cardinality
+ANALYZE TABLE test.t_bak;
+
+#查看latch
+SHOW ENGINE innodb MUTEX;
+
+SHOW VARIABLES LIKE '%version%';
+
+#分布式事务是否打开
+SHOW VARIABLES LIKE 'innodb_support_xa'
 
 ######################### test库 end!!! #####################
 
