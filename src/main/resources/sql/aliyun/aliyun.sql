@@ -582,9 +582,88 @@ SHOW ENGINE innodb MUTEX;
 SHOW VARIABLES LIKE '%version%';
 
 #分布式事务是否打开
-SHOW VARIABLES LIKE 'innodb_support_xa'
+SHOW VARIABLES LIKE 'innodb_support_xa';
+
+
+DROP TABLE IF EXISTS t_user;
+
+
+CREATE TABLE test.t_user (
+    id          BIGINT   NOT NULL AUTO_INCREMENT PRIMARY KEY
+    COMMENT '自增主键',
+    name        VARCHAR(100)      DEFAULT NULL
+    COMMENT '姓名',
+    password    VARCHAR(100)      DEFAULT NULL
+    COMMENT '密码',
+    create_time DATETIME NOT NULL
+    COMMENT '创建时间',
+    modify_time DATETIME NOT NULL
+    COMMENT '修改时间',
+    remained    INT               DEFAULT NULL
+    COMMENT '剩余',
+    version     INT               DEFAULT NULL
+    COMMENT '系统版本号'
+)
+    COMMENT '用户表';
+
+SHOW CREATE TABLE test.t_user;
 
 ######################### test库 end!!! #####################
 
+
+######################### 事务测试大全 start #########################
+
+#查看当前会话的事务隔离级别
+SELECT @@tx_isolation;
+#查看全局的事务隔离级别
+SELECT @@global.tx_isolation;
+
+#查看全局配置 autocommit
+SELECT @@global.autocommit;
+#查看当前会话 autocommit
+SELECT @@autocommit;
+
+
+CREATE TABLE test.t_trx_test (
+    id       BIGINT NOT NULL PRIMARY KEY,
+    name     VARCHAR(100) DEFAULT NULL,
+    age      INT          DEFAULT NULL,
+    password VARCHAR(100) DEFAULT NULL
+);
+
+SHOW CREATE TABLE test.t_trx_test;
+
+SELECT *
+FROM test.t_trx_test;
+
+INSERT INTO test.t_trx_test (id, name, age, password) VALUES (1, 'luxun', 20, '123456');
+
+INSERT INTO test.t_trx_test (id, name, age, password) VALUES (3, 'luxun222', 30, '123456');
+
+INSERT INTO test.t_trx_test (id, name, age, password) VALUES (5, 'luxun333', 40, '123456');
+
+
+INSERT INTO test.t_trx_test (id, name, age, password) VALUES (6, 'luxun666', 40, '123456');
+
+INSERT INTO test.t_trx_test (id, name, age, password) VALUES (7, 'luxun666', 40, '123456');
+
+
+INSERT INTO test.t_trx_test (id, name, age, password) VALUES (8, 'luxun666', 40, '123456');
+
+###【1】脏读示例
+
+#会话1
+
+SET autocommit = 0;
+
+SHOW SESSION VARIABLES LIKE 'auto%';
+
+SHOW GLOBAL VARIABLES LIKE 'auto%';
+
+
+SET TX_ISOLATION = ''
+
+
+######################### 事务测试大全 end   #########################
 
 
