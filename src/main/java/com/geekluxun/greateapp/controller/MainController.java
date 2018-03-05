@@ -119,6 +119,8 @@ public class MainController {
 
             TUser user = new TUser();
             BeanUtils.copyProperties(para, user);
+            user.setCreateTime(new Date());
+            user.setModifyTime(new Date());
             userService.addUser(user);
             dto.setData(user);
         } catch (Exception e) {

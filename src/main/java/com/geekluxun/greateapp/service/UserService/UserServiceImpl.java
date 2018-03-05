@@ -54,12 +54,14 @@ public class UserServiceImpl implements UserService {
     /**
      * @Transactional默认只回滚RuntimeException异常，此方法跑出的MyException不是RuntimeException，
      * 所以，即使发生异常，也不会回滚，改成rollbackFor = Exception.class才能回滚
+     *
+     * 此处之所以加value = "transactionManager" 是因为spring管理的事务管理器有多个情况下，指明其具体是哪个
      * @param user
      * @throws MyException
      */
     @Override
     //@MyAnnotation
-    @Transactional(rollbackFor = Exception.class, noRollbackFor = ParamValidException.class)
+    @Transactional(value = "transactionManager", rollbackFor = Exception.class, noRollbackFor = ParamValidException.class)
     public void addUser(TUser user) throws MyException {
         userMapper.insertSelective(user);
 

@@ -38,8 +38,9 @@
         <property name="transactionManager" ref="transactionManager"/>
     </bean>
 
-    <bean id="transactionManager"
-          class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>
+    <!-- 和class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 冲突 暂时注掉，否则事务会不起作用！！！-->
+    <!--<bean id="transactionManager"-->
+          <!--class="org.springframework.batch.support.transaction.ResourcelessTransactionManager"/>-->
 
     <bean id="messageReader"
           class="org.springframework.batch.item.file.FlatFileItemReader">
