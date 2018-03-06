@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Created by luxun on 2018/1/23.
@@ -25,8 +22,7 @@ public class DistributedBarrierDemo {
     ZkClientService zkClientService;
 
 
-
-    public void test(){
+    public void test() {
         testBarrier();
         testDoubleBarrier();
     }
@@ -40,9 +36,19 @@ public class DistributedBarrierDemo {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        for (int i = 0; i < 4; i++)
+
+
+         /** 最佳实践 使用ThreadPoolExecutor 明确具体参数，避免线程数或者等待队列无限大耗尽内存问题*/
+        ExecutorService executorService = new ThreadPoolExecutor(
+                10,
+                10,
+                60,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<Runnable>(10));
+
+        for (int i = 0; i < 4; i++) {
             executorService.execute(new Task1(barrier));
+        }
 
 
         try {
@@ -61,7 +67,7 @@ public class DistributedBarrierDemo {
 
 
         ExecutorService executorService = Executors.newCachedThreadPool();
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             DistributedDoubleBarrier barrier = new DistributedDoubleBarrier(zkClientService.getClient(), "/barrier2", 5);
             executorService.execute(new Task2(barrier));
         }
