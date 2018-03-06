@@ -108,14 +108,14 @@ public class MyAspect {
      * @return
      * @throws Throwable
      */
-    @Around("pointcut1()")
-    public Object doAfterFinally(ProceedingJoinPoint point) throws Throwable{
-        logger.error(" ========== 环绕通知 ========== ");
-        try {
-            return point.proceed();
-        } catch (Throwable throwable) { //此处必须重新抛出异常，否则异常会被吃掉！！！
-            throw throwable;
-        }
-    }
+//    @Around("pointcut1()")
+//    public Object doAfterFinally(ProceedingJoinPoint point) throws Throwable{
+//        logger.error(" ========== 环绕通知 ========== ");
+//        try {
+//            return point.proceed();
+//        } catch (Throwable throwable) { //此处必须重新抛出异常，否则异常会被吃掉！！！
+//            throw throwable;
+//        }
+//    }
 
 }

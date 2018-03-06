@@ -92,5 +92,9 @@
     <import resource="classpath*:spring/spring-cache.xml"/>
     <import resource="classpath*:spring/spring-batch.xml"/>
     <import resource="classpath*:spring/spring-httpclient.xml"/>
+    <import resource="classpath*:tcc-transaction.xml"/>
+    <import resource="classpath*:tcc-transaction-dubbo.xml"/>
+    <import resource="classpath*:spring/dubbo-client.xml"/>
+    <import resource="classpath*:spring/dubbo-service.xml"/>
 
 </beans>

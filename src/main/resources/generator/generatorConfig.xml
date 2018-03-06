@@ -34,12 +34,19 @@
 
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.geekluxun.greateapp.dao"  targetProject="src/main/java"/>
 
-        <table tableName="t_user"
+        <table tableName="redpacket_account"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            
-            <!--<generatedKey column="id" sqlStatement="MySql"/>-->
         </table>
+
+
+        <table tableName="trade_order"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+
     </context>
 </generatorConfiguration>

@@ -154,4 +154,17 @@ public class RedisExamples {
         rSemaphore.release();
     }
 
+
+    /**
+     * 分布式锁
+     */
+    public void testLock(){
+        RLock rLock = redissonClient.getLock("mylock");
+        try {
+            rLock.lock();
+        }finally {
+            rLock.unlock();
+        }
+    }
+
 }
