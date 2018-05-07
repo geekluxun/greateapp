@@ -351,6 +351,12 @@
 		</dependency>
 
 		<!-- tcc柔性事务-->
+		<!-- 请先把本地的jar install到本地maven仓库
+		mvn install:install-file -Dfile=tcc-transaction-core-1.2.4.20.jar -DgroupId=org.mengyun -DartifactId=tcc-transaction-core -Dversion=1.2.4.20 -Dpackaging=jar
+		mvn install:install-file -Dfile=tcc-transaction-api-1.2.4.20.jar -DgroupId=org.mengyun -DartifactId=tcc-transaction-api -Dversion=1.2.4.20 -Dpackaging=jar
+		mvn install:install-file -Dfile=tcc-transaction-dubbo-1.2.4.20.jar -DgroupId=org.mengyun -DartifactId=tcc-transaction-dubbo -Dversion=1.2.4.20 -Dpackaging=jar
+		mvn install:install-file -Dfile=tcc-transaction-spring-1.2.4.20.jar -DgroupId=org.mengyun -DartifactId=tcc-transaction-spring -Dversion=1.2.4.20 -Dpackaging=jar
+		-->
 		<dependency>
 			<groupId>org.mengyun</groupId>
 			<artifactId>tcc-transaction-spring</artifactId>
@@ -362,6 +368,24 @@
 			<artifactId>tcc-transaction-dubbo</artifactId>
 			<version>${tcc.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.mengyun</groupId>
+			<artifactId>tcc-transaction-core</artifactId>
+			<version>${tcc.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.mengyun</groupId>
+			<artifactId>tcc-transaction-api</artifactId>
+			<version>${tcc.version}</version>
+		</dependency>
+
+
+
+
+
 
 		<dependency>
 			<groupId>com.alibaba</groupId>
