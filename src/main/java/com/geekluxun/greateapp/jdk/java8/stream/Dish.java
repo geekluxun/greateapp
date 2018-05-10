@@ -39,6 +39,10 @@ public class Dish {
         return type;
     }
 
+    //热量级别
+    public enum CaloricLevel { DIET, NORMAL, FAT };
+    
+    //食物类型
     public enum Type {MEAT, FISH, OTHER}
 
     @Override
