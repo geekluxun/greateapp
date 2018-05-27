@@ -2,10 +2,7 @@ package com.geekluxun.greateapp.controller;
 
 import com.geekluxun.greateapp.constant.ResponseCode;
 import com.geekluxun.greateapp.constant.SexEnum;
-import com.geekluxun.greateapp.dto.CommonResponseDto;
-import com.geekluxun.greateapp.dto.RedPacketTradeOrderDto;
-import com.geekluxun.greateapp.dto.TestDto;
-import com.geekluxun.greateapp.dto.UserDto;
+import com.geekluxun.greateapp.dto.*;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.example.HttpClientExample;
 import com.geekluxun.greateapp.example.excel.ExcelService;
@@ -317,7 +314,19 @@ public class MainController {
         String[] receivers = {"luxun@xinxindai.com"};
         List<String> filePathList = new ArrayList<>();
         filePathList.add("/tmp/user.xlsx");
-        sendMailService.send("通知", "hello world", Arrays.asList(receivers), null, filePathList);
+
+        final String from = "noreply@xinxindai.com";
+        final String passwd = "Yxwlhrqwop78nm";
+
+
+        MailSendDto mailSendDto = new MailSendDto();
+        mailSendDto.setAttachFilePaths(filePathList);
+        mailSendDto.setFrom(from);
+        mailSendDto.setFromPassword(passwd);
+        mailSendDto.setTo(Arrays.asList(receivers));
+        mailSendDto.setSubject("通知");
+        mailSendDto.setContent("hello");
+        sendMailService.send(mailSendDto);
 
         return responseDto;
     }

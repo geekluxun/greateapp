@@ -1,6 +1,6 @@
 package com.geekluxun.greateapp.spring.mail;
 
-import java.util.List;
+import com.geekluxun.greateapp.dto.MailSendDto;
 
 /**
  * Project: greateapp
@@ -9,5 +9,5 @@ import java.util.List;
  * Description:
  */
 public interface SendMailService {
-    void send(String subject, String content, List<String> receivers, List<String> cc, List<String> filePath);
+    void send(MailSendDto mailConfigDto);
 }

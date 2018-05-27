@@ -1,73 +1,51 @@
 package com.geekluxun.greateapp.spring.mail;
 
-import com.geekluxun.greateapp.controller.MainController;
+import com.geekluxun.greateapp.dto.MailSendDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.MailException;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.Properties;
 
 /**
  * Project: greateapp
- * Author: luxun
+ * @Author: luxun
  * Date: 2018/1/29 10:03
  * Description:
  */
 @Service(value = "SendMailService")
 public class SendMailServiceImpl implements SendMailService {
 
-
-    private JavaMailSenderImpl sender;
-
     private static final Logger logger = LoggerFactory.getLogger(SendMailServiceImpl.class);
 
 
-    final String from = "noreply@xinxindai.com";
-    final String passwd = "Yxwlhrqwop78nm";
 
+    /**
+     *
+     * @param mailSendDto
+     */
+    @Override
+    public void send(MailSendDto mailSendDto) {
 
-    @PostConstruct
-    private void init(){
-        sender = new JavaMailSenderImpl();
-        //sender.setHost("smtp.163.com");
-        //sender.setUsername("geekluxun@163.com");
-        /** 邮箱的密码*/
-        //sender.setPassword("******");
+        JavaMailSenderImpl sender = new JavaMailSenderImpl();
 
-        sender.setUsername(from);
-        sender.setPassword(passwd);
+        sender.setUsername(mailSendDto.getFrom());
+        sender.setPassword(mailSendDto.getFromPassword());
 
         Properties pp = new Properties();
-        pp.put("mail.smtp.auth", true);// 邮箱验证
+        // 邮箱验证
+        pp.put("mail.smtp.auth", true);
         pp.put("mail.smtp.starttls.enable", true);
         pp.put("mail.smtp.host", "smtp.partner.outlook.cn");
         pp.put("mail.smtp.port", 587);
-        sender.setJavaMailProperties(pp);
-    }
 
-    /**
-     * @param subject
-     * @param content
-     * @param receivers
-     * @param cc
-     * @param filePaths
-     */
-    public void send(String subject, String content, List<String> receivers, List<String> cc, List<String> filePaths) {
+        sender.setJavaMailProperties(pp);
+
 
         MimeMessage message = sender.createMimeMessage();
 
@@ -75,16 +53,16 @@ public class SendMailServiceImpl implements SendMailService {
         try {
             helper = new MimeMessageHelper(message, true);
 
-            helper.setTo((String[]) receivers.toArray());
-            helper.setText(content);
-            helper.setFrom(from);
-            helper.setSubject(subject);
-            if (cc != null){
-                helper.setCc((String[]) cc.toArray());
+            helper.setTo((String[]) mailSendDto.getTo().toArray());
+            helper.setText(mailSendDto.getContent());
+            helper.setFrom(mailSendDto.getFrom());
+            helper.setSubject(mailSendDto.getSubject());
+            if (mailSendDto.getCc() != null){
+                helper.setCc((String[]) mailSendDto.getCc().toArray());
             }
 
-            if (filePaths != null){
-                for (String filePath : filePaths){
+            if (mailSendDto.getAttachFilePaths() != null){
+                for (String filePath : mailSendDto.getAttachFilePaths()){
                     FileSystemResource file = new FileSystemResource(new File(filePath));
                     helper.addAttachment(file.getFilename(), file);
                 }
