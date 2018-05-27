@@ -1,15 +1,14 @@
 package com.geekluxun.greateapp.example.excel;
 
 import com.geekluxun.greateapp.controller.MainController;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.xssf.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -23,35 +22,55 @@ import java.util.Iterator;
  * Date: 2018/1/29 17:46
  * Description:
  */
-@Service(value = "ExportExcelService")
-public class ExportExcelServiceImpl implements ExportExcelService {
+@Service
+public class ExcelServiceImpl  implements ExcelService{
 
-    private static final Logger logger = LoggerFactory.getLogger(ExportExcelServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExcelServiceImpl.class);
+
+    //默认的配置属性
+    private  final int defaultColumnWidth = 20;
+    private  final short align = CellStyle.ALIGN_CENTER;
+    private  final String dateFormat = "yyyy-MM-dd HH:mm:ss";
 
 
     /**
-     * javabean导出到excel
      *
      * @param headers
      * @param dataset
      * @param fileName
-     * @param response
      * @param <T>
+     * @return
      */
-    public <T> void exportExcel(String[] headers, Collection<T> dataset, String fileName, HttpServletResponse response) {
+    public  <T> File exportExcelToLocalFile(String[] headers, Collection<T> dataset, String fileName, String fileDir) {
+        File file = null;
         // 声明一个工作薄
         XSSFWorkbook workbook = new XSSFWorkbook();
+
+        XSSFCellStyle  style = workbook.createCellStyle();
+        style.setAlignment(align);
+
         // 生成一个表格
         XSSFSheet sheet = workbook.createSheet(fileName);
+
         // 设置表格默认列宽度为15个字节
-        sheet.setDefaultColumnWidth((short) 20);
+        sheet.setDefaultColumnWidth(defaultColumnWidth);
+
+        XSSFRow row;
+
+        if (headers == null || headers.length == 0){
+            logger.error("列数不能为空");
+            return null;
+        }
+
         // 产生表格标题行
-        XSSFRow row = sheet.createRow(0);
+        row = sheet.createRow(0);
         for (short i = 0; i < headers.length; i++) {
             XSSFCell cell = row.createCell(i);
             XSSFRichTextString text = new XSSFRichTextString(headers[i]);
             cell.setCellValue(text);
+            cell.setCellStyle(style);
         }
+
         try {
             // 遍历集合数据，产生数据行
             Iterator<T> it = dataset.iterator();
@@ -66,6 +85,8 @@ public class ExportExcelServiceImpl implements ExportExcelService {
                 //填充一行数据的各个字段
                 for (short i = 0; i < headers.length; i++) {
                     XSSFCell cell = row.createCell(i);
+                    cell.setCellStyle(style);
+
                     Field field = fields[i];
                     String fieldName = field.getName();
                     //get方法名
@@ -79,9 +100,9 @@ public class ExportExcelServiceImpl implements ExportExcelService {
                     String textValue = null;
                     // 字段是Date的格式化一下
                     if (field.getType().isAssignableFrom(Date.class)) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
                         textValue = sdf.format((Date) value);
-                    } else if (value != null && value != "") {   // 其它数据类型都当作字符串简单处理
+                    } else if (value != null) {   // 其它数据类型都当作字符串简单处理
                         textValue = value.toString();
                     }
 
@@ -92,19 +113,28 @@ public class ExportExcelServiceImpl implements ExportExcelService {
                 }
             }
 
-            saveExportedFile(workbook, fileName);
-            //saveExportedFile(workbook, fileName, response);
-        } catch (Exception e) {
-            e.printStackTrace();
+            //保存到本地
+           file = saveExportedFile(workbook, fileName, fileDir);
+
+        } catch (NoSuchMethodException e) {
+            logger.error("传入参数不是标准的POJO：", e);
+        } catch (Exception e){
+            logger.error("生成excel：", e);
         }
+
+        return file;
     }
 
+
+
     /**
-     * 方法说明: 指定路径下生成EXCEL文件
      *
-     * @return
+     * @param workbook
+     * @param name
+     * @param response
+     * @throws Exception
      */
-    private void saveExportedFile(XSSFWorkbook workbook, String name, HttpServletResponse response) throws Exception {
+    private  void saveExportedFile(XSSFWorkbook workbook, String name, HttpServletResponse response) throws Exception {
         BufferedOutputStream fos = null;
         try {
             String fileName = name + ".xlsx";
@@ -122,10 +152,16 @@ public class ExportExcelServiceImpl implements ExportExcelService {
     }
 
 
-    private void saveExportedFile(XSSFWorkbook workbook, String name) throws Exception {
+    /**
+     *
+     * @param workbook
+     * @param fileName
+     * @return
+     * @throws IOException
+     */
+    private  File saveExportedFile(XSSFWorkbook workbook, String fileName, String fileDir) throws IOException {
 
-        String fileName = name + "_" + new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss").format(new Date()) + ".xlsx";
-        String filetPath = "d:/user/" + fileName;
+        String filetPath =   fileDir +  fileName +  ".xlsx";
         BufferedOutputStream fos = null;
 
         File file = new File(filetPath);
@@ -140,12 +176,17 @@ public class ExportExcelServiceImpl implements ExportExcelService {
             fos = new BufferedOutputStream(new FileOutputStream(file));
             workbook.write(fos);
         } catch (Exception e) {
-            logger.error("========== 保存EXCEL文件=========", e);
+            logger.error("==========保存excel文件=========", e);
         } finally {
             if (fos != null) {
                 fos.close();
             }
         }
 
+        return file;
+
     }
+
+
+
 }

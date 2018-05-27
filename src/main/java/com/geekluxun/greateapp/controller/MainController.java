@@ -8,7 +8,8 @@ import com.geekluxun.greateapp.dto.TestDto;
 import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.example.HttpClientExample;
-import com.geekluxun.greateapp.example.excel.ExportExcelService;
+import com.geekluxun.greateapp.example.excel.ExcelService;
+import com.geekluxun.greateapp.example.excel.ExcelServiceImpl;
 import com.geekluxun.greateapp.example.jdbc.JdbcExample;
 import com.geekluxun.greateapp.mq.activemq.producer.TopicProducer;
 import com.geekluxun.greateapp.mq.kafka.producer.Producer;
@@ -37,6 +38,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
@@ -47,6 +49,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.floor;
 import static java.lang.Math.multiplyExact;
 
 /**
@@ -86,7 +89,7 @@ public class MainController {
 
 
     @Autowired
-    ExportExcelService exportExcelService;
+    ExcelService excelService;
 
 
     @Autowired
@@ -311,8 +314,10 @@ public class MainController {
     public Object test10() {
         CommonResponseDto responseDto = new CommonResponseDto();
 
-        String[] receivers = {"geekluxun@163.com"};
-        sendMailService.send("通知", "hello world", Arrays.asList(receivers), null, null);
+        String[] receivers = {"luxun@xinxindai.com"};
+        List<String> filePathList = new ArrayList<>();
+        filePathList.add("/tmp/user.xlsx");
+        sendMailService.send("通知", "hello world", Arrays.asList(receivers), null, filePathList);
 
         return responseDto;
     }
@@ -343,10 +348,22 @@ public class MainController {
     public Object test12() {
         CommonResponseDto responseDto = new CommonResponseDto();
 
-        String[] headers = {"id", "name", "password", "createTime", "modifyTime", "remained", "version"};
+        String[] headers = {"id", "name", "password", "createTime", "modifyTime", "remained", "version", "amount"};
 
-        List<TUser> users = userService.queryAll();
-        exportExcelService.exportExcel(headers, users, "user", null);
+        //List<TUser> users = userService.queryAll();
+        List<TUser> users = new ArrayList<>();
+        for (int i = 0; i < 5; i++){
+            TUser user = new TUser();
+            user.setCreateTime(new Date());
+            user.setModifyTime(new Date());
+            user.setId(100L);
+            user.setVersion(i);
+            user.setName("鲁勋");
+            users.add(user);
+            user.setAmont(new BigDecimal("33.33"));
+        }
+
+        File file = excelService.exportExcelToLocalFile(headers, users, "user", "/tmp/");
 
         return responseDto;
     }
@@ -435,5 +452,6 @@ public class MainController {
 
         return responseDto;
     }
+
 
 }

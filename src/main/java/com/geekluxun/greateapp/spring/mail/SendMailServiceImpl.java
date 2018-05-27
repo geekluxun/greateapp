@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Project: greateapp
@@ -36,13 +37,27 @@ public class SendMailServiceImpl implements SendMailService {
     private static final Logger logger = LoggerFactory.getLogger(SendMailServiceImpl.class);
 
 
+    final String from = "noreply@xinxindai.com";
+    final String passwd = "Yxwlhrqwop78nm";
+
+
     @PostConstruct
     private void init(){
         sender = new JavaMailSenderImpl();
-        sender.setHost("smtp.163.com");
-        sender.setUsername("geekluxun@163.com");
+        //sender.setHost("smtp.163.com");
+        //sender.setUsername("geekluxun@163.com");
         /** 邮箱的密码*/
         //sender.setPassword("******");
+
+        sender.setUsername(from);
+        sender.setPassword(passwd);
+
+        Properties pp = new Properties();
+        pp.put("mail.smtp.auth", true);// 邮箱验证
+        pp.put("mail.smtp.starttls.enable", true);
+        pp.put("mail.smtp.host", "smtp.partner.outlook.cn");
+        pp.put("mail.smtp.port", 587);
+        sender.setJavaMailProperties(pp);
     }
 
     /**
@@ -62,7 +77,7 @@ public class SendMailServiceImpl implements SendMailService {
 
             helper.setTo((String[]) receivers.toArray());
             helper.setText(content);
-            helper.setFrom("geekluxun@163.com");
+            helper.setFrom(from);
             helper.setSubject(subject);
             if (cc != null){
                 helper.setCc((String[]) cc.toArray());

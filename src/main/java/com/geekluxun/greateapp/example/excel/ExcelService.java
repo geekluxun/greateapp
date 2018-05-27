@@ -1,6 +1,9 @@
 package com.geekluxun.greateapp.example.excel;
 
+import org.apache.poi.ss.formula.functions.T;
+
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.Collection;
 
 /**
@@ -9,11 +12,9 @@ import java.util.Collection;
  * Date: 2018/1/29 17:46
  * Description:
  */
-public interface ExportExcelService {
+public interface ExcelService {
 
-    <T> void exportExcel(String[] headers, Collection<T> dataset, String fileName, HttpServletResponse response);
-
-
+    <T> File exportExcelToLocalFile(String[] headers, Collection<T> dataset, String fileName, String fileDir);
 
 
 }
