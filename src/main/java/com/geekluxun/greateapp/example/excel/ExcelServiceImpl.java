@@ -1,6 +1,5 @@
 package com.geekluxun.greateapp.example.excel;
 
-import com.geekluxun.greateapp.controller.MainController;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.xssf.usermodel.*;
 import org.slf4j.Logger;
@@ -8,9 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -23,30 +26,29 @@ import java.util.Iterator;
  * Description:
  */
 @Service
-public class ExcelServiceImpl  implements ExcelService{
+public class ExcelServiceImpl implements ExcelService {
 
     private static final Logger logger = LoggerFactory.getLogger(ExcelServiceImpl.class);
 
     //默认的配置属性
-    private  final int defaultColumnWidth = 20;
-    private  final short align = CellStyle.ALIGN_CENTER;
-    private  final String dateFormat = "yyyy-MM-dd HH:mm:ss";
+    private final int defaultColumnWidth = 20;
+    private final short align = CellStyle.ALIGN_CENTER;
+    private final String dateFormat = "yyyy-MM-dd HH:mm:ss";
 
 
     /**
-     *
      * @param headers
      * @param dataset
      * @param fileName
      * @param <T>
      * @return
      */
-    public  <T> File exportExcelToLocalFile(String[] headers, Collection<T> dataset, String fileName, String fileDir) {
+    public <T> File exportExcelToLocalFile(String[] headers, Collection<T> dataset, String fileName, String fileDir) {
         File file = null;
         // 声明一个工作薄
         XSSFWorkbook workbook = new XSSFWorkbook();
 
-        XSSFCellStyle  style = workbook.createCellStyle();
+        XSSFCellStyle style = workbook.createCellStyle();
         style.setAlignment(align);
 
         // 生成一个表格
@@ -57,7 +59,7 @@ public class ExcelServiceImpl  implements ExcelService{
 
         XSSFRow row;
 
-        if (headers == null || headers.length == 0){
+        if (headers == null || headers.length == 0) {
             logger.error("列数不能为空");
             return null;
         }
@@ -78,7 +80,7 @@ public class ExcelServiceImpl  implements ExcelService{
             while (it.hasNext()) {
                 index++;
                 row = sheet.createRow(index);
-                T t = (T) it.next();
+                T t = it.next();
                 // 利用反射，根据javabean属性的先后顺序，动态调用getXxx()方法得到属性值
                 Field[] fields = t.getClass().getDeclaredFields();
 
@@ -93,32 +95,42 @@ public class ExcelServiceImpl  implements ExcelService{
                     String getMethodName = "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
                     Class tCls = t.getClass();
                     //获取get方法
-                    Method getMethod = tCls.getMethod(getMethodName, new Class[]{});
+                    Method getMethod = tCls.getMethod(getMethodName);
                     //调用get方法
-                    Object value = getMethod.invoke(t, new Object[]{});
-                    // 判断值的类型后进行强制类型转换
-                    String textValue = null;
-                    // 字段是Date的格式化一下
-                    if (field.getType().isAssignableFrom(Date.class)) {
+                    Object value = getMethod.invoke(t);
+                    Class type = field.getType();
+                    if (type.isAssignableFrom(Date.class)){
                         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-                        textValue = sdf.format((Date) value);
-                    } else if (value != null) {   // 其它数据类型都当作字符串简单处理
-                        textValue = value.toString();
-                    }
-
-                    if (textValue != null) {
-                        XSSFRichTextString richString = new XSSFRichTextString(textValue);
-                        cell.setCellValue(richString);
+                        cell.setCellValue(sdf.format((Date) value));
+                    } else if (type.isAssignableFrom(short.class)
+                            || type.isAssignableFrom(Short.class)
+                            || type.isAssignableFrom(int.class)
+                            || type.isAssignableFrom(Integer.class)
+                            || type.isAssignableFrom(long.class)
+                            || type.isAssignableFrom(Long.class)
+                            || type.isAssignableFrom(double.class)
+                            || type.isAssignableFrom(Double.class)
+                            || type.isAssignableFrom(float.class)
+                            || type.isAssignableFrom(Float.class)
+                            || type.isAssignableFrom(BigDecimal.class)
+                            ){
+                        cell.setCellValue(((Number)value).doubleValue());
+                    } else if (type.isAssignableFrom((boolean.class))
+                            || type.isAssignableFrom(Boolean.class)){
+                        cell.setCellValue((boolean)value);
+                    } else {
+                        logger.error("数据类型不支持");
+                        return null;
                     }
                 }
             }
 
             //保存到本地
-           file = saveExportedFile(workbook, fileName, fileDir);
+            file = saveExportedFile(workbook, fileName, fileDir);
 
         } catch (NoSuchMethodException e) {
             logger.error("传入参数不是标准的POJO：", e);
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error("生成excel：", e);
         }
 
@@ -126,15 +138,13 @@ public class ExcelServiceImpl  implements ExcelService{
     }
 
 
-
     /**
-     *
      * @param workbook
      * @param name
      * @param response
      * @throws Exception
      */
-    private  void saveExportedFile(XSSFWorkbook workbook, String name, HttpServletResponse response) throws Exception {
+    private void saveExportedFile(XSSFWorkbook workbook, String name, HttpServletResponse response) throws Exception {
         BufferedOutputStream fos = null;
         try {
             String fileName = name + ".xlsx";
@@ -153,22 +163,21 @@ public class ExcelServiceImpl  implements ExcelService{
 
 
     /**
-     *
      * @param workbook
      * @param fileName
      * @return
      * @throws IOException
      */
-    private  File saveExportedFile(XSSFWorkbook workbook, String fileName, String fileDir) throws IOException {
+    private File saveExportedFile(XSSFWorkbook workbook, String fileName, String fileDir) throws IOException {
 
-        String filetPath =   fileDir +  fileName +  ".xlsx";
+        String filetPath = fileDir + fileName + ".xlsx";
         BufferedOutputStream fos = null;
 
         File file = new File(filetPath);
-        if (!file.getParentFile().exists()){
+        if (!file.getParentFile().exists()) {
             Boolean result = file.getParentFile().mkdirs();
-            if (!result){
-                throw  new RuntimeException("创建目录失败");
+            if (!result) {
+                throw new RuntimeException("创建目录失败");
             }
         }
 
@@ -186,7 +195,6 @@ public class ExcelServiceImpl  implements ExcelService{
         return file;
 
     }
-
 
 
 }
