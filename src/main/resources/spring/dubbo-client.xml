@@ -13,6 +13,7 @@
 		address="${dubbo.registry.address}" group="dubbo-${env_path}" check="false"
 		file="${user.home}/.dubbo-cache/greatapp" />
 
+	<dubbo:consumer check="false" timeout="${dubbo.provider.timeout}" />
 
 	<!--<dubbo:reference id="redPacketAccountService"-->
 		<!--interface="com.geekluxun.greateapp.service.RedPacketAccountService" version="1.0.0"-->

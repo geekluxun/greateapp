@@ -10,7 +10,9 @@
 		http://code.alibabatech.com/schema/dubbo/dubbo.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="greateapp" />
+    
     <dubbo:monitor protocol="registry" />
 
     <!-- 注册中心暴露服务地址-->
@@ -22,9 +24,7 @@
         threadpool="${dubbo.protocol.threadpool}" threads="${dubbo.protocol.threads}" />
 
     <!--<dubbo:provider timeout="${dubbo.provider.timeout}" />-->
-
-    <dubbo:consumer check="false" timeout="${dubbo.provider.timeout}" />
-
+    
     <!-- dubbo接口定义-->
     <dubbo:service interface="com.geekluxun.greateapp.service.RedPacketAccountService"
                    ref="redPacketAccountService" registry="service" version="1.0.0" />

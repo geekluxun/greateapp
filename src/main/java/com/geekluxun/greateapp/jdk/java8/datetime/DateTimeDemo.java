@@ -1,9 +1,11 @@
 package com.geekluxun.greateapp.jdk.java8.datetime;
 
+import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
 import java.util.Locale;
 
 /**
@@ -28,6 +30,8 @@ public class DateTimeDemo {
         test8();
 
         test9();
+
+        test10();
     }
 
     /**
@@ -216,6 +220,21 @@ public class DateTimeDemo {
         ZonedDateTime zonedDateTime1 = dateTime.atZone(tokyo);
         //打印出带时区信息的时间 2018-05-11T13:53:52.433+09:00[Asia/Tokyo]
         System.out.println(zonedDateTime1);
+
+    }
+
+    /**
+     * 测试Calendar
+     */
+    public static void test10() {
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.MONTH, 1);
+        SimpleDateFormat sf = new SimpleDateFormat();
+        String ss = sf.format(c.getTime());
+        c.add(Calendar.MONTH, 1);
+        ss = sf.format(c.getTime());
+
+        System.out.println(ss);
 
     }
     
