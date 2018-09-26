@@ -22,7 +22,7 @@ public class GreateappApplication {
     @Autowired
     private WebApplicationContext webApplicationContext;
 
-    // 入口
+
 	public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(GreateappApplication.class, args);
     }
