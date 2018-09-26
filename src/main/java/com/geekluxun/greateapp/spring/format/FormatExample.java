@@ -3,6 +3,8 @@ package com.geekluxun.greateapp.spring.format;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.geekluxun.greateapp.spring.mail.SendMailServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +42,12 @@ public class FormatExample implements Serializable {
 
     public void init() {
         curDate = new Date();
-        logger.info("========== curDate:======== {}", JSON.toJSONString(this));
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            logger.info("========== curDate:======== {}", mapper.writeValueAsString(this));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
