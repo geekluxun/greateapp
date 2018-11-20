@@ -68,7 +68,7 @@ public class ValidatorTest extends BaseTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test()
-    public void testValid1_1(){
+    public void testValid1_1() {
         PersonDto dto = new PersonDto();
         thrown.expect(ParaValidException.class); //期待抛出的异常类型
         try {
@@ -80,7 +80,7 @@ public class ValidatorTest extends BaseTest {
     }
 
     @Test(expected = ParaValidException.class)
-    public void testValid1_2(){
+    public void testValid1_2() {
         PersonDto dto = new PersonDto();
         Car car = new Car();
         dto.setCar(car);
@@ -93,7 +93,7 @@ public class ValidatorTest extends BaseTest {
     }
 
     @Test
-    public void testValid1_3(){
+    public void testValid1_3() {
         PersonDto dto = new PersonDto();
         Car car = new Car();
         Gear gear = new Gear();

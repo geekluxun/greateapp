@@ -29,15 +29,18 @@
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        DELETE FROM trade_order
+        DELETE
+        FROM trade_order
         WHERE id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.geekluxun.greateapp.entity.TradeOrder">
-        INSERT INTO trade_order (id, self_user_id, opposite_user_id,
-                                 merchant_order_no, amount, status,
-                                 version)
-        VALUES (#{id,jdbcType=BIGINT}, #{selfUserId,jdbcType=BIGINT}, #{oppositeUserId,jdbcType=BIGINT},
-                #{merchantOrderNo,jdbcType=BIGINT}, #{amount,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR},
+        INSERT INTO trade_order (id, self_user_id, opposite_user_id, merchant_order_no, amount, status, version)
+        VALUES (#{id,jdbcType=BIGINT},
+                #{selfUserId,jdbcType=BIGINT},
+                #{oppositeUserId,jdbcType=BIGINT},
+                #{merchantOrderNo,jdbcType=BIGINT},
+                #{amount,jdbcType=DECIMAL},
+                #{status,jdbcType=VARCHAR},
                 #{version,jdbcType=BIGINT})
     </insert>
     <insert id="insertSelective" parameterType="com.geekluxun.greateapp.entity.TradeOrder">

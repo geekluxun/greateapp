@@ -18,10 +18,8 @@ public class HumanTest {
     public static void main(String[] argcs) {
 
         List<Human> list = Lists.newArrayList(new Human("luxun", 30),
-            new Human("mark", 3),
-            new Human( "alen", 10));
-
-
+                new Human("mark", 3),
+                new Human("alen", 10));
 
 
 //        sort1(list);
@@ -38,9 +36,10 @@ public class HumanTest {
 
     /**
      * 方式1
+     *
      * @param list
      */
-    private static void sort1(List<Human> list){
+    private static void sort1(List<Human> list) {
         Collections.sort(list, new Comparator<Human>() {
             @Override
             public int compare(Human o1, Human o2) {
@@ -51,37 +50,40 @@ public class HumanTest {
 
     /**
      * 方式2 lambda方式排序
+     *
      * @param list
      */
-    private static void sort2(List<Human> list){
-        list.sort((Human h1, Human h2)->h1.getName().compareTo(h2.getName()));
+    private static void sort2(List<Human> list) {
+        list.sort((Human h1, Human h2) -> h1.getName().compareTo(h2.getName()));
     }
 
 
     /**
      * 方式3 lambda方法引用
      */
-    private static void sort3(List<Human> list){
+    private static void sort3(List<Human> list) {
         list.sort(Human::compareByNameThenAge);
     }
 
 
     /**
      * 方式4
+     *
      * @param list
      */
     private static void sort4(List<Human> list) {
-        Collections.sort(list,Comparator.comparing(Human::getName));
+        Collections.sort(list, Comparator.comparing(Human::getName));
 
     }
 
 
     /**
      * 反转排序
+     *
      * @param list
      */
-    private static void reverse(List<Human> list){
-        Comparator<Human> comparator = (h1, h2)-> h1.getName().compareTo(h2.getName());
+    private static void reverse(List<Human> list) {
+        Comparator<Human> comparator = (h1, h2) -> h1.getName().compareTo(h2.getName());
 
         list.sort(comparator.reversed());
     }

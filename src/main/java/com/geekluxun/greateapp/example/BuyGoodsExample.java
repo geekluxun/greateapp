@@ -11,13 +11,13 @@ public class BuyGoodsExample {
     private AtomicLong stockCount = new AtomicLong(888);
     private AtomicLong allBuyedCount = new AtomicLong(0);
 
-    public static void main(String[] argc){
+    public static void main(String[] argc) {
         BuyGoodsExample exmaple = new BuyGoodsExample();
         exmaple.init();
 
     }
 
-    public void init(){
+    public void init() {
         ExecutorService executorService = new ThreadPoolExecutor(
                 10,
                 10,
@@ -32,16 +32,16 @@ public class BuyGoodsExample {
     }
 
 
-    private class BuyGoods implements Runnable{
+    private class BuyGoods implements Runnable {
 
         @Override
         public void run() {
             long buyedCount = 0;
-            while (true){
-                if (stockCount.decrementAndGet() >= 0){
+            while (true) {
+                if (stockCount.decrementAndGet() >= 0) {
                     buyedCount++;
                 } else {
-                    System.out.println("当前用户购买到商品" + Thread.currentThread().getId()  + ":" + buyedCount);
+                    System.out.println("当前用户购买到商品" + Thread.currentThread().getId() + ":" + buyedCount);
                     System.out.println("已买总数：" + allBuyedCount.addAndGet(buyedCount));
                     break;
                 }
@@ -62,10 +62,6 @@ public class BuyGoodsExample {
     //public Long updateStock(Long itemId);
 
 }
-
-
-
-
 
 
 //#读库存（方法签名为 Long selectCount(Long itemId);）

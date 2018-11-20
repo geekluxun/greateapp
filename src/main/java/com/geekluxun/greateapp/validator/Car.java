@@ -22,7 +22,7 @@ public class Car {
     private Gear gearList;
 
 
-    private  Integer passengers;
+    private Integer passengers;
 
     private Integer seatCount;
 
@@ -64,7 +64,7 @@ public class Car {
         this.gearList = gearList;
     }
 
-    public static void main(String[] argc){
+    public static void main(String[] argc) {
         Car car = new Car();
         car.setBrand(null);
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
@@ -72,15 +72,15 @@ public class Car {
 
         Set<ConstraintViolation<Car>> constraintViolations = validator.validate(car);
 
-        Assert.assertEquals( 2, constraintViolations.size() );
-        Assert.assertEquals("品牌不能为空",constraintViolations.iterator().next().getMessage());
+        Assert.assertEquals(2, constraintViolations.size());
+        Assert.assertEquals("品牌不能为空", constraintViolations.iterator().next().getMessage());
 
         //验证某一属性
-        constraintViolations = validator.validateProperty(car,"gearList");
+        constraintViolations = validator.validateProperty(car, "gearList");
         Assert.assertEquals(1, constraintViolations.size());
 
         //验证某一属性的值
-        constraintViolations = validator.validateValue(Car.class,"brand",null);
+        constraintViolations = validator.validateValue(Car.class, "brand", null);
         Assert.assertEquals(1, constraintViolations.size());
 
     }

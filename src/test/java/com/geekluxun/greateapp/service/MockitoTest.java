@@ -19,11 +19,11 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MockitoTest extends BaseTest{
+public class MockitoTest extends BaseTest {
 
 
     @Test
-    public void test(){
+    public void test() {
         // 创建mock对象
         List mockedList = Mockito.mock(List.class);
 

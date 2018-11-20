@@ -22,15 +22,15 @@ public class ConcurrentDemo {
         return number++;
     }
 
-    private void init(){
+    private void init() {
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10);
 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             fixedThreadPool.submit(new numberTask());
         }
     }
 
-    private class numberTask implements Runnable{
+    private class numberTask implements Runnable {
         @Override
         public void run() {
             while (true)

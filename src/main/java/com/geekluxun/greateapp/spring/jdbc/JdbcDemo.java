@@ -44,7 +44,8 @@ public class JdbcDemo {
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private void f1() {}
+    private void f1() {
+    }
 
     public static void main(String[] argc) {
         JdbcDemo jdbcDemo = new JdbcDemo();

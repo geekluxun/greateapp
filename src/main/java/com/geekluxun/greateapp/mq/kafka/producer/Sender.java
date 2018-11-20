@@ -14,7 +14,7 @@ public class Sender {
     @Resource
     KafkaTemplate<String, String> kafkaTemplate;
 
-    public void send(String topic, String payload){
-        kafkaTemplate.send(topic,payload);
+    public void send(String topic, String payload) {
+        kafkaTemplate.send(topic, payload);
     }
 }

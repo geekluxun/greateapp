@@ -38,7 +38,7 @@ public class DistributedBarrierDemo {
         }
 
 
-         /** 最佳实践 使用ThreadPoolExecutor 明确具体参数，避免线程数或者等待队列无限大耗尽内存问题*/
+        /** 最佳实践 使用ThreadPoolExecutor 明确具体参数，避免线程数或者等待队列无限大耗尽内存问题*/
         ExecutorService executorService = new ThreadPoolExecutor(
                 10,
                 10,

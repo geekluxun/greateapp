@@ -1,4 +1,4 @@
-######################### 通用指令 start!!! #####################
+######################### 通用指令 start !!! #####################
 
 #索引区分度公式 (0.1以上)
 SELECT count(DISTINCT user_id) / count(*)
@@ -25,9 +25,7 @@ SHOW STATUS LIKE 'Qcache%';
 SHOW DATABASES;
 
 #通过global_variables查询 系统全局变量
-SELECT
-    VARIABLE_NAME,
-    variable_value
+SELECT VARIABLE_NAME, variable_value
 FROM information_schema.global_variables
 WHERE variable_name LIKE '%long%';
 
@@ -94,14 +92,12 @@ SHOW MASTER STATUS;
 #mysqlbinlog --no-defaults mysql-bin.000004
 
 #查询用户
-SELECT
-    user,
-    host
+SELECT user, host
 FROM mysql.user;
 #设置用户权限
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'
 IDENTIFIED BY 'mypwd'
 WITH GRANT OPTION;
 
-######################### 通用指令 end!!! #####################
+######################### 通用指令 end !!! #####################
 

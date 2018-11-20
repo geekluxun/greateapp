@@ -3,6 +3,7 @@ package com.geekluxun.greateapp.util;
 /**
  * Created by luxun on 2018/1/11.
  */
+
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- *  发送邮件工具类
+ * 发送邮件工具类
  */
 public class MailUtil {
 

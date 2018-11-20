@@ -9,11 +9,11 @@ public class Human {
 
     private int age;
 
-    public Human(){
+    public Human() {
         super();
     }
 
-    public Human(final String name, final int age){
+    public Human(final String name, final int age) {
         super();
         this.age = age;
         this.name = name;
@@ -38,13 +38,14 @@ public class Human {
 
     /**
      * 默认的对象相等是指同一个对象，这里覆写
+     *
      * @param obj
      * @return
      */
     @Override
     public boolean equals(Object obj) {
-        return (this.getName().equals(((Human)obj).getName()) &&
-                this.getAge() == ((Human)(obj)).getAge());
+        return (this.getName().equals(((Human) obj).getName()) &&
+                this.getAge() == ((Human) (obj)).getAge());
     }
 
 

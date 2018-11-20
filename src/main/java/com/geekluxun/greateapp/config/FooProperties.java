@@ -21,7 +21,7 @@ import java.util.List;
 @Component
 @ConfigurationProperties(prefix = "foo")
 @Validated
-public class FooProperties extends BaseDto{
+public class FooProperties extends BaseDto {
 
     private boolean enabled;
 
@@ -63,7 +63,7 @@ public class FooProperties extends BaseDto{
         this.macAddress = macAddress;
     }
 
-    public static class Security extends BaseDto{
+    public static class Security extends BaseDto {
 
         @NotBlank
         private String username;

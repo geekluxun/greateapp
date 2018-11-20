@@ -23,12 +23,12 @@ public class kafkaTest {
 
 
     @Before
-    public void init(){
+    public void init() {
 
     }
 
     @Test
-    public void testSend(){
-        kafkaTemplate.send("test1","luxun!!!");
+    public void testSend() {
+        kafkaTemplate.send("test1", "luxun!!!");
     }
 }

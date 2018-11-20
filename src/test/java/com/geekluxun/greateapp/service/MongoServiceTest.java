@@ -18,13 +18,13 @@ public class MongoServiceTest {
     MongoService mongoService;
 
     @Before
-    public void init(){
+    public void init() {
 
     }
 
 
     @Test
-    public void testSave(){
+    public void testSave() {
         TUser user = new TUser();
         user.setId(1L);
         user.setName("lx");

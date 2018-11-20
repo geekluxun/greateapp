@@ -17,7 +17,7 @@ public class ValidPassengerCountValidator implements ConstraintValidator<ValidPa
 
     @Override
     public boolean isValid(Car value, ConstraintValidatorContext context) {
-        if ( value == null ) {
+        if (value == null) {
             return true;
         }
         //乘客人数<=座位数

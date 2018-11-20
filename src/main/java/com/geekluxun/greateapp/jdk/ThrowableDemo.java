@@ -3,15 +3,14 @@ package com.geekluxun.greateapp.jdk;
 /**
  * Created by luxun on 2017/12/27.
  */
-public class ThrowableDemo
-{
-    public static void main(String[] argc){
+public class ThrowableDemo {
+    public static void main(String[] argc) {
         ThrowableDemo throwableDemo = new ThrowableDemo();
         throwableDemo.f1();
     }
 
 
-    private void f1(){
+    private void f1() {
         try {
             f2();
         } catch (Exception e) {
@@ -19,7 +18,7 @@ public class ThrowableDemo
         }
     }
 
-    private void f2(){
+    private void f2() {
 
         try {
             f3();
@@ -28,7 +27,7 @@ public class ThrowableDemo
         }
     }
 
-    private void f3(){
+    private void f3() {
         throw new IllegalArgumentException("dd");
     }
 

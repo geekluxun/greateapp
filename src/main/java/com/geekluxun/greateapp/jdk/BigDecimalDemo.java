@@ -1,7 +1,6 @@
 package com.geekluxun.greateapp.jdk;
 
 
-
 import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
@@ -12,14 +11,14 @@ import java.text.DecimalFormat;
  * Created by luxun on 2017/12/27.
  */
 public class BigDecimalDemo {
-    public static void main(String[] argc){
-        BigDecimalDemo  decimalDemo = new BigDecimalDemo();
+    public static void main(String[] argc) {
+        BigDecimalDemo decimalDemo = new BigDecimalDemo();
         decimalDemo.test1();
         decimalDemo.test2();
     }
 
 
-    private void test1(){
+    private void test1() {
         float f1 = 0.013f;
         BigDecimal a1 = new BigDecimal(f1);
         a1.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -35,14 +34,14 @@ public class BigDecimalDemo {
 
         System.out.println(a3);
 
-        Assert.isTrue( 3 >  4, "前者必须大于后者");
+        Assert.isTrue(3 > 4, "前者必须大于后者");
 
     }
 
 
     float f[] = {0.010f, 2.510f, 2.515f, 2.516f, -2.510f, -2.511f, -2.515f, -2.516f};
 
-    private void test2 () {
+    private void test2() {
         DecimalFormat df = new DecimalFormat("0.00");
         /**
          * 0.010f 使用Down模式值为0.00而不是0.01  但0.011 则为0.01 特此注意！！！

@@ -19,8 +19,8 @@ public class ValidatorServiceImpl extends BaseService implements ValidatorServic
     }
 
     @Override
-    public void testValidate2(Date date1, Date date2){
-        logger.info("================ testValidate2 ================:",date1);
+    public void testValidate2(Date date1, Date date2) {
+        logger.info("================ testValidate2 ================:", date1);
     }
 
 }

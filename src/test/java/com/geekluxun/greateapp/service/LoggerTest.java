@@ -23,7 +23,7 @@ public class LoggerTest {
 
 
     @Test
-    public void testLogger(){
+    public void testLogger() {
         Integer a = null;
         Double b = 1.23;
         Map c = new HashMap();
@@ -35,7 +35,7 @@ public class LoggerTest {
 
         Date e = new Date();
 
-        logger.info("========= 带参数 ========={}，{}，{},{},{}",a,b,c,d,e);
+        logger.info("========= 带参数 ========={}，{}，{},{},{}", a, b, c, d, e);
 
         TestBean bean = new TestBean();
         bean.setA(null);
@@ -45,15 +45,13 @@ public class LoggerTest {
         bean.setE(c);
 
 
-
-        logger.info("=========== Bean =============== {},{}", bean,  bean.getA());
+        logger.info("=========== Bean =============== {},{}", bean, bean.getA());
 
 
     }
 
 
-
-    private class TestBean implements Serializable{
+    private class TestBean implements Serializable {
         @NotNull(message = "a不能为空！")
         private String a;
         private Date b;
@@ -104,11 +102,12 @@ public class LoggerTest {
 
         /**
          * 打印javabean
+         *
          * @return
          */
         @Override
         public String toString() {
-            return  ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+            return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
         }
     }
 }

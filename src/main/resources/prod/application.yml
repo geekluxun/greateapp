@@ -5,13 +5,13 @@ spring:
   profiles:
     active: prod
 foo:
-    remote-address: 192.168.1.200
-    security:
-        username: "luxun"
-        password: 123999
-        roles:
-          - USER
-          - ADMIN
-          - ROOT
-    enabled: true
-    mac-address: 33355
+  remote-address: 192.168.1.200
+  security:
+    username: "luxun"
+    password: 123999
+    roles:
+    - USER
+    - ADMIN
+    - ROOT
+  enabled: true
+  mac-address: 33355

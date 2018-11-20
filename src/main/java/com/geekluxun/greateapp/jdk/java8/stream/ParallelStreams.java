@@ -11,6 +11,7 @@ public class ParallelStreams {
 
     /**
      * 普通的java8之前方式
+     *
      * @param n
      * @return
      */
@@ -24,6 +25,7 @@ public class ParallelStreams {
 
     /**
      * 顺序流方式
+     *
      * @param n
      * @return
      */
@@ -33,7 +35,8 @@ public class ParallelStreams {
 
     /**
      * 并行流方式 这里有装箱拆箱所以可能很慢
-     * @param 
+     *
+     * @param
      * @return
      */
     public static long parallelSum(long n) {
@@ -42,6 +45,7 @@ public class ParallelStreams {
 
     /**
      * range方式 此处使用原始Long流，没有装箱拆箱开销，应该比较快
+     *
      * @param n
      * @return
      */
@@ -51,6 +55,7 @@ public class ParallelStreams {
 
     /**
      * range并行方式
+     *
      * @param n
      * @return
      */
@@ -60,6 +65,7 @@ public class ParallelStreams {
 
     /**
      * 有共享变量 存在 实质上是顺序的！！！
+     *
      * @param n
      * @return
      */
@@ -71,6 +77,7 @@ public class ParallelStreams {
 
     /**
      * 并行流对共享变量accumulator产生竞争，导致结果不对！！！
+     *
      * @param n
      * @return
      */
@@ -87,6 +94,6 @@ public class ParallelStreams {
             total += value;
         }
     }
-    
-    
+
+
 }

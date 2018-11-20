@@ -21,7 +21,7 @@ public class SpringDataRedisExamplesTest {
 
 
     @Test
-    public void testString(){
+    public void testString() {
         redisExamples.testString();
     }
 

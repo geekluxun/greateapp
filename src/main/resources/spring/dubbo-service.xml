@@ -1,36 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-    xsi:schemaLocation="
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://code.alibabatech.com/schema/dubbo
-		http://code.alibabatech.com/schema/dubbo/dubbo.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="greateapp" />
-    
-    <dubbo:monitor protocol="registry" />
+    <dubbo:application name="greateapp"/>
+
+    <dubbo:monitor protocol="registry"/>
 
     <!-- 注册中心暴露服务地址-->
     <dubbo:registry id="service" protocol="${dubbo.registry.protocol}"
-        address="${dubbo.registry.address}" group="dubbo-${env_path}"
-        check="false" />
+                    address="${dubbo.registry.address}" group="dubbo-${env_path}"
+                    check="false"/>
     <!-- 使用dubbo协议在端口 暴露服务-->
     <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}"
-        threadpool="${dubbo.protocol.threadpool}" threads="${dubbo.protocol.threads}" />
+                    threadpool="${dubbo.protocol.threadpool}" threads="${dubbo.protocol.threads}"/>
 
     <!--<dubbo:provider timeout="${dubbo.provider.timeout}" />-->
-    
+
     <!-- dubbo接口定义-->
     <dubbo:service interface="com.geekluxun.greateapp.service.RedPacketAccountService"
-                   ref="redPacketAccountService" registry="service" version="1.0.0" />
+                   ref="redPacketAccountService" registry="service" version="1.0.0"/>
 
 
     <dubbo:service interface="com.geekluxun.greateapp.service.RedPacketTradeOrderService"
-                   ref="redPacketTradeOrderService" registry="service" version="1.0.0" />
+                   ref="redPacketTradeOrderService" registry="service" version="1.0.0"/>
 
 </beans>

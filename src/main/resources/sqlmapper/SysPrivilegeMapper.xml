@@ -7,7 +7,7 @@
         <result column="privilege_url" jdbcType="VARCHAR" property="privilegeUrl"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, privilege_name, privilege_url
+        id, privilege_name, privilege_url
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -16,14 +16,13 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from sys_privilege
+        delete
+        from sys_privilege
         where id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.geekluxun.greateapp.entity.SysPrivilege">
-        insert into sys_privilege (id, privilege_name, privilege_url
-          )
-        values (#{id,jdbcType=BIGINT}, #{privilegeName,jdbcType=VARCHAR}, #{privilegeUrl,jdbcType=VARCHAR}
-          )
+        insert into sys_privilege (id, privilege_name, privilege_url)
+        values (#{id,jdbcType=BIGINT}, #{privilegeName,jdbcType=VARCHAR}, #{privilegeUrl,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.geekluxun.greateapp.entity.SysPrivilege">
         insert into sys_privilege
@@ -65,7 +64,7 @@
     <update id="updateByPrimaryKey" parameterType="com.geekluxun.greateapp.entity.SysPrivilege">
         update sys_privilege
         set privilege_name = #{privilegeName,jdbcType=VARCHAR},
-          privilege_url = #{privilegeUrl,jdbcType=VARCHAR}
+            privilege_url  = #{privilegeUrl,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
-  </update>
+    </update>
 </mapper>

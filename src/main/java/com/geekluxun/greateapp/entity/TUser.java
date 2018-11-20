@@ -3,7 +3,7 @@ package com.geekluxun.greateapp.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class TUser implements Serializable{
+public class TUser implements Serializable {
     private Long id;
 
     private String name;

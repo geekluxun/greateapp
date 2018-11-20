@@ -58,6 +58,7 @@ public class OOMobjectTest {
 
     /**
      * 同步等待（活锁）
+     *
      * @param lock
      */
     public static void createLcokwaitThread(final Object lock) {
@@ -79,7 +80,7 @@ public class OOMobjectTest {
     }
 
 
-    static void testHeap(){
+    static void testHeap() {
         try {
             fillHeap(1000);
         } catch (InterruptedException e) {
@@ -87,7 +88,7 @@ public class OOMobjectTest {
         }
     }
 
-    static void testWaitLock(){
+    static void testWaitLock() {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
             br.readLine();
@@ -104,30 +105,30 @@ public class OOMobjectTest {
     /**
      * 死锁等待
      */
-    static class SynAddRunable implements Runnable{
+    static class SynAddRunable implements Runnable {
         int a, b;
 
-        public SynAddRunable(int a, int b){
+        public SynAddRunable(int a, int b) {
             this.a = a;
             this.b = b;
         }
 
         @Override
         public void run() {
-            synchronized (Integer.valueOf(a)){
+            synchronized (Integer.valueOf(a)) {
                 //如果两个同步块之间发生线程切换 会死锁
-                synchronized (Integer.valueOf(b)){
-                    System.out.println(a+b);
+                synchronized (Integer.valueOf(b)) {
+                    System.out.println(a + b);
                 }
             }
         }
     }
 
 
-    static void testDeadLcok(){
-        for (int i = 0; i < 100; i++){
-            new Thread(new SynAddRunable(1,2)).start();
-            new Thread(new SynAddRunable(2,1)).start();
+    static void testDeadLcok() {
+        for (int i = 0; i < 100; i++) {
+            new Thread(new SynAddRunable(1, 2)).start();
+            new Thread(new SynAddRunable(2, 1)).start();
         }
     }
 

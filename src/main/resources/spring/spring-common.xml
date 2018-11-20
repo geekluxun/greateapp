@@ -1,43 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans 	xmlns="http://www.springframework.org/schema/beans"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xmlns:context="http://www.springframework.org/schema/context"
-          xmlns:aop="http://www.springframework.org/schema/aop"
-          xmlns:tx="http://www.springframework.org/schema/tx"
-          xmlns:mvc="http://www.springframework.org/schema/mvc"
-          xmlns:p="http://www.springframework.org/schema/p"
-          xsi:schemaLocation="http://www.springframework.org/schema/beans
-       	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-       	http://www.springframework.org/schema/aop
-       	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-      	http://www.springframework.org/schema/context
-       	http://www.springframework.org/schema/context/spring-context-4.0.xsd
-       	http://www.springframework.org/schema/tx
-       	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-       	http://www.springframework.org/schema/mvc
-       	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-    
-    
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+
     <!-- id 的就是此bean的名字，引入此bean通过此名字，譬如@Resource注解 中的name 引用此 bean-->
-    <bean id = "springDemo2"  name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
-         <!--此处注入到bean 名字叫userService33-->
+    <bean id="springDemo2" name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
+        <!--此处注入到bean 名字叫userService33-->
         <property name="userService" ref="userService33"></property>
     </bean>
-    
+
     <bean id="springDemo1" class="com.geekluxun.greateapp.spring.SpringDemo">
-        <constructor-arg index="0"  value="32"/>
-        <constructor-arg index="1"  value="luxun"/>
+        <constructor-arg index="0" value="32"/>
+        <constructor-arg index="1" value="luxun"/>
         <property name="userService" ref="userService33"/>
     </bean>
-    
-    
+
+
     <!-- 通过静态方法createInstance 构造 bean-->
-    <bean id="springDemo3" class="com.geekluxun.greateapp.spring.SpringDemo" factory-method="createInstance" >
+    <bean id="springDemo3" class="com.geekluxun.greateapp.spring.SpringDemo" factory-method="createInstance">
         <property name="userService" ref="userService33"/>
     </bean>
 
     <!-- 通过静态方法createInstance2 构造 bean，注意工厂方法带参数！！-->
-    <bean id="springDemo5" class="com.geekluxun.greateapp.spring.SpringDemo" factory-method="createInstance3" >
+    <bean id="springDemo5" class="com.geekluxun.greateapp.spring.SpringDemo" factory-method="createInstance3">
         <constructor-arg name="age" value="99"/>
         <constructor-arg name="name" value="geeks"/>
         <property name="userService" ref="userService33"/>
@@ -50,7 +38,7 @@
 
     <!-- 使用p标签示例-->
     <bean id="springDemo6" factory-bean="springDemo1" factory-method="createInstance2"
-        p:userService-ref="userService33"
+          p:userService-ref="userService33"
     />
 
 
@@ -63,7 +51,7 @@
 
 
     <!-- props 、list、map、set 示例 -->
-    <bean id="springDemo8" class="com.geekluxun.greateapp.spring.SpringDemo" >
+    <bean id="springDemo8" class="com.geekluxun.greateapp.spring.SpringDemo">
         <property name="userService">
             <bean class="com.geekluxun.greateapp.service.UserService.UserServiceImpl"/>
         </property>
@@ -95,7 +83,7 @@
     </bean>
 
     <!--  父子 bean示例-->
-    <bean id="springDemo9" parent="springDemo8" class="com.geekluxun.greateapp.spring.SpringDemo" >
+    <bean id="springDemo9" parent="springDemo8" class="com.geekluxun.greateapp.spring.SpringDemo">
         <property name="userService">
             <bean class="com.geekluxun.greateapp.service.UserService.UserServiceImpl"/>
         </property>
@@ -120,7 +108,7 @@
 
 
     <!-- autowire 示例-->
-    <bean id="springDemo12" class="com.geekluxun.greateapp.spring.SpringDemo" lazy-init="true" autowire="byType" >
+    <bean id="springDemo12" class="com.geekluxun.greateapp.spring.SpringDemo" lazy-init="true" autowire="byType">
         <property name="userService" ref="userService33"/>
     </bean>
 
@@ -128,11 +116,11 @@
     <!--<bean id="aBean" class="com.geekluxun.greateapp.spring.aop.MyAspect"/>-->
 
     <!--<aop:config>-->
-        <!--<aop:aspect id = "myAspect" ref="aBean">-->
-            <!--<aop:pointcut id="businessService" expression="execution(* com.geekluxun.greateapp.service.UserServiceImpl.addUser(..))"/>-->
-            <!--<aop:before method="doBefore" pointcut-ref="businessService"/>-->
-            <!--<aop:after method="doAfter" pointcut-ref="businessService"/>-->
-        <!--</aop:aspect>-->
+    <!--<aop:aspect id = "myAspect" ref="aBean">-->
+    <!--<aop:pointcut id="businessService" expression="execution(* com.geekluxun.greateapp.service.UserServiceImpl.addUser(..))"/>-->
+    <!--<aop:before method="doBefore" pointcut-ref="businessService"/>-->
+    <!--<aop:after method="doAfter" pointcut-ref="businessService"/>-->
+    <!--</aop:aspect>-->
     <!--</aop:config>-->
 
     <!--&lt;!&ndash; 使用cglib 代理&ndash;&gt;-->
@@ -140,7 +128,7 @@
 
     <!--定义不同环境下注入不同的bean，是通过spring.profiles.active 区别的-->
     <beans profile="prod">
-        <bean id = "springDemo13"  name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
+        <bean id="springDemo13" name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
             <!--此处注入到bean 名字叫userService33-->
             <property name="userService" ref="userService33"/>
             <property name="name" value="luxunprod"/>
@@ -148,7 +136,7 @@
     </beans>
 
     <beans profile="test">
-        <bean id = "springDemo13"  name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
+        <bean id="springDemo13" name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
             <!--此处注入到bean 名字叫userService33-->
             <property name="userService" ref="userService33"/>
             <property name="name" value="luxuntest"/>
@@ -156,7 +144,7 @@
     </beans>
 
     <beans profile="dev">
-        <bean id = "springDemo13"  name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
+        <bean id="springDemo13" name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
             <!--此处注入到bean 名字叫userService33-->
             <property name="userService" ref="userService33"/>
             <property name="name" value="luxundev"/>

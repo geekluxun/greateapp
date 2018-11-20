@@ -29,7 +29,7 @@ public class ZkClientService {
     private String lockPath = "/lock/1";
 
     @PostConstruct
-    public void init(){
+    public void init() {
         logger.info("============== 开始初始化ZkService ===============");
         client = CuratorFrameworkFactory.newClient(connect, new ExponentialBackoffRetry(1000, 3));
 
@@ -37,8 +37,7 @@ public class ZkClientService {
     }
 
 
-
-    public CuratorFramework getClient(){
+    public CuratorFramework getClient() {
         return this.client;
     }
 

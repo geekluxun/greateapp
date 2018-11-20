@@ -1,68 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jms="http://www.springframework.org/schema/jms"
-       xsi:schemaLocation="
-	  http://www.springframework.org/schema/beans
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 	  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-	  http://www.springframework.org/schema/aop
-	  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-	  http://www.springframework.org/schema/tx
-	  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
-	  http://www.springframework.org/schema/context
-      http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	  
+	  
+	  
+	  
+	  
+      
       http://www.springframework.org/schema/jms
       http://www.springframework.org/schema/jms/spring-jms.xsd">
 
-    <bean id = "targetConnectFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+    <bean id="targetConnectFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
         <property name="brokerURL" value="${active.mq.broker.url}"/>
     </bean>
-    
-    
+
+
     <bean id="poolConnectFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
         <property name="connectionFactory" ref="targetConnectFactory"/>
         <property name="maxConnections" value="10"/>
     </bean>
-    
-    
+
+
     <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
         <property name="targetConnectionFactory" ref="poolConnectFactory"/>
         <property name="reconnectOnException" value="true"/>
     </bean>
-    
-    
-    
+
+
     <!-- 生产者 -->
     <bean id="jmsTempate" class="org.springframework.jms.core.JmsTemplate">
         <property name="connectionFactory" ref="connectionFactory"/>
         <!-- 事务支持-->
         <property name="sessionTransacted" value="true"/>
     </bean>
-    
+
     <!-- 消费者 -->
     <bean id="consumer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-        <property name="connectionFactory" ref= "connectionFactory"/>
-        <property name="destination" ref="testQueueDestination" />
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="testQueueDestination"/>
         <property name="messageListener" ref="testMessageListener"/>
         <property name="sessionTransacted" value="true"/>
     </bean>
-    
+
     <bean id="testQueueDestination" class="org.apache.activemq.command.ActiveMQQueue">
         <constructor-arg index="0" value="${active.mq.destination.queue.test}"/>
     </bean>
-    
+
     <bean id="testMessageListener" class="com.geekluxun.greateapp.mq.activemq.consumer.TestQueueMessageListener"></bean>
-    
-    
-   
-    
+
+
     <bean id="testQueueDestinationReply" class="org.apache.activemq.command.ActiveMQQueue">
         <constructor-arg index="0" value="${active.mq.destination.queue.test.reply}"/>
     </bean>
-    
-    
+
+
     <jms:listener-container>
         <!--<jms:listener destination="dd" ref="topicConsumerListener"/>-->
     </jms:listener-container>

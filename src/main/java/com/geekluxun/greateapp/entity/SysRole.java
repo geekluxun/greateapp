@@ -4,7 +4,7 @@ import com.geekluxun.greateapp.common.BaseEntity;
 
 import java.util.Date;
 
-public class SysRole extends BaseEntity{
+public class SysRole extends BaseEntity {
     private Long id;
 
     private String roleName;

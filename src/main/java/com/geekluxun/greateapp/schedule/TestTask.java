@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 public class TestTask {
     private final Logger logger = LoggerFactory.getLogger(TestTask.class);
 
-    public void execute(){
+    public void execute() {
         //System.out.println("test task!!!");
         logger.info("============== test task! ============");
     }

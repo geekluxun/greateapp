@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by luxun on 2017/12/27.
  */
-public class CommentDemo implements Serializable{
+public class CommentDemo implements Serializable {
 
     private String para1;
     private String para2;

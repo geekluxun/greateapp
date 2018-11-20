@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ZkLock
-{
+public class ZkLock {
     private static final Logger logger = LoggerFactory.getLogger(ZkLock.class);
 
     @Autowired
@@ -23,18 +22,19 @@ public class ZkLock
     /**
      * 不能多个线程共享一个InterProcessMutex实例，需要每个线程有单独的InterProcessMutex实例
      * 否则无法释放锁
+     *
      * @param lockPath
      */
-    public void testLock(String lockPath) throws Exception{
+    public void testLock(String lockPath) throws Exception {
 
-        InterProcessMutex mutex  = new InterProcessMutex(zkClientService.getClient(), lockPath);
+        InterProcessMutex mutex = new InterProcessMutex(zkClientService.getClient(), lockPath);
 
         logger.info("======== 当前线程id: " + Thread.currentThread().getId());
 
         try {
             mutex.acquire();
         } catch (Exception e) {
-            logger.error("获取锁失败！" +  e);
+            logger.error("获取锁失败！" + e);
             throw e;
         }
 
@@ -46,7 +46,7 @@ public class ZkLock
         try {
             mutex.release();
         } catch (Exception e) {
-            logger.error("释放锁失败！" +  e);
+            logger.error("释放锁失败！" + e);
             throw e;
         }
 

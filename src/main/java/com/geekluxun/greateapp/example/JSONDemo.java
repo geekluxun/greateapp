@@ -139,7 +139,7 @@ public class JSONDemo {
                     System.out.println("=====value3:=====" + entry3.getValue());
 
                     //JSONArray array = (JSONArray) entry3.getValue();
-                    List array = (List)entry3.getValue();
+                    List array = (List) entry3.getValue();
 
                     /** entry3 的 value 是一个 list, 遍历这个list*/
                     for (Object ob : array) {
@@ -187,7 +187,7 @@ public class JSONDemo {
         /** 此json串经过压缩转义处理过*/
         String jsonStr = "{\"name\":\"str\",\"age\":0,\"para\":null,\"bankCard\":[],\"born\":\"2017-01-03 13:36:46\"}";
 
-        UserBean object = JSON.parseObject(jsonStr,UserBean.class);
+        UserBean object = JSON.parseObject(jsonStr, UserBean.class);
 
         System.out.println("object" + object);
 
@@ -200,12 +200,11 @@ public class JSONDemo {
         /** 输出值为null的字段*/
 
 
-
         String serial = JSON.toJSONString(userBean,
-                                            SerializerFeature.WRITE_MAP_NULL_FEATURES, /** 空值输出null*/
-                                            SerializerFeature.WriteNullListAsEmpty,
-                                            SerializerFeature.WriteEnumUsingToString  /** 枚举值使用字符串而不是ordinal表示*/
-                                            );
+                SerializerFeature.WRITE_MAP_NULL_FEATURES, /** 空值输出null*/
+                SerializerFeature.WriteNullListAsEmpty,
+                SerializerFeature.WriteEnumUsingToString  /** 枚举值使用字符串而不是ordinal表示*/
+        );
 
         System.out.println("序列化结果:" + serial);
 
@@ -244,22 +243,26 @@ public class JSONDemo {
 
 
 class UserBean implements Serializable {
-    private String  name;
+    private String name;
     private Integer age;
-    private Map     para;
-    private List    bankCard;
-    /** 格式化时间很有用处！！！ name 从 born 转换成 实际的bornDate字段*/
+    private Map para;
+    private List bankCard;
+    /**
+     * 格式化时间很有用处！！！ name 从 born 转换成 实际的bornDate字段
+     */
     @JSONField(name = "born", format = "yyyy-MM-dd HH:mm:ss")
     private Date bornDate;
 
     private Boolean isBoy;
 
-    /** 此字段不会被序列化*/
+    /**
+     * 此字段不会被序列化
+     */
     @JSONField(serialize = false)
     private String noSerial;
 
 
-    private  SexEnum sex;
+    private SexEnum sex;
 
     public Integer getAge() {
         return age;
@@ -333,8 +336,8 @@ class UserBean implements Serializable {
 }
 
 
-enum SexEnum{
-    MAN,WORMAN
+enum SexEnum {
+    MAN, WORMAN
 }
 
 

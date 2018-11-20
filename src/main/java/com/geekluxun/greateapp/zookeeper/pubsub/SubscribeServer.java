@@ -13,7 +13,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-/** 从ZooKeeper中读取数据库的配置信息，并注册监听，当数据库切换时，更改数据库
+/**
+ * 从ZooKeeper中读取数据库的配置信息，并注册监听，当数据库切换时，更改数据库
+ *
  * @Author luxun
  * @Date 2017/12/10 19:22
  **/

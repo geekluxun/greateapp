@@ -18,7 +18,7 @@ public class MessageQuueTest {
     TestQueueMessageProducer messageProducer;
 
     @Test
-    public void testSendMegQueue(){
+    public void testSendMegQueue() {
         messageProducer.sendMsg("luxun");
     }
 }

@@ -363,7 +363,7 @@ public class MainController {
 
         //List<TUser> users = userService.queryAll();
         List<TUser> users = new ArrayList<>();
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             TUser user = new TUser();
             user.setCreateTime(new Date());
             user.setModifyTime(new Date());

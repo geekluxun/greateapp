@@ -14,12 +14,13 @@ public class SpringDefaultConfig {
 
     /**
      * 接口方式
+     *
      * @return
      */
     @Bean
     @Description("描述性")
     @Scope(value = "prototype")
-    public UserService userServiceConfig2(){
+    public UserService userServiceConfig2() {
         return new UserServiceImpl();
     }
 }

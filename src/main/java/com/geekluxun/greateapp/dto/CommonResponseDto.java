@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by luxun on 2017/10/20.
  */
-public class CommonResponseDto extends BaseDto{
+public class CommonResponseDto extends BaseDto {
 
     public Boolean result;
     public Integer errcode;

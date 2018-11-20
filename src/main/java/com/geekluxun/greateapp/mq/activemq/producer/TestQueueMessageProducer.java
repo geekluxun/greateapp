@@ -34,7 +34,7 @@ public class TestQueueMessageProducer implements MessageListener {
     ActiveMQQueue replyDestination;
 
 
-    public static void main(String[] argc){
+    public static void main(String[] argc) {
         //TestQueueMessageProducer producer = new TestQueueMessageProducer();
         //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"spring/active-mq.xml","applicationContext.xml"});
         //producer.jmsTemplate  = context.getBean(JmsTemplate.class);

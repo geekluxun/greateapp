@@ -84,7 +84,7 @@ public class JunitTest extends BaseTest {
     }
 
     @After
-    public void after(){
+    public void after() {
 
     }
 

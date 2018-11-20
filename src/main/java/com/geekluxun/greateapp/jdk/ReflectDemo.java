@@ -7,15 +7,15 @@ import java.lang.reflect.InvocationTargetException;
  * Created by luxun on 2018/1/2.
  */
 public class ReflectDemo {
-    public static void main(String[] argc){
+    public static void main(String[] argc) {
         ReflectDemo reflectDemo = new ReflectDemo();
         reflectDemo.demo1();
 
     }
 
 
-    private void demo1(){
-        Class[] paramTypes = { String.class };
+    private void demo1() {
+        Class[] paramTypes = {String.class};
         Class c1 = C1.class;
         Constructor constructor = null;
         try {
@@ -39,15 +39,14 @@ public class ReflectDemo {
     }
 }
 
-class C1
-{
+class C1 {
     private String filed1;
 
-    public C1(String filed1){
+    public C1(String filed1) {
         this.filed1 = filed1;
     }
 
-    public void f1(){
+    public void f1() {
         System.out.println("filed1:" + filed1);
     }
 }

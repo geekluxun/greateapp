@@ -15,30 +15,31 @@ import java.util.List;
 @SpringBootTest
 public class GreateappApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
-	@Test
-	public void testJson(){
-		List list = new ArrayList();
-		TUser user = new TUser();
-		user.setId(11L);
-		user.setName("luxun");
-		user.setPassword("123");
-		list.add(user);
+    @Test
+    public void testJson() {
+        List list = new ArrayList();
+        TUser user = new TUser();
+        user.setId(11L);
+        user.setName("luxun");
+        user.setPassword("123");
+        list.add(user);
 
-		user = new TUser();
-		user.setId(22L);
-		user.setName("luxun");
-		user.setPassword("456");
-		list.add(user);
+        user = new TUser();
+        user.setId(22L);
+        user.setName("luxun");
+        user.setPassword("456");
+        list.add(user);
 
-		String s = JSON.toJSONString(list);
+        String s = JSON.toJSONString(list);
 
-		list = JSON.parseObject(s, new TypeReference<List<TUser>>() {});
+        list = JSON.parseObject(s, new TypeReference<List<TUser>>() {
+        });
 
-		System.out.println(list.toString());
-	}
+        System.out.println(list.toString());
+    }
 
 }

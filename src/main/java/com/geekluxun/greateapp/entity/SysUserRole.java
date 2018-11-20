@@ -2,7 +2,7 @@ package com.geekluxun.greateapp.entity;
 
 import com.geekluxun.greateapp.common.BaseEntity;
 
-public class SysUserRole extends BaseEntity{
+public class SysUserRole extends BaseEntity {
     private Long userId;
 
     private Long roleId;

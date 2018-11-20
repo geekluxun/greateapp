@@ -17,7 +17,6 @@ public class RedisExamples {
     private RedissonClient redissonClient;
 
 
-
     public static void main(String[] args) throws IOException {
         // connects to 127.0.0.1:6379 by default
 
@@ -32,7 +31,7 @@ public class RedisExamples {
     }
 
 
-    public void init(){
+    public void init() {
         Config config = new Config();
         config.useSingleServer().setAddress("redis://116.62.63.81:6379");
 
@@ -40,19 +39,18 @@ public class RedisExamples {
     }
 
 
-    public void destroy(){
+    public void destroy() {
         redissonClient.shutdown();
     }
 
 
-
-
     /**
      * 分布式map
+     *
      * @param
      */
-    public  void testMap(){
-        RMap<String, Integer> map =  redissonClient.getMap("myMap");
+    public void testMap() {
+        RMap<String, Integer> map = redissonClient.getMap("myMap");
         map.put("a", 1);
         map.put("b", 2);
         map.put("c", 3);
@@ -85,7 +83,7 @@ public class RedisExamples {
     /**
      * 分布式Long
      */
-    public  void testLong(){
+    public void testLong() {
         RAtomicLong atomicLong = redissonClient.getAtomicLong("myLong");
         atomicLong.getAndDecrement();
         atomicLong.getAndIncrement();
@@ -103,9 +101,10 @@ public class RedisExamples {
 
     /**
      * 分布式对象
+     *
      * @param
      */
-    public  void testObject(){
+    public void testObject() {
         SysUser user = new SysUser();
         user.setCreateTime(new Date());
         user.setUserName("luxun");
@@ -114,7 +113,7 @@ public class RedisExamples {
         RBucket<SysUser> bucket = redissonClient.getBucket("myUser");
         bucket.set(user);
 
-        SysUser user2  = bucket.get();
+        SysUser user2 = bucket.get();
 
         System.out.println(user2);
     }
@@ -123,7 +122,7 @@ public class RedisExamples {
     /**
      * 分布式延时队列
      */
-    public void testDelayQueue(){
+    public void testDelayQueue() {
         RQueue<String> distinationQueue = redissonClient.getQueue("queue1");
 
         RDelayedQueue<String> delayedQueue = redissonClient.getDelayedQueue(distinationQueue);
@@ -158,11 +157,11 @@ public class RedisExamples {
     /**
      * 分布式锁
      */
-    public void testLock(){
+    public void testLock() {
         RLock rLock = redissonClient.getLock("mylock");
         try {
             rLock.lock();
-        }finally {
+        } finally {
             rLock.unlock();
         }
     }

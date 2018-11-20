@@ -25,7 +25,7 @@ public class UserServiceTest {
     TestTask testTask;
 
     @Test
-    public void testAddUser(){
+    public void testAddUser() {
         TUser user = new TUser();
         user.setName("luxun1234");
         user.setPassword("1234");
@@ -37,7 +37,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testScheduleTask(){
+    public void testScheduleTask() {
         testTask.execute();
     }
 }

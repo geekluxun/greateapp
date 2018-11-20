@@ -14,14 +14,13 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CacheTest extends BaseTest{
+public class CacheTest extends BaseTest {
 
     @Autowired
-    CacheTestService cacheTestService
-            ;
+    CacheTestService cacheTestService;
 
     @Test
-    public void test(){
+    public void test() {
         UserDto dto = new UserDto();
         dto.setPassword("1122");
         dto.setName("luxun2");

@@ -18,14 +18,17 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from sys_role
+        delete
+        from sys_role
         where id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.geekluxun.greateapp.entity.SysRole">
-        insert into sys_role (id, role_name, enabled,
-          create_by, create_time)
-        values (#{id,jdbcType=BIGINT}, #{roleName,jdbcType=VARCHAR}, #{enabled,jdbcType=INTEGER},
-          #{createBy,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
+        insert into sys_role (id, role_name, enabled, create_by, create_time)
+        values (#{id,jdbcType=BIGINT},
+                #{roleName,jdbcType=VARCHAR},
+                #{enabled,jdbcType=INTEGER},
+                #{createBy,jdbcType=BIGINT},
+                #{createTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.geekluxun.greateapp.entity.SysRole">
         insert into sys_role
@@ -84,10 +87,10 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.geekluxun.greateapp.entity.SysRole">
         update sys_role
-        set role_name = #{roleName,jdbcType=VARCHAR},
-          enabled = #{enabled,jdbcType=INTEGER},
-          create_by = #{createBy,jdbcType=BIGINT},
-          create_time = #{createTime,jdbcType=TIMESTAMP}
+        set role_name   = #{roleName,jdbcType=VARCHAR},
+            enabled     = #{enabled,jdbcType=INTEGER},
+            create_by   = #{createBy,jdbcType=BIGINT},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
-  </update>
+    </update>
 </mapper>

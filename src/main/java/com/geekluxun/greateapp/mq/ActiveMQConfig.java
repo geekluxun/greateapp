@@ -19,8 +19,6 @@ public class ActiveMQConfig {
     public static final String topic2 = "active.mq.queue.topic.2";
 
 
-
-
     @Bean
     @SuppressWarnings("SpringJavaAutowiringInspection")
     public JmsListenerContainerFactory<?> topicListenerFactory(ConnectionFactory connectionFactory) {
@@ -48,7 +46,6 @@ public class ActiveMQConfig {
             }
         });
 
-        
 
         /**设置服务质量，可能是高版支持*/
 //        QosSettings replyQosSettings = new ReplyQosSettings();

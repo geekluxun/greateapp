@@ -1,7 +1,6 @@
 package com.geekluxun.greateapp.common;
 
 
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -10,7 +9,7 @@ import java.io.Serializable;
 /**
  * Created by luxun on 2017/11/9.
  */
-public class BaseEntity implements Serializable{
+public class BaseEntity implements Serializable {
 
     @Override
     public String toString() {

@@ -10,13 +10,13 @@ import java.util.concurrent.*;
 public class CountDownLatchDemo {
     List<Future<Boolean>> resultList = new ArrayList<>();
 
-    public static void main(String[] argc){
+    public static void main(String[] argc) {
         CountDownLatchDemo downLatchDemo = new CountDownLatchDemo();
         downLatchDemo.exec();
 
     }
 
-    private void exec(){
+    private void exec() {
         CountDownLatch latch = new CountDownLatch(3);
         ExecutorService executorService = Executors.newCachedThreadPool();
         resultList.add(executorService.submit(new Task1(latch)));
@@ -29,7 +29,7 @@ public class CountDownLatchDemo {
     class Task1 implements Callable<Boolean> {
         private CountDownLatch countDownLatch;
 
-        public Task1(CountDownLatch countDownLatch){
+        public Task1(CountDownLatch countDownLatch) {
             this.countDownLatch = countDownLatch;
         }
 
@@ -48,7 +48,7 @@ public class CountDownLatchDemo {
 
         private CountDownLatch countDownLatch;
 
-        public Task2(CountDownLatch countDownLatch){
+        public Task2(CountDownLatch countDownLatch) {
             this.countDownLatch = countDownLatch;
         }
 
@@ -60,7 +60,7 @@ public class CountDownLatchDemo {
                 System.out.println("任务2执行完成");
                 countDownLatch.countDown();
                 return false;
-            }finally {
+            } finally {
                 System.out.println("一定执行！！！");
             }
 
@@ -71,7 +71,7 @@ public class CountDownLatchDemo {
 
         private CountDownLatch countDownLatch;
 
-        public Task3(CountDownLatch countDownLatch){
+        public Task3(CountDownLatch countDownLatch) {
             this.countDownLatch = countDownLatch;
         }
 
@@ -91,7 +91,7 @@ public class CountDownLatchDemo {
 
         private CountDownLatch countDownLatch;
 
-        public Task4(CountDownLatch countDownLatch){
+        public Task4(CountDownLatch countDownLatch) {
             this.countDownLatch = countDownLatch;
         }
 
@@ -99,8 +99,8 @@ public class CountDownLatchDemo {
         public Boolean call() throws Exception {
             System.out.println("等待3个任务执行完毕...");
             countDownLatch.await();
-            for (Future<Boolean> result: resultList){
-                System.out.println("任务执行结果："+ result.get());
+            for (Future<Boolean> result : resultList) {
+                System.out.println("任务执行结果：" + result.get());
             }
             return true;
         }

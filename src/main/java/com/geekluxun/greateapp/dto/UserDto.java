@@ -20,7 +20,7 @@ import java.util.Date;
  * Created by luxun on 2017/9/2.
  */
 @ParaValidator
-@ApiModel(value ="UserDto")
+@ApiModel(value = "UserDto")
 public class UserDto extends BaseDto {
     @NotNull(message = "姓名不能为空")
     @CheckCase(value = CaseMode.UPPER, message = "姓名只能大写") //自定义约束校验示例

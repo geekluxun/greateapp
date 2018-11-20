@@ -5,7 +5,7 @@ package com.geekluxun.greateapp.jdk.DesignPattern.simple_factory;
  */
 public class Client {
 
-    public static void main(String[] argc){
+    public static void main(String[] argc) {
         Creator creator = new ConcreteCreator();
         Product product = creator.createProduct(ConcreteProduct.class);
         product.sayHello();

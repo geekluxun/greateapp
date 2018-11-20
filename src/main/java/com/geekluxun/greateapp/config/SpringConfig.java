@@ -38,9 +38,10 @@ public class SpringConfig {
 
     /**
      * 实例化这个bean时又用到了另一个UserService，类似xml方式 属性方法！！！
+     *
      * @return
      */
-    @Bean(initMethod = "init",name = "springDemoConfig")
+    @Bean(initMethod = "init", name = "springDemoConfig")
     public SpringDemo springDemoConfig() {
         SpringDemo springDemo = new SpringDemo();
         springDemo.setUserService(userService);
@@ -50,13 +51,14 @@ public class SpringConfig {
 
     /**
      * 接口方式
+     *
      * @return
      */
     @Bean
     @Description("描述性")
     @Scope(value = "prototype")
     @Profile(value = "prod")
-    public UserService userServiceConfig(){
+    public UserService userServiceConfig() {
         return new UserServiceImpl();
     }
 }

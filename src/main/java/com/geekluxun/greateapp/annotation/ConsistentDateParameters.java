@@ -18,14 +18,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  */
 
 @Constraint(validatedBy = ConsistentDateParametersValidator.class)
-@Target({ METHOD, CONSTRUCTOR, ANNOTATION_TYPE })
+@Target({METHOD, CONSTRUCTOR, ANNOTATION_TYPE})
 @Retention(RUNTIME)
 @Documented
 public @interface ConsistentDateParameters {
 
     String message() default "前一个时间必须早于后一个时间";
 
-    Class<?>[] groups() default { };
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default { };
+    Class<? extends Payload>[] payload() default {};
 }

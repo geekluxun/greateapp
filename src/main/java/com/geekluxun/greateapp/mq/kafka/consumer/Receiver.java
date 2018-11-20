@@ -19,14 +19,13 @@ public class Receiver {
     private CountDownLatch countDownLatch = new CountDownLatch(1);
 
 
-
-    public CountDownLatch getLatch(){
+    public CountDownLatch getLatch() {
         return countDownLatch;
     }
 
 
     @KafkaListener(topics = "${kafka.topic.test.1}")
-    public void receive(ConsumerRecord<?, ?> record){
+    public void receive(ConsumerRecord<?, ?> record) {
 
         logger.info("========= 收到的消息：==========", record.toString());
         countDownLatch.countDown();

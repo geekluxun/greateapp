@@ -41,7 +41,7 @@ public class ParamValidAspect {
 
 
     @Before("controllerBefore()")
-    public void before(JoinPoint point) throws Exception,NoSuchMethodException, SecurityException, ParamValidException {
+    public void before(JoinPoint point) throws Exception, NoSuchMethodException, SecurityException, ParamValidException {
         // 获得切入目标对象
         Object target = point.getThis();
         // 获得切入方法参数

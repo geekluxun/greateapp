@@ -13,27 +13,28 @@ public class StaticExample {
     static {
         int x = 5;
     }
+
     static int x, y;
 
-    public static void main(String[] argc){
+    public static void main(String[] argc) {
         x--;
         System.out.println(x);
         func1();
-        System.out.println(x+ y++ + x);
+        System.out.println(x + y++ + x);
 
         test();
 
     }
 
 
-    private static void func1(){
+    private static void func1() {
         y = x++ + ++x;
         System.out.println(x);
         System.out.println(y);
     }
 
-    private static void test(){
-        int  a = "luxun".length();
+    private static void test() {
+        int a = "luxun".length();
         char c = 17;
 
         Integer b = Integer.valueOf(10);

@@ -16,17 +16,16 @@ import java.net.URL;
 
 @SpringBootConfiguration
 @EnableAutoConfiguration
-@ImportResource(locations={"classpath:applicationContext.xml"})
+@ImportResource(locations = {"classpath:applicationContext.xml"})
 public class GreateappApplication {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
 
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(GreateappApplication.class, args);
     }
-
 
 
 }

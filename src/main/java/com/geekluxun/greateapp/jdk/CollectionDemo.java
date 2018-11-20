@@ -6,11 +6,10 @@ import java.util.*;
 /**
  * Created by luxun on 2017/12/22.
  */
-public class CollectionDemo
-{
-    public static void main(String[] argc){
-        BigDecimal totalAmount= new BigDecimal( "52345");
-        BigDecimal totalAmount2= new BigDecimal("-3.15");
+public class CollectionDemo {
+    public static void main(String[] argc) {
+        BigDecimal totalAmount = new BigDecimal("52345");
+        BigDecimal totalAmount2 = new BigDecimal("-3.15");
         BigDecimal totalAmount3 = new BigDecimal(0.1);
         totalAmount = totalAmount.add(totalAmount2);
         CollectionDemo demo = new CollectionDemo();
@@ -19,7 +18,7 @@ public class CollectionDemo
 
     }
 
-    private void testMap(){
+    private void testMap() {
         Map map = new HashMap();
         map.put("key1", 1);
         map.put("key1", 3);
@@ -28,7 +27,7 @@ public class CollectionDemo
         System.out.println(set);
     }
 
-    private void testList(){
+    private void testList() {
         List<String> list = new ArrayList<>();
         String a = "aa";
         String b = "bb";
@@ -44,9 +43,11 @@ public class CollectionDemo
         System.out.println();
     }
 
-    private class d1 {}
+    private class d1 {
+    }
 
-    private class d2 {}
+    private class d2 {
+    }
 }
 
 

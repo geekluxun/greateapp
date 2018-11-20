@@ -14,6 +14,7 @@ import java.util.Properties;
 
 /**
  * Project: greateapp
+ *
  * @Author: luxun
  * Date: 2018/1/29 10:03
  * Description:
@@ -24,9 +25,7 @@ public class SendMailServiceImpl implements SendMailService {
     private static final Logger logger = LoggerFactory.getLogger(SendMailServiceImpl.class);
 
 
-
     /**
-     *
      * @param mailSendDto
      */
     @Override
@@ -57,12 +56,12 @@ public class SendMailServiceImpl implements SendMailService {
             helper.setText(mailSendDto.getContent());
             helper.setFrom(mailSendDto.getFrom());
             helper.setSubject(mailSendDto.getSubject());
-            if (mailSendDto.getCc() != null){
+            if (mailSendDto.getCc() != null) {
                 helper.setCc((String[]) mailSendDto.getCc().toArray());
             }
 
-            if (mailSendDto.getAttachFilePaths() != null){
-                for (String filePath : mailSendDto.getAttachFilePaths()){
+            if (mailSendDto.getAttachFilePaths() != null) {
+                for (String filePath : mailSendDto.getAttachFilePaths()) {
                     FileSystemResource file = new FileSystemResource(new File(filePath));
                     helper.addAttachment(file.getFilename(), file);
                 }

@@ -4,7 +4,7 @@ import com.geekluxun.greateapp.common.BaseEntity;
 
 import java.util.Date;
 
-public class SysUser extends BaseEntity{
+public class SysUser extends BaseEntity {
     private Long id;
 
     private String userName;

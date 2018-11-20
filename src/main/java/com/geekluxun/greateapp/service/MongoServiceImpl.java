@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
  * Created by luxun on 2017/10/17.
  */
 @Service
-public class MongoServiceImpl implements MongoService
-{
+public class MongoServiceImpl implements MongoService {
     @Autowired
     MongoTemplate mongoTemplate;
 
@@ -18,7 +17,6 @@ public class MongoServiceImpl implements MongoService
     public void saveUser(TUser user) {
         mongoTemplate.save(user);
     }
-
 
 
 }

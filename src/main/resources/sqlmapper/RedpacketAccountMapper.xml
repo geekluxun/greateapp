@@ -24,14 +24,13 @@
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        DELETE FROM redpacket_account
+        DELETE
+        FROM redpacket_account
         WHERE id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.geekluxun.greateapp.entity.RedpacketAccount">
-        INSERT INTO redpacket_account (id, user_id, balance_amount
-        )
-        VALUES (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{balanceAmount,jdbcType=DECIMAL}
-        )
+        INSERT INTO redpacket_account (id, user_id, balance_amount)
+        VALUES (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{balanceAmount,jdbcType=DECIMAL})
     </insert>
     <insert id="insertSelective" parameterType="com.geekluxun.greateapp.entity.RedpacketAccount">
         insert into redpacket_account

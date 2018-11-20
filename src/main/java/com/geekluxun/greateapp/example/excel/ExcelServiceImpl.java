@@ -99,7 +99,7 @@ public class ExcelServiceImpl implements ExcelService {
                     //调用get方法
                     Object value = getMethod.invoke(t);
                     Class type = field.getType();
-                    if (type.isAssignableFrom(Date.class)){
+                    if (type.isAssignableFrom(Date.class)) {
                         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
                         cell.setCellValue(sdf.format((Date) value));
                     } else if (type.isAssignableFrom(short.class)
@@ -113,11 +113,11 @@ public class ExcelServiceImpl implements ExcelService {
                             || type.isAssignableFrom(float.class)
                             || type.isAssignableFrom(Float.class)
                             || type.isAssignableFrom(BigDecimal.class)
-                            ){
-                        cell.setCellValue(((Number)value).doubleValue());
+                    ) {
+                        cell.setCellValue(((Number) value).doubleValue());
                     } else if (type.isAssignableFrom((boolean.class))
-                            || type.isAssignableFrom(Boolean.class)){
-                        cell.setCellValue((boolean)value);
+                            || type.isAssignableFrom(Boolean.class)) {
+                        cell.setCellValue((boolean) value);
                     } else {
                         logger.error("数据类型不支持");
                         return null;

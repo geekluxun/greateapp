@@ -19,12 +19,12 @@ public class SpringDataRedisExamples {
 
     private String testKey1 = "mykey1";
 
-    public void testString(){
+    public void testString() {
 
         try {
             redisTemplate.opsForValue().set(testKey1, "luxun");
 
-            if (redisTemplate.hasKey(testKey1)){
+            if (redisTemplate.hasKey(testKey1)) {
                 String value = (String) redisTemplate.opsForValue().get(testKey1);
                 logger.info("================ 读取redis " + testKey1 + "的值为:" + value);
             }

@@ -50,7 +50,8 @@ public class TopicConsumerListener {
 
 
     /**
-     *  带消息头带响应
+     * 带消息头带响应
+     *
      * @param message
      * @param testDto
      * @param headers
@@ -74,6 +75,7 @@ public class TopicConsumerListener {
 
     /**
      * 响应queue是动态指定的示例
+     *
      * @param message
      * @param testDto
      * @param headers

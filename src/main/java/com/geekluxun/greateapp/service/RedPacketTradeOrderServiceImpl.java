@@ -31,6 +31,7 @@ public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderServic
 
     /**
      * 尝试，如果成功执行confirmRecord方法,如果失败执行cancelRecord方法.
+     *
      * @param tradeOrderDto
      * @return
      */
@@ -82,6 +83,7 @@ public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderServic
 
     /**
      * 确认
+     *
      * @param tradeOrderDto
      */
     @Transactional
@@ -114,6 +116,7 @@ public class RedPacketTradeOrderServiceImpl implements RedPacketTradeOrderServic
 
     /**
      * 取消事务，其本质上做相反的操作,也就是回滚
+     *
      * @param tradeOrderDto
      */
     @Transactional

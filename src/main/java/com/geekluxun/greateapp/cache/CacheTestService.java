@@ -49,10 +49,11 @@ public class CacheTestService {
     /**
      * 会把方法的返回值TUser缓存,一般用在update或add数据库操作上
      * conditon表示条件缓存，满足提交的才会缓存
+     *
      * @param dto
      * @return
      */
-    @CachePut(value = "user", key = "#dto.name" , condition = "#result.username ne 'zhang'")
+    @CachePut(value = "user", key = "#dto.name", condition = "#result.username ne 'zhang'")
     public TUser saveUser(UserDto dto) {
         logger.info("============ saveUser() ========= ");
         TUser user = new TUser();
@@ -87,16 +88,17 @@ public class CacheTestService {
 
     /**
      * 组合cache示例
+     *
      * @param user
      * @return
      */
     @Caching(
-        put = { @CachePut(value = "user", key = "#user.id"),
-                @CachePut(value = "user", key = "#user.username"),
-                @CachePut(value = "user", key = "#user.email")}
+            put = {@CachePut(value = "user", key = "#user.id"),
+                    @CachePut(value = "user", key = "#user.username"),
+                    @CachePut(value = "user", key = "#user.email")}
     )
     public TUser save(User user) {
 
-        return  new TUser();
+        return new TUser();
     }
 }

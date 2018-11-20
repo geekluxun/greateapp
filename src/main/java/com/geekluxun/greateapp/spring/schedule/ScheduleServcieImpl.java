@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * Description:
  */
 @Service(value = "ScheduleServcie")
-public class ScheduleServcieImpl implements ScheduleServcie{
+public class ScheduleServcieImpl implements ScheduleServcie {
     private static final Logger logger = LoggerFactory.getLogger(ScheduleServcieImpl.class);
 
     /**
@@ -63,10 +63,9 @@ public class ScheduleServcieImpl implements ScheduleServcie{
 ////            e.printStackTrace();
 ////        }
 //    }
-
     @Async
     public Future<String> doSomething4(String argc) {
-        logger.info("======= doSomething4 !!! =========" + + Thread.currentThread().getId());
+        logger.info("======= doSomething4 !!! =========" + +Thread.currentThread().getId());
         Random random = new Random();
         System.out.println("开始做任务4");
         long start = System.currentTimeMillis();
@@ -84,7 +83,7 @@ public class ScheduleServcieImpl implements ScheduleServcie{
 
     @Async
     public Future<String> doSomething5(String argc) {
-        logger.info("======= doSomething5 !!! =========" + + Thread.currentThread().getId());
+        logger.info("======= doSomething5 !!! =========" + +Thread.currentThread().getId());
         Random random = new Random();
         System.out.println("开始做任务5");
         long start = System.currentTimeMillis();

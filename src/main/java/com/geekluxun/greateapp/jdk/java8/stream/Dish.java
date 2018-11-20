@@ -40,10 +40,16 @@ public class Dish {
     }
 
     //热量级别
-    public enum CaloricLevel { DIET, NORMAL, FAT };
-    
+    public enum CaloricLevel {
+        DIET, NORMAL, FAT
+    }
+
+    ;
+
     //食物类型
-    public enum Type {MEAT, FISH, OTHER}
+    public enum Type {
+        MEAT, FISH, OTHER
+    }
 
     @Override
     public String toString() {

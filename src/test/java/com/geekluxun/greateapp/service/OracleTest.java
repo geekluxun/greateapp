@@ -24,7 +24,7 @@ public class OracleTest extends BaseTest {
 
 
     @Test
-    public void insertTest(){
+    public void insertTest() {
         TUserAccount accout = new TUserAccount();
         accout.setUserId(123L);
         accout.setCreateTime(new Date());

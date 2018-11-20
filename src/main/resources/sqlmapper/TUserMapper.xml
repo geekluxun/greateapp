@@ -37,14 +37,17 @@
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        DELETE FROM t_user
+        DELETE
+        FROM t_user
         WHERE id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.geekluxun.greateapp.entity.TUser">
-        INSERT INTO t_user (id, name, password,
-                            create_time, modify_time)
-        VALUES (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-                #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+        INSERT INTO t_user (id, name, password, create_time, modify_time)
+        VALUES (#{id,jdbcType=BIGINT},
+                #{name,jdbcType=VARCHAR},
+                #{password,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP},
+                #{modifyTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.geekluxun.greateapp.entity.TUser">
         insert into t_user
@@ -99,7 +102,7 @@
                 modify_time = #{modifyTime,jdbcType=TIMESTAMP},
             </if>
         </set>
-        where id = #{id,jdbcType=BIGINT} and  version = #{version, jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT} and version = #{version, jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.geekluxun.greateapp.entity.TUser">
         UPDATE t_user
@@ -112,23 +115,23 @@
 
     <update id="updateRemind" parameterType="com.geekluxun.greateapp.entity.TUser">
         UPDATE t_user
-            <set>
-                <if test="name != null">
-                 name = #{name,jdbcType=VARCHAR},
-                </if>
-                <if test="password != null">
-                    password = #{password,jdbcType=VARCHAR},
-                </if>
-                <if test="createTime != null">
-                    create_time = #{createTime,jdbcType=TIMESTAMP},
-                </if>
-                <if test="modifyTime != null">
-                    modify_time = #{modifyTime,jdbcType=TIMESTAMP},
-                </if>
-                <if test="version != null">
-                    version  = version + 1,
-                </if>
-            </set>
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="version != null">
+                version = version + 1,
+            </if>
+        </set>
         WHERE id = #{id, jdbcType=BIGINT} and version = #{version, jdbcType=INTEGER}
     </update>
 </mapper>

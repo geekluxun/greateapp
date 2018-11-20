@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation=
-               "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-                http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+               "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 哨兵模式配置-->
     <!--<bean id="node" class="org.springframework.data.redis.connection.RedisNode"/>-->
 
     <!--<util:set id= "sentinel" value-type="org.springframework.data.redis.connection.RedisNode">-->
-        <!--<ref bean="node"/>-->
+    <!--<ref bean="node"/>-->
     <!--</util:set>-->
     <!---->
 
     <!--<bean id="redisSentinelConfiguration"  class="org.springframework.data.redis.connection.RedisSentinelConfiguration">-->
-        <!--<property name="sentinels" ref="sentinel"/>-->
-        <!--<property name="master">-->
-            <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
-                <!--<property name="name" value="${spring.redis.sentinel.master}"></property>-->
-            <!--</bean>-->
-        <!--</property>-->
+    <!--<property name="sentinels" ref="sentinel"/>-->
+    <!--<property name="master">-->
+    <!--<bean class="org.springframework.data.redis.connection.RedisNode">-->
+    <!--<property name="name" value="${spring.redis.sentinel.master}"></property>-->
+    <!--</bean>-->
+    <!--</property>-->
     <!--</bean>-->
 
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxTotal" value="${redis.config.maxTotal}" />
-        <property name="maxIdle" value="${redis.config.maxIdle}" />
-        <property name="minIdle" value="${redis.config.minIdle}" />
-        <property name="maxWaitMillis" value="${redis.config.maxWaitMillis}" />
-        <property name="testOnBorrow" value="true" />
+        <property name="maxTotal" value="${redis.config.maxTotal}"/>
+        <property name="maxIdle" value="${redis.config.maxIdle}"/>
+        <property name="minIdle" value="${redis.config.minIdle}"/>
+        <property name="maxWaitMillis" value="${redis.config.maxWaitMillis}"/>
+        <property name="testOnBorrow" value="true"/>
     </bean>
 
     <!-- Jedis ConnectionFactory -->
@@ -41,5 +39,5 @@
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
         <property name="connectionFactory" ref="jedisConnectionFactory"/>
     </bean>
-    
+
 </beans>

@@ -19,7 +19,7 @@ public class SpringDemo {
 
     private Integer age;
 
-    private String name ;
+    private String name;
 
     private Properties myProperties;
 
@@ -32,24 +32,24 @@ public class SpringDemo {
     private static SpringDemo springDemo = new SpringDemo();
 
 
-    public SpringDemo(){
+    public SpringDemo() {
 
     }
 
-    public SpringDemo(Integer age , String name){
+    public SpringDemo(Integer age, String name) {
         this.age = age;
         this.name = name;
     }
 
-    public static SpringDemo createInstance(){
+    public static SpringDemo createInstance() {
         return springDemo;
     }
 
-    public  SpringDemo createInstance2(){
+    public SpringDemo createInstance2() {
         return springDemo;
     }
 
-    public static SpringDemo createInstance3(Integer age, String name){
+    public static SpringDemo createInstance3(Integer age, String name) {
         SpringDemo springDemo = new SpringDemo(age, name);
         return springDemo;
     }
@@ -57,7 +57,7 @@ public class SpringDemo {
 
     //表示此属性必须在实例化时指定
     @Required
-    public void setUserService(UserService userService){
+    public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
@@ -93,7 +93,7 @@ public class SpringDemo {
         this.mySet = mySet;
     }
 
-    public void init(){
+    public void init() {
 
     }
 

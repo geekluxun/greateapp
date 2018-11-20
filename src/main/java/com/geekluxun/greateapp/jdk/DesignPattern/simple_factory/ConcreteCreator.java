@@ -20,6 +20,6 @@ public class ConcreteCreator extends Creator {
             e.printStackTrace();
         }
 
-        return  (T)product;
+        return (T) product;
     }
 }

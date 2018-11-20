@@ -11,11 +11,11 @@ import java.util.Date;
 /**
  * Created by luxun on 2018/1/18.
  */
-public class TestDto implements Serializable{
+public class TestDto implements Serializable {
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date born;
-    private String  name;
+    private String name;
     private Integer age;
     private SexEnum sex;
     private BigDecimal amount;

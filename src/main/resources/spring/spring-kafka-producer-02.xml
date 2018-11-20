@@ -13,8 +13,7 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
 
-
-    <bean id = "producerProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    <bean id="producerProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="properties">
             <props>
                 <prop key="topic.metadata.refresh.interval.ms">3600000</prop>
@@ -24,8 +23,8 @@
             </props>
         </property>
     </bean>
-    
-    
+
+
     <int:channel id="channel2">
         <int:queue/>
     </int:channel>
@@ -34,7 +33,7 @@
     <int-kafka:outbound-channel-adapter kafka-producer-context-ref="producerContext" channel="channel2">
         <int:poller fixed-delay="1000" time-unit="MILLISECONDS" task-executor="executor"/>
     </int-kafka:outbound-channel-adapter>
-    
+
     <task:executor id="executor" pool-size="100" keep-alive="1000" queue-capacity="50"/>
 
     <int-kafka:producer-context id="producerContext" producer-properties="producerProperties">
@@ -47,7 +46,7 @@
         </int-kafka:producer-configurations>
     </int-kafka:producer-context>
 
-    
+
     <bean id="stringSerializer" class="org.apache.kafka.common.serialization.StringSerializer"/>
 
 </beans>

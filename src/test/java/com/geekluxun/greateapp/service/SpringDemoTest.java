@@ -26,10 +26,10 @@ public class SpringDemoTest {
 
     //@Resource //没有显示名字就类似@Autowired 是根据bean类型 选择要注入的bean
     @Resource(name = "springDemo2") // 寻找一个名字叫springDemo2的bean 注入
-    SpringDemo springDemo2;
+            SpringDemo springDemo2;
 
     @Resource(name = "springDemoAlias") // 寻找一个名字叫springDemoAlias的bean 注入 ,name是bean的别名
-    SpringDemo springDemoAlias;
+            SpringDemo springDemoAlias;
 
     //根据bean的类型 选择bean注入
     @Autowired
@@ -41,14 +41,12 @@ public class SpringDemoTest {
     SpringDemo springDemo4;
 
 
-
     @Resource(name = "springDemo5")
     SpringDemo springDemo5;
 
 
     @Resource(name = "springDemo6")
     SpringDemo springDemo6;
-
 
 
     @Resource(name = "springDemo7")
@@ -69,10 +67,8 @@ public class SpringDemoTest {
     SpringDemo springDemo11;
 
 
-
     @Resource(name = "springDemoConfig")
     SpringDemo springDemo13;
-
 
 
     @Resource(name = "userServiceConfig")
@@ -88,12 +84,12 @@ public class SpringDemoTest {
 
 
     @Test
-    public void test1(){
+    public void test1() {
         System.out.print("测试springDemo");
     }
 
     @Test
-    public void test(){
+    public void test() {
 //        ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
 //        UserService userService2 = (UserService) ctx.getBean("userServiceConfig2");
 //        UserService userService = (UserService) ctx.getBean("userServiceConfig");

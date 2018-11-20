@@ -10,5 +10,6 @@ import java.util.concurrent.Future;
  */
 public interface ScheduleServcie {
     Future<String> doSomething4(String argc);
+
     Future<String> doSomething5(String argc);
 }

@@ -52,12 +52,11 @@ public class UserServiceImpl implements UserService {
     JdbcTemplate jdbcTemplate;
 
     /**
-     * @Transactional默认只回滚RuntimeException异常，此方法跑出的MyException不是RuntimeException，
-     * 所以，即使发生异常，也不会回滚，改成rollbackFor = Exception.class才能回滚
-     *
-     * 此处之所以加value = "transactionManager" 是因为spring管理的事务管理器有多个情况下，指明其具体是哪个
      * @param user
      * @throws MyException
+     * @Transactional默认只回滚RuntimeException异常，此方法跑出的MyException不是RuntimeException， 所以，即使发生异常，也不会回滚，改成rollbackFor = Exception.class才能回滚
+     * <p>
+     * 此处之所以加value = "transactionManager" 是因为spring管理的事务管理器有多个情况下，指明其具体是哪个
      */
     @Override
     //@MyAnnotation
@@ -65,7 +64,7 @@ public class UserServiceImpl implements UserService {
     public void addUser(TUser user) throws MyException {
         userMapper.insertSelective(user);
 
-        logger.info("==========属性值==========={}" ,fooProperties);
+        logger.info("==========属性值==========={}", fooProperties);
         user.setName("luxun555");
         //addUser2(user);
         testaddUser(user);
@@ -81,7 +80,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void addUser2(TUser user){
+    public void addUser2(TUser user) {
         userMapper.insertSelective(user);
         //int i = 0/0;
     }
@@ -117,7 +116,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public TUser queryById(long id) {
-         return userMapper.selectByPrimaryKey(id);
+        return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -152,12 +151,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    private void testaddUser(TUser user){
+    private void testaddUser(TUser user) {
         userMapper.insertSelective(user);
     }
 
 
-    private void jdbcDemo1(){
+    private void jdbcDemo1() {
         String sql = "SELECT count(*) FROM test.t_user";
         int count = jdbcTemplate.queryForObject(sql, Integer.class);
         logger.info("result count:" + count);
@@ -167,7 +166,7 @@ public class UserServiceImpl implements UserService {
     /**
      * JDBC 返回一行结果集 和JavaBean 映射
      */
-    private void jdbcDemo2(){
+    private void jdbcDemo2() {
         String sql = "SELECT * FROM test.t_user WHERE id = 89";
         TUser user = jdbcTemplate.queryForObject(sql, new UserRowMapper());
         logger.info("result:" + JSON.toJSONString(user));
@@ -176,7 +175,7 @@ public class UserServiceImpl implements UserService {
     /**
      * JDBC 返回多行结果集
      */
-    private void jdbcDemo3(){
+    private void jdbcDemo3() {
         String sql = "SELECT * FROM test.t_user";
         List user = jdbcTemplate.queryForList(sql);
         logger.info("result:" + JSON.toJSONString(user));
@@ -186,7 +185,7 @@ public class UserServiceImpl implements UserService {
     /**
      * JDBC 多表联合查询（其中同名字段需要起个别名，否则会存在后面覆盖前面同名字段问题）
      */
-    private void jdbcDemo4(){
+    private void jdbcDemo4() {
         String sql = "SELECT a.create_time ac, b.create_time bc FROM test.t_user a INNER JOIN test.t_test_slow_query  b on a.id = b.id WHERE a.name = 'luxun'";
         List user = jdbcTemplate.queryForList(sql);
         logger.info("result:" + JSON.toJSONString(user));
@@ -194,9 +193,9 @@ public class UserServiceImpl implements UserService {
 
 
     /**
-     *  JDBC 函数计算
+     * JDBC 函数计算
      */
-    private void jdbcDemo5(){
+    private void jdbcDemo5() {
         String sql = "SELECT count(*) as count, sum(a.id) as ids FROM test.t_user a INNER JOIN test.t_test_slow_query  b on a.id = b.id WHERE a.name = 'luxun'";
         List user = jdbcTemplate.queryForList(sql);
         logger.info("result:" + JSON.toJSONString(user));
@@ -206,17 +205,17 @@ public class UserServiceImpl implements UserService {
     /**
      * JDBC 返回多行结果集 和JavaBean 映射
      */
-    private void jdbcDemo6(){
+    private void jdbcDemo6() {
         List<TUser> userList = new ArrayList<>();
         String sql = "SELECT create_time createTime ,modify_time modifyTime FROM test.t_user";
 
         /**
          * 这是一个很好的抽象，我们可以遍历这个list，已json形式输出给客户端
          */
-        List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+        List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);
 
         try {
-            for (Map<String,Object> map : list){
+            for (Map<String, Object> map : list) {
                 TUser user = new TUser();
                 BeanUtils.populate(user, map); //map 转 bean!!!
                 userList.add(user);

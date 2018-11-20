@@ -10,14 +10,14 @@ import java.util.List;
 public class gbk2utf8 {
     private static List<File> filelist = new ArrayList<File>();
 
-    public static void main(String[] argc){
+    public static void main(String[] argc) {
         //getFileList("E:\\workspace\\intellij\\mylearning\\sjmszc", ".java");
         getFileList("D:\\sjmszc-code", ".java");
         batchFilegbk2Utf8(filelist);
     }
 
-    private static void batchFilegbk2Utf8(List<File> filelist){
-        for (File file : filelist){
+    private static void batchFilegbk2Utf8(List<File> filelist) {
+        for (File file : filelist) {
             gbk2Utf8(file.getAbsolutePath());
         }
     }
@@ -59,10 +59,8 @@ public class gbk2utf8 {
     /**
      * 递归获取指定目录下所有指定类型文件
      *
-     * @param strPath
-     *            文件夹地址
-     * @param suffix
-     *            文件名后缀
+     * @param strPath 文件夹地址
+     * @param suffix  文件名后缀
      * @return
      */
 
@@ -72,7 +70,7 @@ public class gbk2utf8 {
         if (files != null) {
             for (int i = 0; i < files.length; i++) {
                 String fileName = files[i].getName();
-                System.out.println("fileName:"+ fileName);
+                System.out.println("fileName:" + fileName);
                 if (files[i].isDirectory()) { // 如果是文件夹就递归调用
                     getFileList(files[i].getAbsolutePath(), suffix);
                 } else if (fileName.endsWith(suffix)) {
@@ -82,7 +80,6 @@ public class gbk2utf8 {
         }
         return filelist;
     }
-
 
 
 }

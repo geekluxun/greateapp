@@ -7,7 +7,7 @@ package com.geekluxun.greateapp.constant;
  * Description:
  * TCC柔性事务的三种状态，try,confirm,cancel
  */
-public enum  TStatus {
+public enum TStatus {
     DRAFT, //
     CONFIRM,
     CANCEL
