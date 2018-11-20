@@ -31,6 +31,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -369,7 +371,7 @@ public class MainController {
             user.setVersion(i);
             user.setName("鲁勋");
             users.add(user);
-            user.setAmont(new BigDecimal("33.33"));
+            //user.setAmont(new BigDecimal("33.33"));
         }
 
         File file = excelService.exportExcelToLocalFile(headers, users, "user", "/tmp/");
@@ -460,6 +462,25 @@ public class MainController {
         }
 
         return responseDto;
+    }
+
+    @RequestMapping(value = "/test19")
+    @ResponseBody
+    public Object test19(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getContextPath();
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/error");
+        dispatcher.forward(request, response);
+
+        return path;
+    }
+
+    @RequestMapping(value = "/test20")
+    @ResponseBody
+    public Object test20(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getContextPath();
+        Set<String> paths = request.getServletContext().getResourcePaths("/");
+
+        return path;
     }
 
 
