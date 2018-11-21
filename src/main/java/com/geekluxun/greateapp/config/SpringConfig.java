@@ -124,7 +124,7 @@ public class SpringConfig {
     }
 
     @Bean
-    public SmartLifecycle processor(){
+    public LifeProcess processor(){
         LifeProcess lifeProcess = new LifeProcess();
         return lifeProcess ;
     }

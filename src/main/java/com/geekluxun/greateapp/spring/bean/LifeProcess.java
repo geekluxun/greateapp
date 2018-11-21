@@ -1,5 +1,7 @@
 package com.geekluxun.greateapp.spring.bean;
 
+import jdk.nashorn.internal.runtime.logging.Logger;
+import org.springframework.context.Lifecycle;
 import org.springframework.context.LifecycleProcessor;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.context.support.DefaultLifecycleProcessor;
@@ -13,10 +15,13 @@ import org.springframework.stereotype.Component;
  * @Description:
  * @Other:
  */
-@Component
-public class LifeProcess implements SmartLifecycle {
+//@Component
+public class LifeProcess implements Lifecycle {
     private boolean isRunning = false;
 
+    public LifeProcess(){
+        System.out.println("======LifeProcess is create======");
+    }
 
     @Override
     public void start() {
@@ -36,13 +41,13 @@ public class LifeProcess implements SmartLifecycle {
         return isRunning;
     }
 
-    @Override
+    //@Override
     public boolean isAutoStartup() {
-        System.out.println("======isRunning======");
+        System.out.println("======isAutoStartup======");
         return true;
     }
 
-    @Override
+    //@Override
     public void stop(Runnable callback) {
         System.out.println("======stop callback======");
         callback.run();
@@ -50,9 +55,25 @@ public class LifeProcess implements SmartLifecycle {
 
     }
 
-    @Override
+    /**
+     * 相位决定bean之间的start顺序,按照0,1,2,3...顺序
+     * @return
+     */
+    //@Override
     public int getPhase() {
         System.out.println("======getPhase======");
         return 0;
+    }
+
+    //@Override
+    public void onRefresh() {
+        System.out.println("======onRefresh======");
+
+    }
+
+    //@Override
+    public void onClose() {
+        System.out.println("======onClose======");
+
     }
 }

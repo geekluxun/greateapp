@@ -13,6 +13,7 @@ import com.geekluxun.greateapp.mq.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.RedPacketTradeOrderService;
 import com.geekluxun.greateapp.service.UserService.UserService;
 import com.geekluxun.greateapp.spring.batch.BatchExmaple;
+import com.geekluxun.greateapp.spring.bean.LifeProcess;
 import com.geekluxun.greateapp.spring.bean.methodinject.Command;
 import com.geekluxun.greateapp.spring.jpa.demo.JpaDemoService;
 import com.geekluxun.greateapp.spring.jpa.domain.User;
@@ -121,11 +122,15 @@ public class MainController {
     @Resource(name = "command3")
     Command command3;
 
+    @Autowired
+    LifeProcess lifeProcess;
+
     @ApiOperation(value = "主接口", notes = "无", produces = "application/json", consumes = "application/json")
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
     public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result, @RequestHeader("myheader") String myheader, HttpServletRequest request, HttpServletResponse response) {
 
         command.execute();
+        lifeProcess.start();
         CommonResponseDto dto = new CommonResponseDto();
         dto.setResult(true);
 
