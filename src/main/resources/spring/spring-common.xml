@@ -10,7 +10,12 @@
     <bean id="springDemo2" name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
         <!--此处注入到bean 名字叫userService33-->
         <property name="userService" ref="userService33"></property>
+        <property name="name" value="luxun12345"></property>
     </bean>
+    <!-- 定义别名-->
+    <alias name="springDemo2" alias="springDemo2ForAlians1"></alias>
+    <alias name="springDemo2" alias="springDemo2ForAlians2"></alias>
+    
 
     <bean id="springDemo1" class="com.geekluxun.greateapp.spring.SpringDemo">
         <constructor-arg index="0" value="32"/>

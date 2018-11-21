@@ -3,13 +3,23 @@ package com.geekluxun.greateapp.config;
 import com.geekluxun.greateapp.service.UserService.UserService;
 import com.geekluxun.greateapp.service.UserService.UserServiceImpl;
 import com.geekluxun.greateapp.spring.SpringDemo;
+import com.geekluxun.greateapp.spring.bean.LifeProcess;
+import com.geekluxun.greateapp.spring.bean.methodinject.Command;
+import com.geekluxun.greateapp.spring.bean.methodinject.ConcreteCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.SmartLifecycle;
 import org.springframework.context.annotation.*;
+import org.springframework.context.support.DefaultLifecycleProcessor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.context.annotation.ApplicationScope;
+import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
 
 import javax.annotation.Resource;
+
+import static org.springframework.context.annotation.ScopedProxyMode.TARGET_CLASS;
 
 /**
  * Created by luxun on 2017/11/4.
@@ -50,15 +60,72 @@ public class SpringConfig {
     }
 
     /**
-     * 接口方式
+     * 接口方式返回实例
+     * 注意:这个bean只有在profile是prod且容器调用getBean或者被注入到另一个bean才会实例化（每次实例不同）
      *
      * @return
      */
-    @Bean
+    @Bean(value = "userService")
     @Description("描述性")
     @Scope(value = "prototype")
     @Profile(value = "prod")
     public UserService userServiceConfig() {
         return new UserServiceImpl();
+    }
+
+    /**
+     * 具体类方式返回实例
+     * @return
+     */
+    @Bean(value = "userService222333")
+    @Description("描述性")
+    @Scope(value = "prototype")
+    public UserServiceImpl userServiceConfig2() {
+        return new UserServiceImpl();
+    }
+    
+    @Bean(name = "command")
+    @Scope(value = "prototype")
+    public Command command(){
+        return new ConcreteCommand();
+    }
+
+    /**
+     * 每次Request请求产生一个新的实例
+     * 这里用到了CGLIB代理，把一个小生命周期的bean注入到一个大生命周期的bean(例如单例)需要用到代理
+     * 因为单例是在spring容器创建的时候就实例化，此时还没有实例化request级别的bean
+     * @return
+     */
+    @Bean(value = "command2")
+    @RequestScope
+    public Command commandRequest(){
+        return new ConcreteCommand();
+    }
+
+    /**
+     * 每个HttpSession 产生一个新的实例
+     * @return
+     */
+    @Bean(value = "command3")
+    @SessionScope
+    public Command commandSession(){
+        return new ConcreteCommand();
+    }
+
+    /**
+     * 每个ServletContext 产生一个新的实例
+     * 注意不是ApplicationContext(spring容器) 一个spring容器上下文可以有多个Servlet上下文
+     * @return
+     */
+    @Bean(value = "command4")
+    @ApplicationScope
+    public Command commandApplication(){
+        return new ConcreteCommand();
+    }
+
+    @Bean
+    public SmartLifecycle processor(){
+        LifeProcess lifeProcess = new LifeProcess();
+        return lifeProcess ;
     }
 }

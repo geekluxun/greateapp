@@ -13,6 +13,7 @@ import com.geekluxun.greateapp.mq.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.RedPacketTradeOrderService;
 import com.geekluxun.greateapp.service.UserService.UserService;
 import com.geekluxun.greateapp.spring.batch.BatchExmaple;
+import com.geekluxun.greateapp.spring.bean.methodinject.Command;
 import com.geekluxun.greateapp.spring.jpa.demo.JpaDemoService;
 import com.geekluxun.greateapp.spring.jpa.domain.User;
 import com.geekluxun.greateapp.spring.jpa.domain.UserRepository;
@@ -31,6 +32,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +65,10 @@ public class MainController {
     @Autowired
     @Qualifier("userService33")
     UserService userService;
+
+//    @Autowired
+//    @Qualifier("userService222333")
+//    UserService userService2;
 
     @Autowired
     Producer producer;
@@ -106,11 +112,20 @@ public class MainController {
     @Autowired
     RedPacketTradeOrderService redPacketTradeOrderService;
 
+    /**
+     * 这个bean是一个生命周期是http request级别的，每次请求产生一个新的实例
+     */
+    @Resource(name = "command2")
+    Command command;
+    
+    @Resource(name = "command3")
+    Command command3;
 
     @ApiOperation(value = "主接口", notes = "无", produces = "application/json", consumes = "application/json")
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
     public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result, @RequestHeader("myheader") String myheader, HttpServletRequest request, HttpServletResponse response) {
 
+        command.execute();
         CommonResponseDto dto = new CommonResponseDto();
         dto.setResult(true);
 
