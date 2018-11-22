@@ -27,6 +27,8 @@
                 <value>classpath*:application.properties</value>
             </list>
         </property>
+        <!-- 先检查当前属性文件，找不到再去系统环境变量中找 这是默认值-->
+        <property name="systemPropertiesMode" value="1"></property>
     </bean>
 
 

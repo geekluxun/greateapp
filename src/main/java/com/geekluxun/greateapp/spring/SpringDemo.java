@@ -55,7 +55,7 @@ public class SpringDemo {
     }
 
 
-    //表示此属性必须在实例化时指定
+    //表示此属性必须在实例化时指定,避免运行时NPE
     @Required
     public void setUserService(UserService userService) {
         this.userService = userService;

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  * Created by luxun on 2017/11/15.
  */
 
-@ParaValidator
+//@ParaValidator
 public class PersonDto extends BaseDto {
 
     //为了使car里面的约束校验生效，此处必须加上上@Valid,表示级联，否则car里面的约束忽略不校验

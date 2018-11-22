@@ -1,4 +1,4 @@
-package com.geekluxun.greateapp.spring.bean;
+package com.geekluxun.greateapp.spring.bean.lifecycle;
 
 import jdk.nashorn.internal.runtime.logging.Logger;
 import org.springframework.context.Lifecycle;
@@ -6,6 +6,9 @@ import org.springframework.context.LifecycleProcessor;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.context.support.DefaultLifecycleProcessor;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 /**
  * Copyright,2018-2019,xinxindai Co.,Ltd.
@@ -15,41 +18,52 @@ import org.springframework.stereotype.Component;
  * @Description:
  * @Other:
  */
-//@Component
-public class LifeProcess implements Lifecycle {
+@Component
+public class Foo2 implements SmartLifecycle {
     private boolean isRunning = false;
 
-    public LifeProcess(){
-        System.out.println("======LifeProcess is create======");
+    
+    public Foo2(){
+        System.out.println("======Foo2 is create======");
+    }
+    
+    @PostConstruct
+    public void init(){
+        System.out.println("======Foo2 is init======");
     }
 
+    @PreDestroy
+    public void destory(){
+        System.out.println("======Foo2 is destory======");
+    }
+    
     @Override
     public void start() {
-        System.out.println("======start======");
+        System.out.println("Foo2======start======");
         isRunning = true;
     }
 
     @Override
     public void stop() {
-        System.out.println("======stop======");
+        System.out.println("Foo2======stop======");
 
     }
 
     @Override
     public boolean isRunning() {
-        System.out.println("======isRunning======");
+        System.out.println("Foo2======isRunning======");
         return isRunning;
     }
 
-    //@Override
+    @Override
     public boolean isAutoStartup() {
-        System.out.println("======isAutoStartup======");
+        System.out.println("Foo2======isAutoStartup======");
         return true;
     }
 
-    //@Override
+    @Override
     public void stop(Runnable callback) {
-        System.out.println("======stop callback======");
+        System.out.println("Foo2======stop callback======");
         callback.run();
         isRunning = false;
 
@@ -61,19 +75,7 @@ public class LifeProcess implements Lifecycle {
      */
     //@Override
     public int getPhase() {
-        System.out.println("======getPhase======");
+        System.out.println("Foo2======getPhase======");
         return 0;
-    }
-
-    //@Override
-    public void onRefresh() {
-        System.out.println("======onRefresh======");
-
-    }
-
-    //@Override
-    public void onClose() {
-        System.out.println("======onClose======");
-
     }
 }

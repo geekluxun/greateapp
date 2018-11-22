@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by luxun on 2017/11/14.
  */
 @Service("validatorService")
-@ParaValidator
+//@ParaValidator
 public class ValidatorServiceImpl extends BaseService implements ValidatorService {
 
     @Override

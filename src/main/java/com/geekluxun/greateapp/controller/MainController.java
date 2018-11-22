@@ -6,21 +6,17 @@ import com.geekluxun.greateapp.dto.*;
 import com.geekluxun.greateapp.entity.TUser;
 import com.geekluxun.greateapp.example.HttpClientExample;
 import com.geekluxun.greateapp.example.excel.ExcelService;
-import com.geekluxun.greateapp.example.excel.ExcelServiceImpl;
 import com.geekluxun.greateapp.example.jdbc.JdbcExample;
 import com.geekluxun.greateapp.mq.activemq.producer.TopicProducer;
 import com.geekluxun.greateapp.mq.kafka.producer.Producer;
 import com.geekluxun.greateapp.service.RedPacketTradeOrderService;
 import com.geekluxun.greateapp.service.UserService.UserService;
 import com.geekluxun.greateapp.spring.batch.BatchExmaple;
-import com.geekluxun.greateapp.spring.bean.LifeProcess;
+import com.geekluxun.greateapp.spring.bean.lifecycle.Foo2;
 import com.geekluxun.greateapp.spring.bean.methodinject.Command;
 import com.geekluxun.greateapp.spring.jpa.demo.JpaDemoService;
-import com.geekluxun.greateapp.spring.jpa.domain.User;
-import com.geekluxun.greateapp.spring.jpa.domain.UserRepository;
 import com.geekluxun.greateapp.spring.mail.SendMailService;
 import com.geekluxun.greateapp.spring.schedule.ScheduleServcie;
-import com.geekluxun.greateapp.util.httpclient.HttpClientService;
 import com.geekluxun.greateapp.zookeeper.SharedCounterExample;
 import com.geekluxun.greateapp.zookeeper.barrier.DistributedBarrierDemo;
 import com.geekluxun.greateapp.zookeeper.lock.ZkLock;
@@ -39,10 +35,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -51,7 +45,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.floor;
 import static java.lang.Math.multiplyExact;
 
 /**
@@ -123,7 +116,7 @@ public class MainController {
     Command command3;
 
     @Autowired
-    LifeProcess lifeProcess;
+    Foo2 lifeProcess;
 
     @ApiOperation(value = "主接口", notes = "无", produces = "application/json", consumes = "application/json")
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)

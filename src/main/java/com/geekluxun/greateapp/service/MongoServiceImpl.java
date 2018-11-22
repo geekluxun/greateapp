@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by luxun on 2017/10/17.
+ * 注意这个bean的名字是"mongoServiceImpl"
  */
 @Service
 public class MongoServiceImpl implements MongoService {
