@@ -8,6 +8,7 @@ import com.geekluxun.greateapp.spring.bean.methodinject.ConcreteCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.context.annotation.ApplicationScope;
@@ -23,10 +24,13 @@ import javax.annotation.Resource;
 @ComponentScan(basePackages = "com.geekluxun")
 @Import({SpringDefaultConfig.class})  //导入另外一个java Config
 @ImportResource("classpath:/spring/spring-common.xml") // 导入XML方式配置的Bean
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.properties") // 导入属性配置 可以通过 Enviroment引用
 @EnableScheduling //使能spring @Schedule注解
 @EnableAsync  //使能spring @Async注解
 public class SpringConfig {
+    
+    @Autowired
+    Environment environment;
 
     /**
      * 注意此方式通过注解@Servcie方式定义的
@@ -51,6 +55,8 @@ public class SpringConfig {
         SpringDemo springDemo = new SpringDemo();
         springDemo.setUserService(userService);
         springDemo.setAge(111);
+        // 通过Enviroment引入属性值
+        String jdbcUrl = environment.getProperty("db.jdbcUrl");
         return springDemo;
     }
 

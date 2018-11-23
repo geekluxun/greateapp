@@ -26,10 +26,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.Resource;
+import javax.print.attribute.standard.MediaSize;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -108,11 +112,16 @@ public class MainController {
 
     /**
      * 这个bean是一个生命周期是http request级别的，每次请求产生一个新的实例
+     * 这里使用lazy加载方式，实例化MainController时候暂时不创建command实例，等用到的时候再实例化
      */
-    @Resource(name = "command2")
+    @Autowired(required = false)
+    @Qualifier(value = "command2")  
+    @Lazy        
     Command command;
-    
-    @Resource(name = "command3")
+
+    @Autowired(required = false)
+    @Qualifier(value = "command3")
+    @Lazy        
     Command command3;
 
     @Autowired
@@ -122,7 +131,7 @@ public class MainController {
     @RequestMapping(value = "/main.json", method = RequestMethod.POST)
     public Object mainPage(@RequestBody @Valid UserDto para, BindingResult result, @RequestHeader("myheader") String myheader, HttpServletRequest request, HttpServletResponse response) {
 
-        command.execute();
+        //command.execute();
         lifeProcess.start();
         CommonResponseDto dto = new CommonResponseDto();
         dto.setResult(true);
