@@ -2,25 +2,17 @@ package com.geekluxun.greateapp.service;
 
 import com.geekluxun.greateapp.BaseTest;
 import com.geekluxun.greateapp.dto.PersonDto;
-import com.geekluxun.greateapp.dto.UserDto;
 import com.geekluxun.greateapp.execption.ParaValidException;
-import com.geekluxun.greateapp.service.UserService.UserService;
 import com.geekluxun.greateapp.validator.Car;
 import com.geekluxun.greateapp.validator.Gear;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import static org.junit.Assert.fail;
 
 /**
  * Created by luxun on 2017/11/14.

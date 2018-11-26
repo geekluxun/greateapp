@@ -14,10 +14,10 @@
  ***********************************************************************/
 package com.geekluxun.greateapp.spring.batch;
 
-import java.util.List;
-
 import com.alibaba.fastjson.JSON;
 import org.springframework.batch.item.ItemWriter;
+
+import java.util.List;
 
 
 /**

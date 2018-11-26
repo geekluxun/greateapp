@@ -1,9 +1,6 @@
 package com.geekluxun.greateapp.dto;
 
 import com.geekluxun.greateapp.common.BaseDto;
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
-
-import java.io.Serializable;
 
 /**
  * Created by luxun on 2017/10/20.

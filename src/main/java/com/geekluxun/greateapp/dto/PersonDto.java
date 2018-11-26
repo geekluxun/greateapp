@@ -1,9 +1,6 @@
 package com.geekluxun.greateapp.dto;
 
-import com.geekluxun.greateapp.annotation.CheckCase;
-import com.geekluxun.greateapp.annotation.ParaValidator;
 import com.geekluxun.greateapp.common.BaseDto;
-import com.geekluxun.greateapp.constant.CaseMode;
 import com.geekluxun.greateapp.validator.Car;
 
 import javax.validation.Valid;

@@ -1,7 +1,5 @@
 package com.geekluxun.greateapp.example;
 
-import io.swagger.models.auth.In;
-
 /**
  * Project: greateapp
  * Author: luxun

@@ -5,8 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
-
 /**
  * Copyright,2018-2019,xinxindai Co.,Ltd.
  *
@@ -18,9 +16,9 @@ import static org.junit.Assert.*;
 public class FormatExampleTest extends BaseTest {
     @Autowired
     FormatExample formatExample;
-    
+
     @Test
-    public void test1(){
+    public void test1() {
         String moeny = formatExample.getMoney().toString();
         Assert.assertTrue(true);
     }

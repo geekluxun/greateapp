@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  * @Description: 定义一个自己的@Qualifier
  * @Other:
  */
-@Target({ElementType.TYPE,ElementType.FIELD,ElementType.PARAMETER})
+@Target({ElementType.TYPE, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Qualifier
 public @interface MyQualifier {

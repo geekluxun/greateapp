@@ -1,18 +1,12 @@
 package com.geekluxun.greateapp.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.geekluxun.greateapp.annotation.CheckCase;
 import com.geekluxun.greateapp.annotation.ParaValidator;
-import com.geekluxun.greateapp.annotation.ValidPassengerCount;
 import com.geekluxun.greateapp.common.BaseDto;
 import com.geekluxun.greateapp.constant.CaseMode;
-import com.geekluxun.greateapp.validator.Car;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 

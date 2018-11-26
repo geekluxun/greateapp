@@ -4,7 +4,10 @@ import com.geekluxun.greateapp.annotation.ValidPassengerCount;
 import org.hibernate.validator.constraints.NotBlank;
 import org.junit.Assert;
 
-import javax.validation.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 

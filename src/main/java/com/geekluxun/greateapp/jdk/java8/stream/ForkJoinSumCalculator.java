@@ -1,8 +1,7 @@
 package com.geekluxun.greateapp.jdk.java8.stream;
 
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.ForkJoinTask;
+import java.util.concurrent.RecursiveTask;
 import java.util.stream.LongStream;
 
 

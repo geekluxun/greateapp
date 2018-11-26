@@ -4,14 +4,13 @@ package com.geekluxun.greateapp.util;
  * Created by luxun on 2018/1/11.
  */
 
+import com.sun.mail.util.MailSSLSocketFactory;
+
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.*;
-
-import com.sun.mail.util.MailSSLSocketFactory;
-
 import java.util.List;
 import java.util.Properties;
 

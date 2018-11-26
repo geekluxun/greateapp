@@ -3,7 +3,6 @@ package com.geekluxun.greateapp.jdk;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Created by luxun on 2017/12/28.

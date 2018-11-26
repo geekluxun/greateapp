@@ -2,7 +2,6 @@ package com.geekluxun.greateapp.config;
 
 import com.geekluxun.greateapp.common.BaseDto;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -10,8 +9,6 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

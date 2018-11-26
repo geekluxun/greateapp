@@ -1,7 +1,5 @@
 package com.geekluxun.greateapp.jdk.java8.optional;
 
-import com.sun.corba.se.spi.activation.NoSuchEndPointHolder;
-
 import java.util.NoSuchElementException;
 import java.util.Optional;
 

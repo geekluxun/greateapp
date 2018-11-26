@@ -1,6 +1,5 @@
 package com.geekluxun.greateapp.spring.bean.annotation;
 
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 

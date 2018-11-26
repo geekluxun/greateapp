@@ -4,8 +4,6 @@ import com.geekluxun.greateapp.BaseTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
-
 /**
  * Copyright,2018-2019,xinxindai Co.,Ltd.
  *

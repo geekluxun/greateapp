@@ -1,6 +1,5 @@
 package com.geekluxun.greateapp.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.geekluxun.greateapp.constant.SexEnum;
 

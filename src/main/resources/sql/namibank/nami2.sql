@@ -1,9 +1,7 @@
 DELETE
 FROM t_cash_order
-WHERE apply_id IN (SELECT tca.apply_id
-                   FROM t_cash_apply tca
-                   WHERE tca.mobile_no = '13817806136'
-                     AND tca.prod_code = 'QYL');
+WHERE apply_id IN (SELECT tca.apply_id FROM t_cash_apply tca WHERE tca.mobile_no = '13817806136'
+                                                               AND tca.prod_code = 'QYL');
 
 DELIMITER;
 ;

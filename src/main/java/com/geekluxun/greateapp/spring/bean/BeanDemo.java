@@ -3,7 +3,6 @@ package com.geekluxun.greateapp.spring.bean;
 import com.geekluxun.greateapp.spring.SpringDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,13 +17,13 @@ import org.springframework.stereotype.Component;
 public class BeanDemo {
     @Autowired
     ApplicationContext context;
-    
-    public void demo1(){
-        //ApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-common.xml");
-        SpringDemo  springDemo = (SpringDemo)context.getBean("springDemoAlias");
-        SpringDemo  springDemo2 = (SpringDemo)context.getBean("springDemo2ForAlians1");
 
-        SpringDemo  springDemo3 = (SpringDemo)context.getBean("springDemo2ForAlians2");
+    public void demo1() {
+        //ApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-common.xml");
+        SpringDemo springDemo = (SpringDemo) context.getBean("springDemoAlias");
+        SpringDemo springDemo2 = (SpringDemo) context.getBean("springDemo2ForAlians1");
+
+        SpringDemo springDemo3 = (SpringDemo) context.getBean("springDemo2ForAlians2");
 
         springDemo.getAge();
         System.out.println("");

@@ -1,7 +1,5 @@
 package com.geekluxun.greateapp.spring.jpa.domain;
 
-import sun.awt.SunHints;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -28,7 +28,7 @@ import javax.annotation.Resource;
 @EnableScheduling //使能spring @Schedule注解
 @EnableAsync  //使能spring @Async注解
 public class SpringConfig {
-    
+
     @Autowired
     Environment environment;
 
@@ -65,6 +65,7 @@ public class SpringConfig {
      * 注意:
      * 1、这个bean只有在profile是prod且容器调用getBean或者被注入到另一个bean才会实例化（每次实例不同）
      * 2、一个bean可以有多个name，但是name在一个容器中不可以重复
+     *
      * @return
      */
     @Bean(name = {"userService", "userService1", "userService2"})

@@ -6,8 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.*;
-
 /**
  * Copyright,2018-2019,xinxindai Co.,Ltd.
  *
@@ -19,25 +17,25 @@ import static org.junit.Assert.*;
 public class AutowireExampleTest extends BaseTest {
     @Autowired
     AutowireExample example;
-    
+
     @Test
-    public void test1(){
+    public void test1() {
         example.getUserService().isSucceed();
         example.getValidatorService().testValidate(new PersonDto());
         Assert.assertTrue(true);
     }
-    
+
     @Test
-    public void test2(){
+    public void test2() {
         int size = example.getBaseAnnotationFoos().size();
-        
-        example.getBaseAnnotationFoos().stream().forEach((a->System.out.println(a.getOrder())));
-        
+
+        example.getBaseAnnotationFoos().stream().forEach((a -> System.out.println(a.getOrder())));
+
         Assert.assertTrue(true);
     }
-    
+
     @Test
-    public void test3(){
+    public void test3() {
         String order = example.getBaseAnnotationFoo().getOrder();
         Assert.assertTrue(true);
     }

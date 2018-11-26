@@ -1,7 +1,5 @@
 package com.geekluxun.greateapp.spring.resources;
 
-import com.geekluxun.greateapp.entity.TUser;
-import com.geekluxun.greateapp.service.UserService.UserService;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -9,7 +7,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.Resource;
-import org.springframework.format.annotation.NumberFormat;
 import org.springframework.jms.core.JmsTemplate;
 
 import java.util.List;

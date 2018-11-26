@@ -1,7 +1,5 @@
 package com.geekluxun.greateapp.spring.bean.methodinject;
 
-import java.util.Map;
-
 /**
  * Copyright,2018-2019,xinxindai Co.,Ltd.
  *

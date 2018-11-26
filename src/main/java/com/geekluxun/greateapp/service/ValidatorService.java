@@ -2,7 +2,6 @@ package com.geekluxun.greateapp.service;
 
 import com.geekluxun.greateapp.annotation.ConsistentDateParameters;
 import com.geekluxun.greateapp.dto.PersonDto;
-import com.geekluxun.greateapp.dto.UserDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

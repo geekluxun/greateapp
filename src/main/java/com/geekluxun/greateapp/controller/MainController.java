@@ -26,14 +26,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.RequestScope;
 
-import javax.annotation.Resource;
-import javax.print.attribute.standard.MediaSize;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +45,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.multiplyExact;
 
 /**
  * Created by luxun on 2017/9/2.
@@ -115,13 +110,13 @@ public class MainController {
      * 这里使用lazy加载方式，实例化MainController时候暂时不创建command实例，等用到的时候再实例化
      */
     @Autowired(required = false)
-    @Qualifier(value = "command2")  
-    @Lazy        
+    @Qualifier(value = "command2")
+    @Lazy
     Command command;
 
     @Autowired(required = false)
     @Qualifier(value = "command3")
-    @Lazy        
+    @Lazy
     Command command3;
 
     @Autowired

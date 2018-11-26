@@ -19,5 +19,5 @@ import org.springframework.stereotype.Repository;
         includeFilters = @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*Stub.*Repository"),
         excludeFilters = @ComponentScan.Filter(Repository.class))
 public class AppConfig {
-    
+
 }

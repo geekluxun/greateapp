@@ -5,14 +5,14 @@ import com.geekluxun.greateapp.dto.TestDto;
 import com.geekluxun.greateapp.mq.ActiveMQConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
-import javax.jms.*;
+import javax.jms.Message;
+import javax.jms.Session;
 
 /**
  * Project: greateapp

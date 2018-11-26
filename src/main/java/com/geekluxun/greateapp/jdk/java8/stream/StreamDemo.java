@@ -1,7 +1,5 @@
 package com.geekluxun.greateapp.jdk.java8.stream;
 
-import com.geekluxun.greateapp.annotation.CheckCase;
-
 import java.util.*;
 import java.util.concurrent.ForkJoinPool;
 import java.util.function.Function;
@@ -9,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.partitioningBy;
 
 /**
  * Created by luxun on 2018/5/8.

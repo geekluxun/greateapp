@@ -1,6 +1,5 @@
 package com.geekluxun.greateapp.service;
 
-import com.geekluxun.greateapp.annotation.ParaValidator;
 import com.geekluxun.greateapp.dto.PersonDto;
 import org.springframework.stereotype.Service;
 

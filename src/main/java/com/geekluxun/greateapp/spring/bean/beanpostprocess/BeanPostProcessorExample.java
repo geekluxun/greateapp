@@ -2,7 +2,6 @@ package com.geekluxun.greateapp.spring.bean.beanpostprocess;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.stereotype.Component;
 
 /**
  * Copyright,2018-2019,xinxindai Co.,Ltd.
@@ -12,11 +11,12 @@ import org.springframework.stereotype.Component;
  * @Description: 对所有bean初始化前和后的的回调
  * @Other:
  */
-@Component
+//@Component
 public class BeanPostProcessorExample implements BeanPostProcessor {
 
     /**
      * 所有bean在初始化前都会调用
+     *
      * @param bean
      * @param beanName
      * @return
@@ -24,12 +24,13 @@ public class BeanPostProcessorExample implements BeanPostProcessor {
      */
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("======postProcessBeforeInitialization=====Bean:" + beanName );
+        System.out.println("======postProcessBeforeInitialization=====Bean:" + beanName);
         return bean;
     }
 
     /**
      * 所有bean初始化后都会被调用
+     *
      * @param bean
      * @param beanName
      * @return

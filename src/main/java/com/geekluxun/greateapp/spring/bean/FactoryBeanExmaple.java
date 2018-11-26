@@ -1,10 +1,5 @@
 package com.geekluxun.greateapp.spring.bean;
 
-import com.geekluxun.greateapp.annotation.CheckCase;
-import com.geekluxun.greateapp.service.MongoService;
-import com.geekluxun.greateapp.service.MongoServiceImpl;
-import com.geekluxun.greateapp.service.UserService.UserService;
-import com.geekluxun.greateapp.service.UserService.UserServiceImpl;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
 

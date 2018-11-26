@@ -1,6 +1,5 @@
 package com.geekluxun.greateapp.service;
 
-import com.geekluxun.greateapp.controller.MainController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

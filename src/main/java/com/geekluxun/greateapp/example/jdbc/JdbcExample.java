@@ -1,6 +1,5 @@
 package com.geekluxun.greateapp.example.jdbc;
 
-import com.geekluxun.greateapp.mq.activemq.producer.TestQueueMessageProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

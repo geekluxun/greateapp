@@ -1,10 +1,6 @@
 package com.geekluxun.greateapp.spring.bean.lifecycle;
 
-import jdk.nashorn.internal.runtime.logging.Logger;
-import org.springframework.context.Lifecycle;
-import org.springframework.context.LifecycleProcessor;
 import org.springframework.context.SmartLifecycle;
-import org.springframework.context.support.DefaultLifecycleProcessor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -22,21 +18,21 @@ import javax.annotation.PreDestroy;
 public class Foo2 implements SmartLifecycle {
     private boolean isRunning = false;
 
-    
-    public Foo2(){
+
+    public Foo2() {
         System.out.println("======Foo2 is create======");
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         System.out.println("======Foo2 is init======");
     }
 
     @PreDestroy
-    public void destory(){
+    public void destory() {
         System.out.println("======Foo2 is destory======");
     }
-    
+
     @Override
     public void start() {
         System.out.println("Foo2======start======");
@@ -71,6 +67,7 @@ public class Foo2 implements SmartLifecycle {
 
     /**
      * 相位决定bean之间的start顺序,按照0,1,2,3...顺序
+     *
      * @return
      */
     //@Override

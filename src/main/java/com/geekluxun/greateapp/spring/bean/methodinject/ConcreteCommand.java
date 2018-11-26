@@ -1,8 +1,5 @@
 package com.geekluxun.greateapp.spring.bean.methodinject;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 /**
  * Copyright,2018-2019,xinxindai Co.,Ltd.
  *
@@ -13,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 
 public class ConcreteCommand implements Command {
-    
+
     @Override
     public Object execute() {
         System.out.println("this command:" + this);

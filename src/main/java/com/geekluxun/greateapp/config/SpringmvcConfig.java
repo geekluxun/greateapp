@@ -1,7 +1,6 @@
 package com.geekluxun.greateapp.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
@@ -17,9 +16,9 @@ import java.text.SimpleDateFormat;
  */
 @Configuration
 public class SpringmvcConfig {
-    
+
     //@Bean
-    public MappingJackson2HttpMessageConverter converter(){
+    public MappingJackson2HttpMessageConverter converter() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         ObjectMapper om = new ObjectMapper();
         om.setDateFormat(new SimpleDateFormat("yyyy"));

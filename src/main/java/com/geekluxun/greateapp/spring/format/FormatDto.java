@@ -2,10 +2,7 @@ package com.geekluxun.greateapp.spring.format;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.NumberFormat;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -18,7 +15,7 @@ import java.util.Date;
  */
 @Data
 public class FormatDto {
-    
-    @JsonFormat(pattern =  "yyyy-MM-dd" )
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date cueDate;
 }

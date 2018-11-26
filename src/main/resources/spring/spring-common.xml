@@ -15,7 +15,7 @@
     <!-- 定义别名-->
     <alias name="springDemo2" alias="springDemo2ForAlians1"></alias>
     <alias name="springDemo2" alias="springDemo2ForAlians2"></alias>
-    
+
 
     <bean id="springDemo1" class="com.geekluxun.greateapp.spring.SpringDemo">
         <constructor-arg index="0" value="32"/>
