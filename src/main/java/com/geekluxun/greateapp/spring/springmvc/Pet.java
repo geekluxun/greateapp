@@ -17,4 +17,12 @@ public class Pet {
     String name;
     String color;
     Integer age;
+
+    public Pet(String name, String color, Integer age) {
+        this.name = name;
+        this.color = color;
+        this.age = age;
+    }
+    
+    public Pet(){};
 }

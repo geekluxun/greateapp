@@ -1,9 +1,13 @@
 package com.geekluxun.greateapp.spring.springmvc;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -82,9 +86,9 @@ public class DemoController {
      * @param pet
      * @return
      */
-    @ApiOperation(value = "测试pet")
     @PostMapping(path = "/pets", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
+    @ApiOperation(value = "测试pet")
     public Pet addPet(@RequestBody Pet pet) {
         System.out.println("======接收pet请求=====" + pet);
         return pet;
@@ -96,6 +100,8 @@ public class DemoController {
      * @param petId
      * @return
      */
+    @GetMapping(path = "/pets/{petId}", params = "myParam=11", headers = "myHeader=22")
+    @ResponseBody
     @ApiOperation(value = "测试pet读")
     @ApiImplicitParams(
             {
@@ -103,8 +109,6 @@ public class DemoController {
                     @ApiImplicitParam(name = "myParam", defaultValue = "22", paramType = "query", dataType = "string")
             }
     )
-    @GetMapping(path = "/pets/{petId}", params = "myParam=11", headers = "myHeader=22")
-    @ResponseBody
     public Object findPet(@PathVariable String petId,
                           @RequestParam(value = "myParam", required = false) String myParam, // request 表示"可选项"
                           @RequestHeader(value = "myHeader") String myHeader) {
@@ -120,8 +124,8 @@ public class DemoController {
      * @param ownerId
      * @param q
      */
-    @ApiOperation(value = "测试MatrixVariable")
     @GetMapping("/owners/{ownerId}")
+    @ApiOperation(value = "测试MatrixVariable")
     public void findPet(
             @PathVariable(name = "ownerId") String ownerId,
             @MatrixVariable(value = "q", pathVar = "ownerId", required = false) String q) {
@@ -135,8 +139,8 @@ public class DemoController {
      * @param accept
      * @param request
      */
-    @ApiOperation(value = "head头测试")
     @GetMapping("/header")
+    @ApiOperation(value = "head头测试")
     public void handle5(
             @RequestHeader("Accept-Encoding") String[] encoding,
             @RequestHeader("Accept") String[] accept,
@@ -151,10 +155,39 @@ public class DemoController {
      * @param sessionId
      * @param dd
      */
-    @ApiOperation(value = "cookie测试")
     @GetMapping("/cookie")
+    @ApiOperation(value = "cookie测试")
     public void handle6(@CookieValue("JSESSIONID") String sessionId, @CookieValue("dd") String dd) {
         System.out.println("sessionId:" + sessionId + " dd:" + dd);
     }
-    
+
+    /**
+     * ResponseEntity的特点是类似ResponseEntity，但可以带status和header
+     *
+     * @return
+     */
+    @GetMapping("/entity")
+    @ApiOperation(value = "ResponseEntity测试")
+    public ResponseEntity<Object> handle7() {
+        Pet pet = new Pet();
+        pet.setAge(22);
+        pet.setName("dog");
+        pet.setColor("black");
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("h1", "value1");
+
+        ResponseEntity<Object> entity = new ResponseEntity(pet, httpHeaders, HttpStatus.OK);
+
+        return entity;
+    }
+
+   
+    @GetMapping("/jsonview")
+    @ResponseBody
+    @JsonView(User2.WithPasswordView.class)
+    @ApiOperation(value = "@Jsonview测试")
+    public User2 getUser() {
+        return new User2("luxun", "7!jd#h23");
+    }
 }
+
