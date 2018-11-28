@@ -1,7 +1,10 @@
 package com.geekluxun.greateapp.spring.springmvc;
 
+import com.geekluxun.greateapp.util.HttpServletUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -25,7 +28,7 @@ import java.util.Date;
 @Controller
 @RequestMapping("/pet")
 public class AttributeDemoController {
-    private String sessionId;
+    private String sessionId = "";
 
     /**
      * 会话中保存pet属性
@@ -84,37 +87,67 @@ public class AttributeDemoController {
         return null;
     }
 
-    
+    /**
+     * ModelAttribute的值可以来自请求参数或者表单
+     * @param session
+     * @param pet
+     * @param request
+     * @return
+     */
     @PostMapping("/pets/get4")
-    @ApiOperation("会话中获取pet属性4")
-    public String handle4(HttpSession session, @ModelAttribute Pet pet) {
-        System.out.println("sessionI:" + session.getId());
+    @ApiOperation("方法参数中带ModelAttribute注解示例")
+    public String handle4(HttpSession session, @ModelAttribute Pet pet, HttpServletRequest request) {
+        HttpServletUtil.printHttpHeaders(request);
+        System.out.println("model属性pet值:" + pet);
+        System.out.println("当前会话id:" + session.getId());
         if (sessionId.equals(session.getId())){
-            System.out.println("是同一会话:" + pet);
+            System.out.println("是同一会话:");
         }
         return null;
     }
 
     /**
-     * 这个是方法级别的ModelAttribute,在所有ReqeustMap之前调用
+     * 这个是方法级别的ModelAttribute,在所有ReqeuestMap方调用之前调用
+     * 使用场景：Such methods support the same argument types as @RequestMapping methods
+     *  but that cannot be mapped directly to requests
      * @param model
      */
     @ModelAttribute
     public void populateModel(Model model, HttpServletRequest request) {
-        model.addAttribute(new Pet("cat", "blue11",10));
-        model.addAttribute("pet", new Pet("cat", "red123",99));
+        //model.addAttribute(new Pet("cat", "blue11",10));
+        //model.addAttribute("pet", new Pet("cat", "red123",99));
         request.setAttribute("pet", new Pet("dog!!!", "white", 12));
     }
 
     /**
-     * 这个方法中的pet
-     * @param pet
+     * 这个方法会在ReqeuestMap之前调用
+     * @param binder
      */
-    @PostMapping("/pets/get5")
-    @ApiOperation("获取pet属性5")
-    public void handle5(@ModelAttribute Pet pet){
-        System.out.println("======获取的Model======" );
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
-    
+
+    /**
+     * 模拟产生异常，然后让ExceptionHandler去处理
+     */
+    @PostMapping("/exception")
+    @ApiOperation("模拟产生异常")
+    public void handle5(){
+        throw new RuntimeException("wow!!");
+    }
+
+    /**
+     * Rest风格的异常处理器
+     * @param ex
+     * @return
+     */
+//    @ExceptionHandler
+//    public ResponseEntity<String> handle(Exception ex) {
+//        ResponseEntity responseEntity = new ResponseEntity("抱歉，系统发生了异常", HttpStatus.OK);
+//        return responseEntity;
+//    }
 
 }
