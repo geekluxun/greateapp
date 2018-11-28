@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2018-11-22 9:53

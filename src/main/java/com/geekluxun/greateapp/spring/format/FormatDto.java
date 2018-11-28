@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2018-11-23 16:34

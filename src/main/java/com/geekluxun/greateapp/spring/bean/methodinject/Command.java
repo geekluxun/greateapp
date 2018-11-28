@@ -1,7 +1,7 @@
 package com.geekluxun.greateapp.spring.bean.methodinject;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2018-11-21 10:33

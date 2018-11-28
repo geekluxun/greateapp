@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.util.Enumeration;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2018-11-27 13:42

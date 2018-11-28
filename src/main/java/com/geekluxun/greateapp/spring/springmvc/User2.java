@@ -3,7 +3,7 @@ package com.geekluxun.greateapp.spring.springmvc;
 import com.fasterxml.jackson.annotation.JsonView;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2018-11-28 13:43

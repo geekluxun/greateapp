@@ -330,11 +330,11 @@ public class MainController {
     public Object test10() {
         CommonResponseDto responseDto = new CommonResponseDto();
 
-        String[] receivers = {"luxun@xinxindai.com"};
+        String[] receivers = {"luxun@geekluxun.com"};
         List<String> filePathList = new ArrayList<>();
         filePathList.add("/tmp/user.xlsx");
 
-        final String from = "noreply@xinxindai.com";
+        final String from = "noreply@geekluxun.com";
         final String passwd = "Yxwlhrqwop78nm";
 
 
