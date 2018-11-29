@@ -28,7 +28,11 @@ public class SpringmvcConfig {
         converter.setObjectMapper(om);
         return converter;
     }
-    
+
+    /**
+     * 这是一个eTag过滤器
+     * @return
+     */
     @Bean
     public Filter etag(){
         ShallowEtagHeaderFilter filter = new ShallowEtagHeaderFilter();
