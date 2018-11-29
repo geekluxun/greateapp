@@ -11,10 +11,10 @@ import java.util.Enumeration;
  */
 public class HttpServletUtil {
 
-    public static void printHttpHeaders(HttpServletRequest request){
+    public static void printHttpHeaders(HttpServletRequest request) {
         System.out.println("请求URL:" + request.getRequestURL() + "的所有请求头:");
-        Enumeration<String> names =  request.getHeaderNames();
-        while (names.hasMoreElements()){
+        Enumeration<String> names = request.getHeaderNames();
+        while (names.hasMoreElements()) {
             String headerName = names.nextElement();
             System.out.println("[headerName]:" + headerName + "[headerValue]:" + request.getHeader(headerName));
         }

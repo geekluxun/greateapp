@@ -181,7 +181,7 @@ public class DemoController {
         return entity;
     }
 
-   
+
     @GetMapping("/jsonview")
     @ResponseBody
     @JsonView(User2.WithPasswordView.class)

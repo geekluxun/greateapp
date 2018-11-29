@@ -3,8 +3,6 @@ package com.geekluxun.greateapp.spring.springmvc;
 import com.geekluxun.greateapp.util.HttpServletUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -32,6 +30,7 @@ public class AttributeDemoController {
 
     /**
      * 会话中保存pet属性
+     *
      * @param pet
      * @param session
      * @param status
@@ -54,6 +53,7 @@ public class AttributeDemoController {
 
     /**
      * 如果是同一会话读取出来的pet属性值应该是相同的,其中的一个使用场景就是在Filter中传递数据
+     *
      * @param session
      * @param pet
      * @return
@@ -62,7 +62,7 @@ public class AttributeDemoController {
     @PostMapping("/pets/get2")
     public String handle2(HttpSession session, @SessionAttribute Pet pet) {
         System.out.println("sessionI:" + session.getId());
-        if (sessionId.equals(session.getId())){
+        if (sessionId.equals(session.getId())) {
             System.out.println("是同一会话:" + pet);
         }
         return null;
@@ -71,6 +71,7 @@ public class AttributeDemoController {
     /**
      * RequestAttribute使用场景在Filter中传递数据 在本示例中
      * 它的值来自populateModel中setAttribute的设置的值
+     *
      * @param session
      * @param pet
      * @return
@@ -81,7 +82,7 @@ public class AttributeDemoController {
         System.out.println("sessionI:" + session.getId());
         System.out.println("来自reqeust设置的attribute的pet:" + pet);
         System.out.println("来自请求URL中的请求参数color:" + color);
-        if (sessionId.equals(session.getId())){
+        if (sessionId.equals(session.getId())) {
             System.out.println("是同一会话:" + pet);
         }
         return null;
@@ -89,18 +90,19 @@ public class AttributeDemoController {
 
     /**
      * ModelAttribute的值可以来自请求参数或者表单
+     *
      * @param session
      * @param pet
      * @param request
      * @return
      */
-    @PostMapping("/pets/get4")
+    @GetMapping("/pets/get4")
     @ApiOperation("方法参数中带ModelAttribute注解示例")
     public String handle4(HttpSession session, @ModelAttribute Pet pet, HttpServletRequest request) {
         HttpServletUtil.printHttpHeaders(request);
         System.out.println("model属性pet值:" + pet);
         System.out.println("当前会话id:" + session.getId());
-        if (sessionId.equals(session.getId())){
+        if (sessionId.equals(session.getId())) {
             System.out.println("是同一会话:");
         }
         return null;
@@ -109,7 +111,8 @@ public class AttributeDemoController {
     /**
      * 这个是方法级别的ModelAttribute,在所有ReqeuestMap方调用之前调用
      * 使用场景：Such methods support the same argument types as @RequestMapping methods
-     *  but that cannot be mapped directly to requests
+     * but that cannot be mapped directly to requests
+     *
      * @param model
      */
     @ModelAttribute
@@ -121,6 +124,7 @@ public class AttributeDemoController {
 
     /**
      * 这个方法会在ReqeuestMap之前调用
+     *
      * @param binder
      */
     @InitBinder
@@ -135,7 +139,7 @@ public class AttributeDemoController {
      */
     @PostMapping("/exception")
     @ApiOperation("模拟产生异常")
-    public void handle5(){
+    public void handle5() {
         throw new RuntimeException("wow!!");
     }
 

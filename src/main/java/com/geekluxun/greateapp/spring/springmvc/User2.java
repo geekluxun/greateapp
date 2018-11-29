@@ -38,6 +38,7 @@ public class User2 {
 
     /**
      * 带密码的view因为继承WithoutPasswordView，所以view也会显示getUsername获取到name，两个都显示
+     *
      * @return
      */
     @JsonView(WithPasswordView.class)

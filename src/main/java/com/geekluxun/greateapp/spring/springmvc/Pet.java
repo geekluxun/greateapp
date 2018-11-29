@@ -23,6 +23,9 @@ public class Pet {
         this.color = color;
         this.age = age;
     }
-    
-    public Pet(){};
+
+    public Pet() {
+    }
+
+    ;
 }
