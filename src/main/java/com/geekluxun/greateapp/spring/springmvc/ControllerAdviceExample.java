@@ -27,7 +27,7 @@ public class ControllerAdviceExample {
      */
     @ExceptionHandler
     public ResponseEntity<String> handle(Exception e, HttpServletRequest request) {
-        log.error("请求url:" + request.getRequestURL() + "发生了异常:" + e);
+        log.error("请求url:" + request.getRequestURL() + "发生了异常:", e);
         ResponseEntity responseEntity = new ResponseEntity("我是通用的异常处理：抱歉，系统发生了异常", HttpStatus.OK);
         return responseEntity;
     }

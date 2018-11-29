@@ -1,9 +1,12 @@
 package com.geekluxun.greateapp.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
+import javax.servlet.Filter;
 import java.text.SimpleDateFormat;
 
 /**
@@ -24,5 +27,11 @@ public class SpringmvcConfig {
         om.setDateFormat(new SimpleDateFormat("yyyy"));
         converter.setObjectMapper(om);
         return converter;
+    }
+    
+    @Bean
+    public Filter etag(){
+        ShallowEtagHeaderFilter filter = new ShallowEtagHeaderFilter();
+        return  filter;
     }
 }
