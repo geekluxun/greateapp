@@ -400,6 +400,12 @@
             <version>1.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.librepdf</groupId>
+            <artifactId>openpdf</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+
     </dependencies>
 
     <profiles>
