@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.xml.MarshallingView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,19 +25,19 @@ import java.util.Map;
 public class PdfViewController {
     @Autowired
     PdfView pdfView;
-    
+
     @GetMapping("/person")
-    public void viewPdf(HttpServletRequest request, HttpServletResponse response){
+    public void viewPdf(HttpServletRequest request, HttpServletResponse response) {
         Map model = createData();
         try {
             pdfView.renderMergedOutputModel(model, request, response);
         } catch (Exception e) {
-            throw new RuntimeException("查看PDF异常",e);
+            throw new RuntimeException("查看PDF异常", e);
         }
         log.info("返回结果");
     }
-    
-    private Map createData(){
+
+    private Map createData() {
         Map data = new HashMap();
         data.put("name", "luxun");
         data.put("age", 11);

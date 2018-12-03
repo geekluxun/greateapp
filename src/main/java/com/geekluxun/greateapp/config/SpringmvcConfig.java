@@ -31,11 +31,12 @@ public class SpringmvcConfig {
 
     /**
      * 这是一个eTag过滤器
+     *
      * @return
      */
     @Bean
-    public Filter etag(){
+    public Filter etag() {
         ShallowEtagHeaderFilter filter = new ShallowEtagHeaderFilter();
-        return  filter;
+        return filter;
     }
 }

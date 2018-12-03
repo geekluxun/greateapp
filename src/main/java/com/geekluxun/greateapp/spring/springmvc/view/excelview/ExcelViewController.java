@@ -1,6 +1,5 @@
 package com.geekluxun.greateapp.spring.springmvc.view.excelview;
 
-import com.geekluxun.greateapp.annotation.CheckCase;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +29,7 @@ public class ExcelViewController {
         List<User> users = new ArrayList<>();
         users.add(user);
         model.addAttribute("users", users);
-        Map map  = new HashMap(10);
+        Map map = new HashMap(10);
         map.put("users", users);
         ExcelView view = new ExcelView();
         ModelAndView modelAndView = new ModelAndView(view, map);

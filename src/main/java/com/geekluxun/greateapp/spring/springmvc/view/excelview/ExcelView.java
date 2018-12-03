@@ -52,8 +52,8 @@ public class ExcelView extends AbstractXlsView {
 
         int rowCount = 1;
 
-        for(User user : users){
-            Row userRow =  sheet.createRow(rowCount++);
+        for (User user : users) {
+            Row userRow = sheet.createRow(rowCount++);
             userRow.createCell(0).setCellValue(user.getFirstName());
             userRow.createCell(1).setCellValue(user.getLastName());
         }

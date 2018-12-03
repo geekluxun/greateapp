@@ -2,7 +2,6 @@ package com.geekluxun.greateapp.spring.springmvc.view.pdfview;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.PdfObject;
 import com.lowagie.text.pdf.PdfWriter;
 import org.springframework.stereotype.Component;
 
@@ -20,10 +19,11 @@ import java.util.Map;
  */
 @Component
 public class PdfView extends AbstractPdfView {
-    
-    public PdfView(){
+
+    public PdfView() {
         super();
     }
+
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer, HttpServletRequest request, HttpServletResponse response) throws Exception {
         document.add(new Paragraph("luxun"));

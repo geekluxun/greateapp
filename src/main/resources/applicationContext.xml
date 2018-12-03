@@ -98,5 +98,6 @@
     <import resource="classpath*:tcc-transaction-dubbo.xml"/>
     <import resource="classpath*:spring/dubbo-client.xml"/>
     <import resource="classpath*:spring/dubbo-service.xml"/>
+    <import resource="classpath*:spring/spring-tx.xml"/>
 
 </beans>

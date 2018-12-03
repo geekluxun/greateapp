@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -42,6 +41,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
      * 可以提供多个view，由view解析器根据条件完成view逻辑名到具体view视图的映射
+     *
      * @param manager
      * @return
      */
@@ -80,6 +80,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
      * 注册拦截器
+     *
      * @param registry
      */
     @Override
@@ -92,6 +93,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
      * 自定义MessageConverter
+     *
      * @param converters
      */
     @Override
@@ -99,13 +101,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder()
                 .indentOutput(true)
                 .dateFormat(new SimpleDateFormat("yyyy-MM-dd"));
-                //.modulesToInstall(new ParameterNamesModule());
+        //.modulesToInstall(new ParameterNamesModule());
         converters.add(new MappingJackson2HttpMessageConverter(builder.build()));
-        converters.add(new MappingJackson2XmlHttpMessageConverter(builder.createXmlMapper(true).build()));
+        // converters.add(new MappingJackson2XmlHttpMessageConverter(builder.createXmlMapper(true).build()));
     }
 
     /**
      * 某一个viewController设置view名字
+     *
      * @param registry
      */
     @Override
@@ -115,6 +118,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
      * 配置viewResolver
+     *
      * @param registry
      */
     @Override
@@ -125,6 +129,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
      * 配置freemarker
+     *
      * @return
      */
     @Bean
@@ -137,15 +142,16 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
      * 请求路径以/resources开头的q请求解析到一个资源(Resource)
+     *
      * @param registry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")
-            .addResourceLocations("/public/")
-            .resourceChain(true)
-            .addResolver(new VersionResourceResolver()
-            .addContentVersionStrategy("/**"));
+                .addResourceLocations("/public/")
+                .resourceChain(true)
+                .addResolver(new VersionResourceResolver()
+                        .addContentVersionStrategy("/**"));
     }
 
 }
