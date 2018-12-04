@@ -12,8 +12,8 @@
 
     
     <modules>
-        <module>greateapp</module>
-        <module>spring-data-jpa</module>
+        <module>greate-app</module>
+        <module>spring-data</module>
     </modules>
     
     
