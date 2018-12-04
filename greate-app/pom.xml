@@ -8,7 +8,7 @@
     <version>0.0.2</version>
     <packaging>jar</packaging>
 
-    <name>greateapp</name>
+    <name>greate-app</name>
     <description>greateapp project for Spring Boot</description>
 
     <parent>
@@ -438,7 +438,7 @@
 
     <build>
         <!-- 增加这个打的JAR包就不带版本号-->
-        <finalName>greateapp</finalName>
+        <finalName>greate-app</finalName>
         <filters>
             <!--<filter>/etc/config/env.properties</filter>-->
         </filters>
