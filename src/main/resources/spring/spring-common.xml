@@ -133,7 +133,7 @@
 
     <!--定义不同环境下注入不同的bean，是通过spring.profiles.active 区别的-->
     <beans profile="prod">
-        <bean id="springDemo13" name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
+        <bean id="springDemo13" name="springDemoAlias2" class="com.geekluxun.greateapp.spring.SpringDemo">
             <!--此处注入到bean 名字叫userService33-->
             <property name="userService" ref="userService33"/>
             <property name="name" value="luxunprod"/>
@@ -141,7 +141,7 @@
     </beans>
 
     <beans profile="test">
-        <bean id="springDemo13" name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
+        <bean id="springDemo13" name="springDemoAlias2" class="com.geekluxun.greateapp.spring.SpringDemo">
             <!--此处注入到bean 名字叫userService33-->
             <property name="userService" ref="userService33"/>
             <property name="name" value="luxuntest"/>
@@ -149,7 +149,7 @@
     </beans>
 
     <beans profile="dev">
-        <bean id="springDemo13" name="springDemoAlias" class="com.geekluxun.greateapp.spring.SpringDemo">
+        <bean id="springDemo13" name="springDemoAlias2" class="com.geekluxun.greateapp.spring.SpringDemo">
             <!--此处注入到bean 名字叫userService33-->
             <property name="userService" ref="userService33"/>
             <property name="name" value="luxundev"/>

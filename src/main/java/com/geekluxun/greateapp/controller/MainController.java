@@ -397,14 +397,7 @@ public class MainController {
     }
 
 
-    @RequestMapping(value = "/test13", method = RequestMethod.GET)
-    public Object test13() {
-        CommonResponseDto responseDto = new CommonResponseDto();
 
-        jpaDemoService.test();
-
-        return responseDto;
-    }
 
 
     @RequestMapping(value = "/test14", method = RequestMethod.GET)

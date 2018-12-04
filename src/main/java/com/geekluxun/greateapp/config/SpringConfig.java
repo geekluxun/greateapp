@@ -27,7 +27,6 @@ import javax.annotation.Resource;
 @PropertySource("classpath:application.properties") // 导入属性配置 可以通过 Enviroment引用
 @EnableScheduling //使能spring @Schedule注解
 @EnableAsync  //使能spring @Async注解
-@EnableLoadTimeWeaving
 public class SpringConfig {
 
     @Autowired

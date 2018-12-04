@@ -47,7 +47,7 @@ public class DataAccessExample {
     /**
      * 事务处理中各个阶段的监听
      */
-    @TransactionalEventListener
+    //@TransactionalEventListener
     public void handleOrderCreatedEvent() {
 
     }
