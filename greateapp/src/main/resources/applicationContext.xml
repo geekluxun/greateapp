@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+    <!-- 基础配置资源加载
+      以下两种方式是等价的！！！
+     -->
+    <!--<context:property-placeholder-->
+    <!--location="classpath*:sapplication.properties, classpath*:application.properties"/>-->
+    <bean id="propertyConfigure"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:application.properties</value>
+            </list>
+        </property>
+        <!-- 先检查当前属性文件，找不到再去系统环境变量中找 这是默认值-->
+        <property name="systemPropertiesMode" value="1"></property>
+    </bean>
+
+
+    <!--启动注解-->
+    <context:annotation-config/>
+
+    <!--指明spring bean 扫描包根路径-->
+    <!--
+       1、如果 use-default-filters=false 需要在include
+       exclude中显示的指明包含或排除的扫描范围，如果是默认true,只要指明自己"另外"想要include和exclude的范围即可
+       2、如果springbootApplication 默认是启用的@ComponetScan 注解，此配置将失效，不起作用！！！
+    -->
+    <context:component-scan base-package="com.geekluxun.greateapp" use-default-filters="true">
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+    </context:component-scan>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!-- 不拦截的URL-->
+            <mvc:exclude-mapping path="/api/member/exist.json"/>
+            <bean class="com.geekluxun.greateapp.util.CommonInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- 解决浏览器跨域问题-->
+    <mvc:cors>
+        <mvc:mapping path="/**" max-age="7200" allowed-headers="*" allow-credentials="true"
+                     allowed-methods="GET,POST,OPTIONS" allowed-origins="*"/>
+    </mvc:cors>
+
+
+    <!-- 使用aspectj 而不是默认的proxy，可以解决非public方法和内部调用事务注解无效问题-->
+    <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj"/>
+
+    <tx:advice id="transAdvice">
+        <tx:attributes>
+            <tx:method name="get*" propagation="SUPPORTS"/>
+            <tx:method name="query*" propagation="SUPPORTS"/>
+            <tx:method name="find*" propagation="SUPPORTS"/>
+            <tx:method name="select*" propagation="SUPPORTS"/>
+            <tx:method name="*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>
+        </tx:attributes>
+    </tx:advice>
+
+
+    <aop:config>
+        <aop:pointcut expression="execution(* com.geekluxun.greateapp.service..*(..))" id="serviceOperate"/>
+        <aop:advisor advice-ref="transAdvice" pointcut-ref="serviceOperate"/>
+    </aop:config>
+
+
+    <import resource="classpath:spring/spring-database.xml"/>
+    <import resource="classpath:spring/spring-quartz.xml"/>
+    <import resource="classpath:spring/active-mq.xml"/>
+    <import resource="classpath:spring/spring-kafka-producer-02.xml"/>
+    <import resource="classpath*:spring/spring-kafka-consumer-02.xml"/>
+    <import resource="classpath:spring/spring-kafka-producer.xml"/>
+    <import resource="classpath*:spring/spring-kafka-consumer.xml"/>
+    <import resource="classpath*:spring/spring-data-redis.xml"/>
+    <import resource="classpath*:spring/spring-common.xml"/>
+    <import resource="classpath*:spring/spring-cache.xml"/>
+    <import resource="classpath*:spring/spring-batch.xml"/>
+    <import resource="classpath*:spring/spring-httpclient.xml"/>
+    <import resource="classpath*:tcc-transaction.xml"/>
+    <import resource="classpath*:tcc-transaction-dubbo.xml"/>
+    <import resource="classpath*:spring/dubbo-client.xml"/>
+    <import resource="classpath*:spring/dubbo-service.xml"/>
+    <import resource="classpath*:spring/spring-tx.xml"/>
+
+</beans>
