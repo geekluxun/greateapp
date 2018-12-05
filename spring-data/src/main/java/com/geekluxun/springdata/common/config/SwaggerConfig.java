@@ -3,9 +3,8 @@ package com.geekluxun.springdata.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -15,12 +14,17 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * Created by luxun on 2017/11/22.
+ * Copyright,2018-2019,xinxindai Co.,Ltd.
+ *
+ * @Author: luxun
+ * @Create: 2018-12-04 16:32
+ * @Description:
+ * @Other:
  */
 @Configuration
-@EnableWebMvc
+//@EnableWebMvc //增加这个注解会使@ResponsBody返回的默认编码不是UTF-8导致乱码，另外导致swagger-ui.html无法映射 不用加!!
 @EnableSwagger2
-public class SwaggerConfig extends WebMvcConfigurerAdapter {
+public class SwaggerConfig implements WebMvcConfigurer {
 
     @Bean
     public Docket createRestApi() {
@@ -40,10 +44,12 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * 增加一个才能把swagger-ui.html映射到/META-INF/resources
+     * 1、增加一个才能把swagger-ui.html映射到/META-INF/resources
+     * 2、或者去掉@EnableWebMvc就不用覆盖此方法
+     *
      * @param registry
      */
-    @Override
+//    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
@@ -51,7 +57,5 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
-
-
 
 }

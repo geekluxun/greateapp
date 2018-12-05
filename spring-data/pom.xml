@@ -34,6 +34,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.1.2.RELEASE</version>
+        </dependency>
+
         <!-- 内存数据库H2-->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -52,6 +58,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- 这里没有加版本号是因为引用了导入的pom中的默认定义，也可以加版本号，覆盖已有的版本号-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -61,10 +68,26 @@
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
     </dependencies>
 
 
     <dependencyManagement>
+        <!-- 导入一个pom文件，这种方式解决了pom只能单继承的问题-->
         <dependencies>
             <dependency>
                 <groupId>com.geekluxun</groupId>
@@ -75,7 +98,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
+
     <build>
         <plugins>
             <plugin>
