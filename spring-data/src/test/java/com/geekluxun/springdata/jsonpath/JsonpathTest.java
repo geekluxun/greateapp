@@ -11,7 +11,7 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2018-12-05 16:04

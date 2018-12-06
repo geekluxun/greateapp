@@ -5,7 +5,7 @@ import org.springframework.core.Ordered;
 import org.springframework.util.StopWatch;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2018-12-03 11:26

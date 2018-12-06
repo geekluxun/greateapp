@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import java.io.Serializable;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2018-12-05 14:55

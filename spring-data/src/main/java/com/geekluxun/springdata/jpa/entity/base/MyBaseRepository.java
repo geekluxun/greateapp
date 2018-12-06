@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Optional;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2018-12-05 10:48
