@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
@@ -41,6 +42,7 @@ public class UserRepositoryTest {
                 user.setName("luxun");
             }
             user.setAge(i + 1);
+            user.setEmailAddress("geekluxun@163.com");
             users.add(user);
         }
         userRepository.saveAll(users);
@@ -111,5 +113,34 @@ public class UserRepositoryTest {
     public void findAndSort() {
         List<User> users = userRepository.findByAndSort("luxun", Sort.by("age").descending());
         Assert.assertTrue(users.get(0).getAge() == 20);
+    }
+
+    @Test
+    public void nameQuery() {
+        List<User> users = userRepository.findEmail("geekluxun@163.com");
+        Assert.assertTrue(true);
+    }
+
+    @Test
+    public void nativeQuery() {
+        Page<User> users = userRepository.findByName("luxun", PageRequest.of(0, 3));
+        Assert.assertTrue(users.getTotalPages() == 7);
+    }
+
+    @Test
+    public void updateQuery() {
+        List<User> users = userRepository.findByName("luxun");
+        userRepository.setFixedNameFor("geek222", "luxun");
+        users = userRepository.findByName("geek222");
+        Assert.assertTrue(users.size() == 20);
+    }
+
+    @Test
+    public void delect() {
+        Optional<User> user = userRepository.findById(1L);
+        Assert.assertTrue(user.isPresent());
+        userRepository.deleteInBulkById(1);
+        user = userRepository.findById(1L);
+        Assert.assertTrue(!user.isPresent());
     }
 }

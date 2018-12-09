@@ -12,7 +12,7 @@ import java.util.Optional;
  *
  * @Author: luxun
  * @Create: 2018-12-05 10:48
- * @Description:
+ * @Description: 加上@NoRepositoryBean注解，JPA就不会实例化此接口，这个接口的目的是为了继承的，不是用来具体的
  * @Other:
  */
 @NoRepositoryBean

@@ -26,6 +26,8 @@ import java.util.Date;
 @Data
 @Slf4j
 @EntityListeners({AuditingEntityListener.class,})
+@NamedQuery(name = "User.findEmail",
+        query = "select u from User u where u.emailAddress = ?1")
 public class User {
 
     @Id
@@ -63,6 +65,12 @@ public class User {
     @Column(name = "lastmodified_by")
     @LastModifiedBy
     private String lastmodifiedBy;
+
+    /**
+     * 邮件地址
+     */
+    @Column(name = "emailAddress")
+    private String emailAddress;
 
     public User() {
     }
