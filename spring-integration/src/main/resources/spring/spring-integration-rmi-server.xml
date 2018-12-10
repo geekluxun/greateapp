@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+
+
+
+    <bean id="accountService" class="com.geekluxun.springintegration.rmi.AccountServiceImpl">
+        <!-- any additional properties, maybe a DAO? -->
+    </bean>
+
+    <!-- 通过RMI方式暴露服务-->
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- does not necessarily have to be the same name as the bean to be exported -->
+        <property name="serviceName" value="AccountService"/>
+        <property name="service" ref="accountService"/>
+        <property name="serviceInterface" value="com.geekluxun.service.AccountService"/>
+        <!-- defaults to 1099 -->
+        <property name="registryPort" value="1199"/>
+    </bean>
+    
+</beans>    
