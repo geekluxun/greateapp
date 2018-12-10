@@ -23,5 +23,7 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+/.mvn/
+/target/
 /mvnw
 /mvnw.cmd
