@@ -1,16 +1,13 @@
-package com.geekluxun.messagemiddleware.rabbitmq.transaction;
+package com.geekluxun.messagemiddleware.rabbitmq.demo;
 
-import com.geekluxun.messagemiddleware.rabbitmq.transaction.consumer.ConsumerService;
-import com.geekluxun.messagemiddleware.rabbitmq.transaction.producer.ProduceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.security.x509.OIDMap;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2019-01-16 16:24
@@ -19,33 +16,39 @@ import sun.security.x509.OIDMap;
  */
 @Controller
 @RequestMapping("/rabbitmq")
-public class RabbitMqController {
-    
+public class RabbitMqDemoController {
+
     @Autowired
-    ProduceService produceService;
-    
+    ProducerDemoService produceService;
+
     @Autowired
-    ConsumerService consumerService;
-    
-    
+    ConsumerDemoService consumerDemoService;
+
+
     @GetMapping("/send")
     @ResponseBody
-    public Object sendAndReceive(){
+    public Object sendAndReceive() {
         produceService.sendAndReceive();
         return "OK";
-    } 
-    
-    
+    }
+
+
     @GetMapping("/receive")
     @ResponseBody
-    public Object receive(){
-        consumerService.receiveAndReply();
+    public Object receive() {
+        consumerDemoService.receiveAndReply();
         return "OK";
     }
-    
+
     @GetMapping("/sendAndConfirm")
-    public Object sendAndConfirm(){
+    public Object sendAndConfirm() {
         produceService.sendAndConfirm();
+        return "OK";
+    }
+
+    @GetMapping("/sendAndMsgPostprocessor")
+    private Object sendAndMsgPostprocessor() {
+        produceService.sendAndMsgPostprocessor();
         return "OK";
     }
 }

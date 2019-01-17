@@ -1,7 +1,7 @@
 package com.geekluxun.messagemiddleware.rabbitmq.transaction.messageservice;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2019-01-16 14:58
