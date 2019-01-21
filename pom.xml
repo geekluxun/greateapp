@@ -17,6 +17,7 @@
         <module>spring-integration</module>
         <module>greateapp-interface</module>
         <module>message-middleware</module>
+        <module>spring-security</module>
     </modules>
     
     
