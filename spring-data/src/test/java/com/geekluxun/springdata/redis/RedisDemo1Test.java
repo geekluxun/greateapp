@@ -25,6 +25,6 @@ public class RedisDemo1Test {
     
     @Test
     public void test1() {
-        redisDemo1.test1();
+        redisDemo1.stringTest("name", "luxun");
     }
 }

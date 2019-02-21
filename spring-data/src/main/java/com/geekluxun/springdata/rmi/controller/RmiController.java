@@ -20,8 +20,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/rmi")
 public class RmiController {
-    
-    @Autowired
+
+    /**
+     * 需要另一个项目spring-integration启动，否则启动报错，暂时注掉
+     */
+    //@Autowired
     AccountService accountService;
     
     @GetMapping("/invoke")

@@ -12,6 +12,6 @@ import org.springframework.context.annotation.ImportResource;
  * @Other:
  */
 @Configuration
-@ImportResource(locations = {"classpath:spring/spring-integration-rmi-client.xml"})
+//@ImportResource(locations = {"classpath:spring/spring-integration-rmi-client.xml"})
 public class AppConfig {
 }
