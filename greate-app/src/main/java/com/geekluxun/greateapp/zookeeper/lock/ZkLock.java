@@ -27,30 +27,22 @@ public class ZkLock {
      */
     public void testLock(String lockPath) throws Exception {
 
+        /**
+         * 是一个公平锁，通过结点的顺序wacher机制实现,zookeeper保证只有一个客户端在path上创建结点
+         */
         InterProcessMutex mutex = new InterProcessMutex(zkClientService.getClient(), lockPath);
 
         logger.info("======== 当前线程id: " + Thread.currentThread().getId());
 
         try {
             mutex.acquire();
-        } catch (Exception e) {
-            logger.error("获取锁失败！" + e);
-            throw e;
-        }
+            logger.info("================ 获取到了分布式锁成功！================");
+            Thread.sleep(3000);
 
-        logger.info("================ 获取到了分布式锁成功！================");
-
-
-        Thread.sleep(3000);
-
-        try {
+        } finally {
             mutex.release();
-        } catch (Exception e) {
-            logger.error("释放锁失败！" + e);
-            throw e;
+            logger.info("================ 释放了分布式锁成功！ =================");
         }
-
-        logger.info("================ 释放了分布式锁成功！ =================");
-
     }
+    
 }
