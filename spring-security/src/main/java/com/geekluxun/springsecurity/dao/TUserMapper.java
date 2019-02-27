@@ -5,7 +5,7 @@ import com.geekluxun.springsecurity.entity.TUser;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2019-01-21 17:22

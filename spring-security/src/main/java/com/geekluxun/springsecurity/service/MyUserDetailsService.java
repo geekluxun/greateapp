@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2019-01-21 10:00

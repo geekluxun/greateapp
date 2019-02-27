@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 /**
- * Copyright,2018-2019,xinxindai Co.,Ltd.
+ * Copyright,2018-2019,geekluxun Co.,Ltd.
  *
  * @Author: luxun
  * @Create: 2019-01-21 17:22
