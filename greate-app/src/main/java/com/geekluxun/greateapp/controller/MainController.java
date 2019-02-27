@@ -17,7 +17,7 @@ import com.geekluxun.greateapp.spring.bean.methodinject.Command;
 import com.geekluxun.greateapp.spring.jpa.demo.JpaDemoService;
 import com.geekluxun.greateapp.spring.mail.SendMailService;
 import com.geekluxun.greateapp.spring.schedule.ScheduleServcie;
-import com.geekluxun.greateapp.zookeeper.SharedCounterExample;
+import com.geekluxun.greateapp.zookeeper.share.SharedCounterExample;
 import com.geekluxun.greateapp.zookeeper.barrier.DistributedBarrierDemo;
 import com.geekluxun.greateapp.zookeeper.lock.ZkLock;
 import io.swagger.annotations.ApiOperation;
@@ -296,17 +296,7 @@ public class MainController {
         return responseDto;
     }
 
-    @RequestMapping(value = "/test8", method = RequestMethod.GET)
-    public Object test8() {
-        CommonResponseDto responseDto = new CommonResponseDto();
 
-        try {
-            sharedCounterExample.testShareCounter();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return responseDto;
-    }
 
     @RequestMapping(value = "/test9", method = RequestMethod.GET)
     public Object test9() {

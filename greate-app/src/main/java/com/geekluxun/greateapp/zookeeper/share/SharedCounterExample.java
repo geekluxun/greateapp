@@ -1,5 +1,6 @@
-package com.geekluxun.greateapp.zookeeper;
+package com.geekluxun.greateapp.zookeeper.share;
 
+import com.geekluxun.greateapp.zookeeper.ZkClientService;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.shared.SharedCount;
 import org.apache.curator.framework.recipes.shared.SharedCountListener;
@@ -13,19 +14,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * Created by luxun on 2018/1/23.
+ * 分布式计数器示例
  */
 @Service
-@Configuration
-@ComponentScan
 public class SharedCounterExample implements SharedCountListener {
 
     @Autowired
@@ -52,37 +50,40 @@ public class SharedCounterExample implements SharedCountListener {
 
     public void testShareCounter() throws IOException, Exception {
         final Random rand = new Random();
-        SharedCounterExample example = new SharedCounterExample();
-
+        // 对这个PATH结点进行监听
         SharedCount baseCount = new SharedCount(zkClientService.getClient(), PATH, 0);
-        baseCount.addListener(example);
+        baseCount.addListener(this);
         baseCount.start();
 
-        List<SharedCount> examples = Lists.newArrayList();
+        List<SharedCount> sharedCounts = Lists.newArrayList();
         ExecutorService service = Executors.newFixedThreadPool(QTY);
 
+
+        List<Future> results = new ArrayList<>();
         for (int i = 0; i < QTY; ++i) {
-            final SharedCount count = new SharedCount(zkClientService.getClient(), PATH, 0);
-            examples.add(count);
+            /**分布式计数器，虽然此处是5个实例，但是PATH相同，实际上共享同一个count*/
+            final SharedCount sharedCount = new SharedCount(zkClientService.getClient(), PATH, 0);
+            sharedCounts.add(sharedCount);
             Callable<Void> task = new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
-                    count.start();
+                    sharedCount.start();
                     Thread.sleep(rand.nextInt(10000));
                     /**count 随机加10以内的数*/
-                    System.out.println("Increment:" + count.trySetCount(count.getVersionedValue(), count.getCount() + rand.nextInt(10)));
+                    System.out.println("Increment:" + sharedCount.trySetCount(sharedCount.getVersionedValue(), sharedCount.getCount() + rand.nextInt(10)));
                     return null;
                 }
             };
-            service.submit(task);
+            Future future = service.submit(task);
+            results.add(future);
         }
-
-
-        service.shutdown();
-        service.awaitTermination(10, TimeUnit.MINUTES);
-
+        
+        for (int i = 0; i < QTY; i++){
+            results.get(0).get();
+        }
         for (int i = 0; i < QTY; ++i) {
-            examples.get(i).close();
+            System.out.println("sharecount" +  i + ": " + sharedCounts.get(i).getCount());
+            sharedCounts.get(i).close();
         }
         baseCount.close();
     }
@@ -94,6 +95,6 @@ public class SharedCounterExample implements SharedCountListener {
 
     @Override
     public void countHasChanged(SharedCountReader sharedCount, int newCount) throws Exception {
-        System.out.println("Counter's value is changed to " + newCount);
+        System.out.println("Counters value is changed to " + newCount);
     }
 }

@@ -16,7 +16,7 @@ import java.util.Properties;
  * 使用ZooKeeper发布消息
  *
  * @Author luxun
- * @Date 2017/01/23 17:45
+ * @Date 2018/01/23 17:45
  **/
 
 public class PublishServer {
@@ -59,12 +59,15 @@ public class PublishServer {
      * 读取配置文件到一个DBConfig对象中。
      */
     public static void readConfig() {
-        BufferedReader reader = null;//加载文件流
+        // 加载文件流
+        BufferedReader reader = null;
         try {
             System.out.println(System.getProperty("user.dir"));
             reader = new BufferedReader(new FileReader("src/main/resources/dev/application.properties"));
-            Properties prop = new Properties();//创建属性操作对象
-            prop.load(reader);//加载流
+            // 创建属性操作对象
+            Properties prop = new Properties();
+            // 加载流
+            prop.load(reader);
             dbConfig = new DBConfig(prop.getProperty("db.jdbcUrl"), prop.getProperty("db.driverClass"), prop.getProperty("db.username"), prop.getProperty("db.password"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
